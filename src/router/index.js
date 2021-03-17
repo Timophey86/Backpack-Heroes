@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../views/home.vue'
+import loginSignup from '../views/login-signup.vue'
+import projectApp from '../views/project-app.vue'
+import projectDetails from '../views/project-details.vue'
+import projectEdit from '../views/project-edit.vue'
+import userDetails from '../views/user-details.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +22,32 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/about.vue')
-  }
+  },
+  {
+    path: '/login-signup',
+    name: 'login-signup',
+    component: loginSignup
+  },
+  {
+    path: '/project',
+    name: 'project',
+    component: projectApp
+  },
+  {
+    path: '/project/:id',
+    name: 'project-details',
+    component: projectDetails
+  },
+  {
+    path: '/edit/:projId?',
+    name: 'project-edit',
+    component: projectEdit
+  },
+  {
+    path: '/user/:userId',
+    name: 'user-details',
+    component: userDetails
+  },
 ]
 
 const router = new VueRouter({
