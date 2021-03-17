@@ -1,3 +1,12 @@
+export const demoData ={
+  getProj
+} 
+
+function getProj () {
+  return proj
+}
+
+
 const proj = [
   {
     _id: "10006546",
@@ -11,8 +20,8 @@ const proj = [
     startsEnd: 2015998009209,
     tags: ["Animal Care", "Farmstay help"],
     members: [
-      { _id: 111122, fullname: muki, imgUrl: imf.com / 2332443 },
-      { _id: 111123, fullname: shuki, imgUrl: imf.com / 233 },
+      { _id: 111122, fullname: 'muki', imgUrl: 'imf.com / 2332443' },
+      { _id: 111123, fullname: 'shuki', imgUrl: 'imf.com / 233' },
     ],
     host: {
       _id: 51399391,
@@ -51,8 +60,8 @@ const proj = [
     startsEnd: 2015998009209,
     tags: ["Education", "Community"],
     members: [
-      { _id: 111142, fullname: kuki, imgUrl: imf.com / 2332443 },
-      { _id: 111153, fullname: puki, imgUrl: imf.com / 233 },
+      { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443 "},
+      { _id: 111153, fullname: "puki", imgUrl: "imf.com / 233" },
     ],
     host: {
       _id: 51399391,
@@ -91,8 +100,8 @@ const proj = [
     startsEnd: 2015998009209,
     tags: ["Building", "Community"],
     members: [
-      { _id: 111142, fullname: kuki, imgUrl: imf.com / 2332443 },
-      { _id: 111153, fullname: puki, imgUrl: imf.com / 233 },
+      { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
+      { _id: 111153, fullname: "puki", imgUrl: "imf.com / 233" },
     ],
     host: {
       _id: 51399391,

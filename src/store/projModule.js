@@ -1,11 +1,9 @@
 import { projService } from "../services/proj.service.js";
 
-
-
-export default new Vuex.Store({
+export const projStore = {
   state: {
     projs: [],
-    projForDisplay: null,
+    proj: null,
     filterBy: { name: "", tags: "all", type: "all", pageDiff: 0 },
     sortBy: { sortType: "location" },
   },
@@ -14,7 +12,7 @@ export default new Vuex.Store({
       return state.projs;
     },
     projForDetails(state) {
-      return state.projForDisplay;
+      return state.proj;
     },
     filterBy(state) {
       return state.filterBy;
@@ -37,8 +35,8 @@ export default new Vuex.Store({
       });
       state.projs.splice(idx, 1);
     },
-    getProjForDisplay(state, { projFromDStorage }) {
-      state.projForDisplay = projFromDStorage;
+    getproj(state, { projFromStorage }) {
+      state.proj = projFromStorage;
     },
     setFilter(state, payload) {
       state.filterBy = payload.filter;
@@ -50,15 +48,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    loadProjs(context, payload) {
-      projService.query().then((projs) => {
-        context.commit({ type: "setProjs", projs });
-      });
+    async loadProjs(context, payload) {
+      const projs = await projService.query();
+      context.commit({ type: "setProjs", projs });
     },
     async getProj({ commit }, payload) {
       try {
-        const projFromDStorage = await projService.getById(payload._id);
-        commit({ type: "getProjForDisplay", projFromDStorage });
+        const projFromStorage = await projService.getById(payload._id);
+        commit({ type: "getproj", projFromStorage });
       } catch (err) {
         console.log("Store: Cannot get proj", err);
       }
@@ -88,4 +85,4 @@ export default new Vuex.Store({
       context.dispatch("saveProj", obj);
     },
   },
-});
+};

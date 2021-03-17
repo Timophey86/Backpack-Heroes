@@ -1,4 +1,4 @@
-import { reviewService } from '../services/review-service.js'
+import { reviewService } from '../services/review.service.js'
 
 export const reviewStore = {
     state: {

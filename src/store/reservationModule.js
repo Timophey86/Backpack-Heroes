@@ -1,39 +1,42 @@
-import { reservationService } from "../services/reservation-service.js";
+// import { orderService } from "../services/order.service.js";
 
-export const reservationStore = {
+export const orderStore = {
   state: {
-    reservation: null,
+    orders: [],
+    order: null,
   },
   getters: {
-    reservation(state) {
-      return state.reservation;
+    order(state) {
+      return state.order;
     },
   },
   mutations: {
-    loadReservation(state, { reservation }) {
-      state.reservation = reservation;
-      console.log("this are the state reservation ", state.reservation);
+    loadOrder(state, { order }) {
+      state.order = order;
     },
-    updateReservation(state, { reservation }) {
-      state.reservations = reservation;
+    updateOrder(state, { order }) {
+      state.orders = order;
     },
   },
   actions: {
-    async saveReservation(context, payload) {
-      const savedReservation = await reservationService.save(
-        payload.reservation
+    // asyn loadOrders(context, payload) {
+
+    // },
+    async saveOrder(context, payload) {
+      const savedorder = await orderService.save(
+        payload.order
       );
       context.commit({
-        type: "updateReservation",
-        reservation: savedReservation,
+        type: "updateorder",
+        order: savedorder,
       });
     },
-    async loadReservation(context, payload) {
+    async loadOrder(context, payload) {
       try {
-        const reservation = await reservationService.query(payload.id);
-        context.commit({ type: "loadReservation", reservation });
+        const order = await orderService.getById(payload.id);
+        context.commit({ type: "loadorder", order });
       } catch (err) {
-        console.log("reservationStore: Error in loadReservation", err);
+        console.log("orderStore: Error in loadorder", err);
         throw err;
       }
     },
