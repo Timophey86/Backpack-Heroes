@@ -1,32 +1,40 @@
 <template>
-  <div class="project-details-page">
-    <h1>Project Details Page</h1>
-    <!-- {{ projectToEdit }} -->
+  <div v-if="projectToEdit" class="project-edit-page">
+    <h1>Project Edit Page</h1>
 
-    <label>Project Name </label>
-    <!-- <input
+    <label>Project Name:</label>
+    <input
       type="text"
       v-model="projectToEdit.name"
       placeholder="Project Name"
-    /> -->
-    <label>Project Location</label>
-    <input type="text" placeholder="Project Location" />
+    />
+    <label>Project Location:</label>
+    <input
+      type="text"
+      v-model="projectToEdit.location"
+      placeholder="Project Location"
+    />
 
     <div class="project-gallery">
       <h2>Project image gallery</h2>
     </div>
 
-    <label>Project Description</label>
-    <!-- <input
+    <label>Project Description:</label>
+
+    <textarea
       type="text"
-      v-model="projectToEdit.details.description"
+      v-model="projectToEdit.desc"
       placeholder="Project Description"
-    /> -->
-    <label>Project Dates</label>
-    <input type="date" />
-    <label>Volunteers Quantity</label>
-    <input type="number" />
-    <button>Create Project</button>
+    />
+    <div class="project-dates">
+      <label>Project start at:</label>
+      <input type="date" v-model="projectToEdit.startAt" />
+      <label>Project end at:</label>
+      <input type="date" v-model="projectToEdit.endAt" />
+    </div>
+    <label>Volunteers Quantity:</label>
+    <input type="number" v-model="projectToEdit.members" min="1" />
+    <button @click="update">Submit</button>
   </div>
 </template>
 <script>
@@ -38,24 +46,27 @@ export default {
     };
   },
   methods: {
-    loadproject() {
+    async loadProject() {
       const id = this.$route.params.projId;
-
-      // this.$store.dispatch({ type: "getProj" });
-      // this.projectToEdit = this.$store.getters.projForDetails;
+      if (id) {
+        await this.$store.dispatch({ type: "getProj", _id: id });
+      } else {
+        await this.$store.dispatch({ type: "loadEmptyProj" });
+      }
+      this.projectToEdit = this.$store.getters.projForDetails;
     },
-    // update() {
-    //   const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
-    //   this.$store.dispatch({ type: "updateproject", project: projectCopy });
-    //   this.$router.push("/project");
-    // },
+    update() {
+      const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
+      this.$store.dispatch({ type: "saveProj", project: projectCopy });
+      this.$router.push("/project");
+    },
   },
   created() {
-    this.loadproject();
+    this.loadProject();
   },
   watch: {
     "$route.params.projId"() {
-      this.loadproject();
+      this.loadProject();
     },
   },
 };

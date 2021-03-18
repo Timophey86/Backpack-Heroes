@@ -19,6 +19,9 @@ export const projStore = {
     },
   },
   mutations: {
+    setEmptyProj(state, payload) {
+      state.proj = payload.proj;
+    },
     setProjs(state, payload) {
       state.projs = payload.projs;
     },
@@ -52,17 +55,23 @@ export const projStore = {
       const projs = await projService.query();
       context.commit({ type: "setProjs", projs });
     },
+    async loadEmptyProj(context, payload) {
+      const proj = await projService.getEmptyProj();
+      context.commit({ type: "setEmptyProj", proj });
+    },
     async getProj({ commit }, payload) {
+      
       try {
         const projFromStorage = await projService.getById(payload._id);
+        console.log(projFromStorage);
         commit({ type: "getproj", projFromStorage });
       } catch (err) {
         console.log("Store: Cannot get proj", err);
       }
     },
     async saveProj(context, payload) {
-      const type = payload.proj._id ? "updateProj" : "addProj";
-      const savedProj = await projService.save(payload.proj);
+      const type = payload.project._id ? "updateProj" : "addProj";
+      const savedProj = await projService.save(payload.project);
       context.commit({ type, proj: savedProj });
       context.dispatch("getProj", savedProj);
     },

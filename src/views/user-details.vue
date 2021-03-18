@@ -17,3 +17,14 @@
     </div>
   </div>
 </template>
+
+
+<script>
+export default {
+  name: "projectDetails",
+  created() {
+    console.log('hiiiiiii')
+  }
+};
+</script>
+
