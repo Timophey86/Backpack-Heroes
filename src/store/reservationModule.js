@@ -19,13 +19,14 @@ export const orderStore = {
     },
   },
   actions: {
-    // asyn loadOrders(context, payload) {
-
-    // },
+    async loadOrders(context, payload) {
+      const orders = await orderService.query(payload._id);
+      context.commit({ type: "setProjs", orders });
+    },
     async saveOrder(context, payload) {
       const savedorder = await orderService.save(
         payload.order
-      );
+      ); 
       context.commit({
         type: "updateorder",
         order: savedorder,

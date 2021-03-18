@@ -1,5 +1,5 @@
 <template>
-  <section class="project-preview">
+  <section @click="openDetailsPage(proj._id)" class="project-preview">
     <h1>{{proj.name}}</h1>
     <div class="img-preview">
       <h2>Image Preview</h2>
@@ -20,7 +20,12 @@
 <script>
 export default {
   name: "projectPreview",
-    props: ['proj']
+    props: ['proj'],
+    methods: {
+      openDetailsPage(id) {
+        this.$router.push(`/project/${id}`)
+      }
+    }
 };
 </script>
 

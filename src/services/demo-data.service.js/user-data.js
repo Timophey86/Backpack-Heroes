@@ -17,7 +17,10 @@ const user = {
 const order = {
     _id: "o1225",
     createdAt: 9898989,
-    buyer: "mini-user",
+    member: {
+        _id: "u101",
+        fullName: "Orly Amdadi",
+    },
     host: {
         _id: "u101",
         fullname: "User 1"
