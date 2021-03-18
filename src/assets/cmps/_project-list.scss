@@ -1,0 +1,14 @@
+.project-list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding-left: 0;
+    margin-bottom: 25px;
+    li {
+        background-color: beige;
+        border: 1px solid black;
+    }
+}
+

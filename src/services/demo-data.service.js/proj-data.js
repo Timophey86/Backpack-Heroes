@@ -9,7 +9,6 @@ function getProj () {
 
 const proj = [
   {
-    _id: "10006546",
     name: "Animal rescue",
     imgUrls: ["1.jpg", "2.jpg", "3.jpg"],
     details: {
@@ -49,7 +48,6 @@ const proj = [
     ],
   },
   {
-    _id: "32234421",
     name: "Children",
     imgUrls: ["1.jpg", "2.jpg", "3.jpg"],
     details: {
@@ -89,7 +87,6 @@ const proj = [
     ],
   },
   {
-    _id: "32234421",
     name: "Building",
     imgUrls: ["1.jpg", "2.jpg", "3.jpg"],
     details: {

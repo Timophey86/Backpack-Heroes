@@ -22,15 +22,16 @@ export const reviewStore = {
         },
     },
     actions: {
-        async addReview(context, { review }) {
-            try {
-                review = await reviewService.add(review)
-                context.commit({ type: 'addReview', review })
-                return review;
-            } catch (err) {
-                console.log('reviewStore: Error in addReview', err)
-                throw err
-            }
+        async addReview(context, payload) {
+            console.log(payload);
+            // try {
+            //     review = await reviewService.add(payload.review)
+            //     context.commit({ type: 'addReview', review })
+            //     return review;
+            // } catch (err) {
+            //     console.log('reviewStore: Error in addReview', err)
+            //     throw err
+            // }
         },
         async loadReviews(context, payload) {
             try {
