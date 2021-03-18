@@ -1,19 +1,40 @@
 <template>
-  <section @click="openDetailsPage(proj._id)" class="project-preview">
-    <h1>{{proj.name}}</h1>
-    <div class="img-preview">
-      <h2>Image Preview</h2>
+  <section class="project-preview">
+    <div class="project-details">
+      <h1>{{ proj.name }}</h1>
+      <div class="rating-preview">
+        <h2>{{ proj.reviews.rate }}</h2>
+      </div>
+      <div class="location-preview">
+        <h4>{{ proj.loc.country }}</h4>
+      </div>
+      <div class="date-preview">
+        <div class="detail-headers">Duration of program:</div>
+        <span>{{ formatDateFrom }}</span> to <span>{{ formatDateTo }}</span>
+      </div>
+      <div>
+        <div class="detail-headers">Volunteer Fields:</div>
+        <ul>
+          <li v-for="(tags, index) in proj.tags" :key="index">
+            {{tags}}
+          </li>
+        </ul>
+      </div>
+      <div class="decs-preview">
+        <p>{{ proj.details.description }}</p>
+        <button @click="openDetailsPage(proj._id)" class="continue-reading">
+            Discover More..
+          </button>
+      </div>
     </div>
-    <div class="rating-preview">
-      <h2>{{proj.reviews.rate}}</h2>
+    <div class="previw-img">
+      <img
+        :src="
+          require(`../assets/images/${proj.name}/${proj.imgUrls[0]}` + '.jpg')
+        "
+        alt=""
+      />
     </div>
-    <div class="date-preview">
-      <h2>{{proj.startsAt}}</h2>
-    </div>
-    <div class="decs-preview">
-      <h2>{{proj.details.description}}</h2>
-    </div>
-    <div class="previw-img"><img :src="require(`../assets/images/${proj.name}/${proj.imgUrls[0]}`)" alt=""></div>
   </section>
 </template>
 
@@ -21,12 +42,20 @@
 <script>
 export default {
   name: "projectPreview",
-    props: ['proj'],
-    methods: {
-      openDetailsPage(id) {
-        this.$router.push(`/project/${id}`)
-      }
-    }
+  props: ["proj"],
+  computed: {
+    formatDateFrom() {
+      return new Date(this.proj.startsAt).toDateString();
+    },
+    formatDateTo() {
+      return new Date(this.proj.startsEnd).toDateString();
+    },
+  },
+  methods: {
+    openDetailsPage(id) {
+      this.$router.push(`/project/${id}`);
+    },
+  },
 };
 </script>
 

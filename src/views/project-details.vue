@@ -1,11 +1,17 @@
 <template>
-  <div v-if="displayedProj" class="project-details-page">
-    {{displayedProj}}
+  <div v-if="displayedProj" class="project-details-page main-container">
     <div class="proj-details"> 
-    <h1>Project Details Page</h1>
     <h2>{{displayedProj.name}}</h2>
     <h3>{{displayedProj.host.fullname}}</h3>
     <p>{{displayedProj.details.description}}</p>
+       <div>
+        <div class="detail-headers">Amneties for the volunteer:</div>
+        <ul>
+          <li v-for="(amenities, index) in displayedProj.details.amenities" :key="index">
+            {{amenities}}
+          </li>
+        </ul>
+      </div>
     <button @click="edit(displayedProj._id)">Edit Project Details</button>
     </div>
     <div class="proj reviews">
