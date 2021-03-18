@@ -19,6 +19,9 @@ export const projStore = {
     },
   },
   mutations: {
+    setEmptyProj(state, payload) {
+      state.proj = payload.proj;
+    },
     setProjs(state, payload) {
       state.projs = payload.projs;
     },
@@ -51,6 +54,10 @@ export const projStore = {
     async loadProjs(context, payload) {
       const projs = await projService.query();
       context.commit({ type: "setProjs", projs });
+    },
+    async loadEmptyProj(context, payload) {
+      const proj = await projService.getEmptyProj();
+      context.commit({ type: "setEmptyProj", proj });
     },
     async getProj({ commit }, payload) {
       try {

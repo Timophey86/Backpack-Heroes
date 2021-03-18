@@ -1,5 +1,5 @@
 <template>
-  <div class="project-details-page">
+  <div v-if="projectToEdit" class="project-details-page">
     <h1>Project Details Page</h1>
     {{ projectToEdit }}
 
@@ -23,7 +23,7 @@
       placeholder="Project Description"
     /> -->
     <label>Project start at</label>
-    <input type="date" />
+    <input type="date" v-model="projectToEdit.startAt" />
     <label>Project end at</label>
     <input type="date" />
     <label>Volunteers Quantity</label>
@@ -40,28 +40,25 @@ export default {
     };
   },
   methods: {
-    // async loadEmptyProject() {
-    //   // const id = this.$route.params.projId;
+    async loadEmptyProject() {
+      // const id = this.$route.params.projId;
 
-    //   await this.$store.dispatch({
-    //     type: "getEmptyProj",
-    //     project: this.projectToEdit,
-    //   });
-    //   this.projectToEdit = this.$store.getters.projForDetails;
-    // },
+      await this.$store.dispatch({ type: "loadEmptyProj" });
+      this.projectToEdit = this.$store.getters.projForDetails;
+    },
     // update() {
     //   const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
     //   this.$store.dispatch({ type: "updateproject", project: projectCopy });
     //   this.$router.push("/project");
     // },
   },
-  // created() {
-  //   this.loadEmptyProject();
-  // },
-  // watch: {
-  //   "$route.params.projId"() {
-  //     this.loadEmptyProject();
-  //   },
-  // },
+  created() {
+    this.loadEmptyProject();
+  },
+  watch: {
+    "$route.params.projId"() {
+      this.loadEmptyProject();
+    },
+  },
 };
 </script>
