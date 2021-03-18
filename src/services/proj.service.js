@@ -46,13 +46,22 @@ function getEmptyProj() {
   return {
     _id: "",
     name: "",
-    location: "",
+    loc: {
+      country: "",
+      countryCode: "",
+      address: "",
+      lat: 0,
+      lng: 0,
+    },
     tags: [],
-    desc: "",
-    // imgs,
-    startAt: "",
-    endAt: "",
-    members: 1,
+    details: {
+      description: "",
+      amenities: "",
+    },
+    imgUrls: [],
+    startsAt: 0,
+    startsEnd: 0,
+    members: [],
   };
 }
 

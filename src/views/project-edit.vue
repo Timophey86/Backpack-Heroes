@@ -1,19 +1,33 @@
 <template>
   <div v-if="projectToEdit" class="project-edit-page">
     <h1>Project Edit Page</h1>
-
     <label>Project Name:</label>
     <input
       type="text"
       v-model="projectToEdit.name"
       placeholder="Project Name"
     />
-    <label>Project Location:</label>
-    <input
-      type="text"
-      v-model="projectToEdit.location"
-      placeholder="Project Location"
-    />
+    
+      <h2>Project Location:</h2>
+      <label>Project country:</label>
+      <input
+        type="text"
+        v-model="projectToEdit.loc.country"
+        placeholder="Project country"
+      />
+      <label>Project countryCode:</label>
+      <input
+        type="text"
+        v-model="projectToEdit.loc.countryCode"
+        placeholder="Project countryCode"
+      />
+      <label>Project address:</label>
+      <input
+        type="text"
+        v-model="projectToEdit.loc.address"
+        placeholder="Project address"
+      />
+    
 
     <div class="project-gallery">
       <h2>Project image gallery</h2>
@@ -23,17 +37,17 @@
 
     <textarea
       type="text"
-      v-model="projectToEdit.desc"
+      v-model="projectToEdit.details.description"
       placeholder="Project Description"
     />
     <div class="project-dates">
       <label>Project start at:</label>
-      <input type="date" v-model="projectToEdit.startAt" />
+      <!-- <input type="date" v-model="projectToEdit.startsAt" /> -->
       <label>Project end at:</label>
-      <input type="date" v-model="projectToEdit.endAt" />
+      <!-- <input type="date" v-model="projectToEdit.startsEnd" /> -->
     </div>
     <label>Volunteers Quantity:</label>
-    <input type="number" v-model="projectToEdit.members" min="1" />
+    <!-- <input type="number" v-model="projectToEdit.members" value="1" min="1" /> -->
     <button @click="update">Submit</button>
   </div>
 </template>
@@ -55,9 +69,9 @@ export default {
       }
       this.projectToEdit = this.$store.getters.projForDetails;
     },
-    update() {
+    async update() {
       const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
-      this.$store.dispatch({ type: "saveProj", project: projectCopy });
+      await this.$store.dispatch({ type: "saveProj", project: projectCopy });
       this.$router.push("/project");
     },
   },

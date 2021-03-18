@@ -13,7 +13,9 @@
     <div class="decs-preview">
       <h2>{{proj.details.description}}</h2>
     </div>
-    <div class="previw-img"><img :src="require(`../assets/images/${proj.name}/${proj.imgUrls[0]}`)" alt=""></div>
+    <div class="previw-img">
+      <img :src="require(`../assets/images/${proj.name}/${proj.imgUrls[0]}`)" alt="">
+      </div>
   </section>
 </template>
 
