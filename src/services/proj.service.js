@@ -44,7 +44,7 @@ function save(proj) {
 
 function getEmptyProj() {
   return {
-    _id: utilService.makeId(),
+    _id: "",
     name: "",
     location: "",
     tags: [],
@@ -52,7 +52,7 @@ function getEmptyProj() {
     // imgs,
     startAt: "",
     endAt: "",
-    members: [],
+    members: 1,
   };
 }
 

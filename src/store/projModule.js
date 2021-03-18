@@ -60,16 +60,16 @@ export const projStore = {
       context.commit({ type: "setEmptyProj", proj });
     },
     async getProj({ commit }, payload) {
+      
       try {
         const projFromStorage = await projService.getById(payload._id);
         commit({ type: "getproj", projFromStorage });
       } catch (err) {
-        console.log("Store: Cannot get proj", err);
       }
     },
     async saveProj(context, payload) {
-      const type = payload.proj._id ? "updateProj" : "addProj";
-      const savedProj = await projService.save(payload.proj);
+      const type = payload.project._id ? "updateProj" : "addProj";
+      const savedProj = await projService.save(payload.project);
       context.commit({ type, proj: savedProj });
       context.dispatch("getProj", savedProj);
     },
