@@ -40,28 +40,28 @@ export default {
     };
   },
   methods: {
-    async loadEmptyProject() {
-      // const id = this.$route.params.projId;
+    // async loadEmptyProject() {
+    //   // const id = this.$route.params.projId;
 
-      await this.$store.dispatch({
-        type: "getEmptyProj",
-        project: this.projectToEdit,
-      });
-      this.projectToEdit = this.$store.getters.projForDetails;
-    },
+    //   await this.$store.dispatch({
+    //     type: "getEmptyProj",
+    //     project: this.projectToEdit,
+    //   });
+    //   this.projectToEdit = this.$store.getters.projForDetails;
+    // },
     // update() {
     //   const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
     //   this.$store.dispatch({ type: "updateproject", project: projectCopy });
     //   this.$router.push("/project");
     // },
   },
-  created() {
-    this.loadProject();
-  },
-  watch: {
-    "$route.params.projId"() {
-      this.loadProject();
-    },
-  },
+  // created() {
+  //   this.loadEmptyProject();
+  // },
+  // watch: {
+  //   "$route.params.projId"() {
+  //     this.loadEmptyProject();
+  //   },
+  // },
 };
 </script>
