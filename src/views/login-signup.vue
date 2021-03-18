@@ -3,11 +3,14 @@
     <p>{{ msg }}</p>
 
     <div v-if="loggedinUser">
+
       <h3>
         Loggedin User:
         {{ loggedinUser.username }}
         <button @click="doLogout">Logout</button>
       </h3>
+
+      <h1>My projects:</h1>
     </div>
     <div v-else>
       <h2>Login</h2>
@@ -33,17 +36,7 @@
       </form>
     </div>
     <hr />
-    <details>
-      <summary>
-        Admin Section
-      </summary>
-      <ul>
-        <li v-for="user in users" :key="user._id">
-          <pre>{{ user }}</pre>
-          <button @click="removeUser(user._id)">x</button>
-        </li>
-      </ul>
-    </details>
+
   </div>
 </template>
 
