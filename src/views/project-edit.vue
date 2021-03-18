@@ -7,27 +7,26 @@
       v-model="projectToEdit.name"
       placeholder="Project Name"
     />
-    
-      <h2>Project Location:</h2>
-      <label>Project country:</label>
-      <input
-        type="text"
-        v-model="projectToEdit.loc.country"
-        placeholder="Project country"
-      />
-      <label>Project countryCode:</label>
-      <input
-        type="text"
-        v-model="projectToEdit.loc.countryCode"
-        placeholder="Project countryCode"
-      />
-      <label>Project address:</label>
-      <input
-        type="text"
-        v-model="projectToEdit.loc.address"
-        placeholder="Project address"
-      />
-    
+
+    <h2>Project Location:</h2>
+    <label>Project country:</label>
+    <input
+      type="text"
+      v-model="projectToEdit.loc.country"
+      placeholder="Project country"
+    />
+    <label>Project countryCode:</label>
+    <input
+      type="text"
+      v-model="projectToEdit.loc.countryCode"
+      placeholder="Project countryCode"
+    />
+    <label>Project address:</label>
+    <input
+      type="text"
+      v-model="projectToEdit.loc.address"
+      placeholder="Project address"
+    />
 
     <div class="project-gallery">
       <h2>Project image gallery</h2>
@@ -41,13 +40,12 @@
       placeholder="Project Description"
     />
     <div class="project-dates">
-      <label>Project start at: {{projectToEdit.startsAt}}</label>
-      <input type="date" v-model="projectToEdit.startsAt" />
-      <label>| Project end at: {{projectToEdit.startsEnd}}</label>
-      <input type="date" v-model="projectToEdit.startsEnd" />
+      <label>Project start at: {{ projectToEdit.startsAt }}</label>
+      <!-- <input type="date" v-model="projectToEdit.startsAt" /> -->
+      <label>| Project end at: {{ projectToEdit.startsEnd }}</label>
+      <!-- <input type="date" v-model="projectToEdit.startsEnd" /> -->
     </div>
-    <label>Volunteers Quantity:</label>
-    <!-- <input type="number" v-model="projectToEdit.members" value="1" min="1" /> -->
+
     <button @click="update">Submit</button>
   </div>
 </template>
