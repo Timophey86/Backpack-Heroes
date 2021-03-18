@@ -41,10 +41,10 @@
       placeholder="Project Description"
     />
     <div class="project-dates">
-      <label>Project start at:</label>
-      <!-- <input type="date" v-model="projectToEdit.startsAt" /> -->
-      <label>Project end at:</label>
-      <!-- <input type="date" v-model="projectToEdit.startsEnd" /> -->
+      <label>Project start at: {{projectToEdit.startsAt}}</label>
+      <input type="date" v-model="projectToEdit.startsAt" />
+      <label>| Project end at: {{projectToEdit.startsEnd}}</label>
+      <input type="date" v-model="projectToEdit.startsEnd" />
     </div>
     <label>Volunteers Quantity:</label>
     <!-- <input type="number" v-model="projectToEdit.members" value="1" min="1" /> -->
