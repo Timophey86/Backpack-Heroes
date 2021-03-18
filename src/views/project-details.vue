@@ -30,7 +30,7 @@ export default {
       this.$router.push(`/edit/${id}`)
     },
     addReview(id) {
-      console.log(id)
+     
     }
   },
   created() {
