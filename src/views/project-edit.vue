@@ -1,6 +1,5 @@
 <template>
   <div v-if="projectToEdit" class="project-edit-page">
-    <h1>Project Edit Page</h1>
     <label>Project Name:</label>
     <input
       type="text"
@@ -41,9 +40,9 @@
     />
     <div class="project-dates">
       <label>Project start at: {{ projectToEdit.startsAt }}</label>
-      <!-- <input type="date" v-model="projectToEdit.startsAt" /> -->
+      <input type="date" v-model="projectToEdit.startsAt" />
       <label>| Project end at: {{ projectToEdit.startsEnd }}</label>
-      <!-- <input type="date" v-model="projectToEdit.startsEnd" /> -->
+      <input type="date" v-model="projectToEdit.startsEnd" />
     </div>
 
     <button @click="update">Submit</button>
