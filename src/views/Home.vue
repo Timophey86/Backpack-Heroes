@@ -6,7 +6,7 @@
     </div>
     <div class="category">
         <ul>
-          <li v-for="proj in this.projs" :key="proj._id">
+          <li v-for="proj in projs" :key="proj._id">
             <h1>{{proj.name}}</h1>
           </li>
         </ul>
@@ -47,7 +47,6 @@ export default {
     },
     projList(){
       this.$router.push('/project')
-      console.log(this.projs)
     }
   },
   created () {

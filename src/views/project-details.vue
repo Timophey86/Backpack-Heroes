@@ -1,5 +1,6 @@
 <template>
   <div v-if="displayedProj" class="project-details-page">
+    {{displayedProj}}
     <div class="proj-details"> 
     <h1>Project Details Page</h1>
     <h2>{{displayedProj.name}}</h2>

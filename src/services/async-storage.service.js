@@ -13,7 +13,6 @@ function query(entityType) {
 }
 
 function get(entityType, entityId) {
-  console.log("service storage", entityType);
   return query(entityType).then((entities) =>
     entities.find((entity) => entity._id === entityId)
   );
@@ -31,7 +30,7 @@ function postMany(entityType, newEntities) {
     newEntities = newEntities.map((entity) => ({ ...entity, _id: entity._id }));
     entities.push(...newEntities);
     _save(entityType, entities);
-    return newEntity;
+    return newEntities;
   });
 }
 
