@@ -1,14 +1,13 @@
 <template>
-  <section class="home-page">
-    <h1>Home Page</h1>
+  <section class="home-page main-container">
     <div class="hero">
       <h3>Hero Photo Home Page</h3>
     </div>
-        
+    <div class="main-img-container">    
     <div class=" img-category-container">
       <ul>
         <li v-for="proj in projs" :key="proj._id">
-          <h1>{{proj.name}}</h1>
+          <p>{{proj.name}}</p>
           <img @click="projList" :src="require(`@/assets/images/${proj.name}/${proj.imgUrls[0]}.jpg`)" alt=""/>
         </li>
       </ul>
@@ -17,21 +16,13 @@
     <div class=" img-category-container">
       <ul>
         <li v-for="proj in projs" :key="proj._id">
-          <h1>{{proj.loc.address}}</h1>
+          <p>{{proj.loc.address}}</p>
           <img @click="projList" :src="require(`@/assets/images/locations/${proj.loc.countryCode}.jpg`)" alt=""/>
         </li>
       </ul>
     </div>
+    </div>
 
-    <div class="location">
-      <h3>List of locations</h3>
-    </div>
-    <div class="reviews">
-      <h3>List of reviews</h3>
-    </div>
-    <div class="about-vision">
-      <h3>About our vision</h3>
-    </div>
   </section>
 </template>
 <script>
