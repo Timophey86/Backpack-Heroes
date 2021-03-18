@@ -5,11 +5,21 @@
     margin-bottom: 40px;
 }
 
-.img-container{
+.img-category-container{
+
     img{
-        width: 320px;
+        width: 300px;
         height: 220px;
         cursor: pointer;
+        border-radius: 20px;
+    }
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    li {
+        list-style: none;
     }
 
 }
