@@ -1,5 +1,4 @@
 <template>
   <div class="app-footer">
-      <h1>Footer</h1>
   </div>
 </template>
