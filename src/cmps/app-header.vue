@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link>
     <router-link to="/project">Projects List</router-link>
     <router-link to="/project">Project Details</router-link>
     <router-link to="/edit/">Project Add/Edit</router-link>

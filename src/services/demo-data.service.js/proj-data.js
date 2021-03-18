@@ -11,7 +11,7 @@ const proj = [
   {
     _id: "10006546",
     name: "Animal rescue",
-    imgUrls: ["1.jpg", "2.jpg", "3.jpg"],
+    imgUrls: ["1", "2", "3"],
     details: {
       description: "Support an Animal Rescue Centre team to care for injured, sick and abused animals",
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
@@ -29,6 +29,7 @@ const proj = [
       imgUrl: "https://x.com/pic.jpg",
     },
     loc: {
+      imgUrls : ["TH"],
       country: "Thailand",
       countryCode: "TH",
       address: "Chiang Mai, Thailand",
@@ -51,7 +52,7 @@ const proj = [
   {
     _id: "32234421",
     name: "Children",
-    imgUrls: ["1.jpg", "2.jpg", "3.jpg"],
+    imgUrls: ["1", "2", "3"],
     details: {
       description: "Provide support and education at day care centres and community outreach projects",
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
@@ -69,6 +70,7 @@ const proj = [
       imgUrl: "https://x.com/pic.jpg",
     },
     loc: {
+      imgUrls: ["PE"],
       country: "Peru",
       countryCode: "PE",
       address: "Iquitos, Peru",
@@ -91,7 +93,7 @@ const proj = [
   {
     _id: "32234",
     name: "Building",
-    imgUrls: ["1.jpg", "2.jpg", "3.jpg"],
+    imgUrls: ["1", "2", "3"],
     details: {
       description: "Join a team of local builders to help improve community buildings in India",
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
@@ -109,6 +111,7 @@ const proj = [
       imgUrl: "https://x.com/pic.jpg",
     },
     loc: {
+      imgUrls: ["IN"],
       country: "India",
       countryCode: "IN",
       address: "Udaipur, India",
