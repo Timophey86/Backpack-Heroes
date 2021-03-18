@@ -49,7 +49,7 @@ export default {
     async loadProject() {
       const id = this.$route.params.projId;
       if (id) {
-        await this.$store.dispatch({ type: "getProj" });
+        await this.$store.dispatch({ type: "getProj", _id: id });
       } else {
         await this.$store.dispatch({ type: "loadEmptyProj" });
       }

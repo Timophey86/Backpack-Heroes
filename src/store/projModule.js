@@ -60,8 +60,10 @@ export const projStore = {
       context.commit({ type: "setEmptyProj", proj });
     },
     async getProj({ commit }, payload) {
+      
       try {
         const projFromStorage = await projService.getById(payload._id);
+        console.log(projFromStorage);
         commit({ type: "getproj", projFromStorage });
       } catch (err) {
         console.log("Store: Cannot get proj", err);

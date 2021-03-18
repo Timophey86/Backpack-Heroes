@@ -28,6 +28,7 @@ async function query() {
 }
 
 function getById(id) {
+  console.log("id from storage", id);
   return storageService.get(KEY, id);
 }
 
