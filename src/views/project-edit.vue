@@ -1,7 +1,7 @@
 <template>
   <div class="project-details-page">
     <h1>Project Details Page</h1>
-    <!-- {{ projectToEdit }} -->
+    {{ projectToEdit }}
 
     <label>Project Name </label>
     <!-- <input
@@ -22,10 +22,12 @@
       v-model="projectToEdit.details.description"
       placeholder="Project Description"
     /> -->
-    <label>Project Dates</label>
+    <label>Project start at</label>
+    <input type="date" />
+    <label>Project end at</label>
     <input type="date" />
     <label>Volunteers Quantity</label>
-    <input type="number" />
+    <input type="number" value="1" min="0" />
     <button>Create Project</button>
   </div>
 </template>
@@ -38,11 +40,14 @@ export default {
     };
   },
   methods: {
-    loadproject() {
-      const id = this.$route.params.projId;
+    async loadEmptyProject() {
+      // const id = this.$route.params.projId;
 
-      // this.$store.dispatch({ type: "getProj" });
-      // this.projectToEdit = this.$store.getters.projForDetails;
+      await this.$store.dispatch({
+        type: "getEmptyProj",
+        project: this.projectToEdit,
+      });
+      this.projectToEdit = this.$store.getters.projForDetails;
     },
     // update() {
     //   const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
@@ -51,11 +56,11 @@ export default {
     // },
   },
   created() {
-    this.loadproject();
+    this.loadProject();
   },
   watch: {
     "$route.params.projId"() {
-      this.loadproject();
+      this.loadProject();
     },
   },
 };
