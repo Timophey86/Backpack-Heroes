@@ -1,6 +1,6 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
-const SCORE_FOR_REVIEW = 10
+
 
 export const userService = {
     login,
@@ -11,14 +11,14 @@ export const userService = {
     remove,
     update,
     getLoggedinUser,
-    increaseScore
+
 }
 
 window.userService = userService
 // Note: due to async, must run one by one...
-// userService.signup({fullname: 'Puki Norma', username: 'user1', password:'123',score: 100, isAdmin: false})
-// userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', score: 100, isAdmin: true})
-// userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 100})
+// userService.signup({fullname: 'Puki Norma', username: 'user1', password:'123', isAdmin: false})
+// userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', isAdmin: true})
+// userService.signup({fullname: 'Muki G', username: 'muki', password:'123'})
 
 function getUsers() {
     return storageService.query('user')
@@ -41,16 +41,20 @@ async function update(user) {
     if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
 }
 
-async function increaseScore(by = SCORE_FOR_REVIEW) {
-    const user = getLoggedinUser()
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
-}
+// async function increaseScore(by = SCORE_FOR_REVIEW) {
+//     const user = getLoggedinUser()
+//     user.score = user.score + by || by
+//     await update(user)
+//     return user.score
+// }
 
 async function login(userCred) {
     const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
+    console.log('users',users);
+    console.log('userCred',userCred);
+    const user = users.find(user => {
+        return user.username === userCred.username && user.password === userCred.password
+    })
     return _saveLocalUser(user)
 
     // const user = await httpService.post('auth/login', userCred)
@@ -66,11 +70,13 @@ async function logout() {
     // return await httpService.post('auth/logout')
 }
 function _saveLocalUser(user) {
+    // console.log('from saveLocalUser',user);
     sessionStorage.setItem('loggedinUser', JSON.stringify(user))
     return user
 }
 
 function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
+    // console.log(sessionStorage.getItem('loggedinUser'));
+    // return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
 }
 
