@@ -1,9 +1,3 @@
-.app-header {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 40px;
-}
 
 .img-category-container{
     display: flex;
@@ -41,9 +35,19 @@
 }
 
 .hero {
-    img {
 
-        height: 100vh;
+    width: 100vw;
+    height: 85vh;
+    h1 {
+        font-family: caveat;
+        text-align: center;
+        position: absolute;
+        top: 12%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2.6rem;
+        
     }
 }
 
