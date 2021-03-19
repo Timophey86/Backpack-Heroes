@@ -1,7 +1,12 @@
 <template>
   <section class="home-page main-container">
-    <div class="hero">
-      
+
+
+    <div class="hero"
+      :style="{
+        background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url(${require(`../assets/images/hero/1.jpg`)})`,backgroundSize: 'cover',position: 'relative',}"
+    >
+    <h1>Service to others is the rent you pay for your room here on earth</h1>
     </div>
     <div class="main-img-container">
       <div class=" img-category-container">

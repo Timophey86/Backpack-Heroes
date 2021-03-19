@@ -11,6 +11,7 @@ const user = {
     password: "tinkerbell",
     isAdmin: true,
     imgUrl: "http://some-img",
+    orders: []
 };
 
 

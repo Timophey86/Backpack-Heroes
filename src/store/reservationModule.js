@@ -23,6 +23,27 @@ export const orderStore = {
       const orders = await orderService.query(payload._id);
       context.commit({ type: "setProjs", orders });
     },
+    async sendOrder(context, payload) {
+      const order = {
+        _id: "o1225",
+        createdAt: 9898989,
+        member: {
+          _id: payload.user._id,
+          fullName: payload.user.fullname,
+        },
+        host: {
+          _id: payload.user._id,
+          fullName: payload.user.fullname,
+        },
+        proj: {
+          _id: payload.project._id,
+          name: payload.project.name,
+        },
+        status: "pending",
+      };
+      context.dispatch({type:"updateUserOrder", order: order})
+      // const orders = await orderService.query(payload._id);
+    },
     async saveOrder(context, payload) {
       const savedorder = await orderService.save(payload.order);
       context.commit({
@@ -36,6 +57,21 @@ export const orderStore = {
         context.commit({ type: "loadorder", order });
       } catch (err) {
         console.log("orderStore: Error in loadorder", err);
+        throw err;
+      }
+    },
+    async updateUserOrder(context, payload) {
+      var currHost = await userService.getById(payload.order.host._id);
+      if (!currHost.orders) {
+        currHost.orders = [];
+        currHost.orders.push(payload.order);
+      } else {
+        currHost.orders.push(payload.order);
+      }
+      try {
+      await userService.update(currHost);
+      } catch (err) {
+        console.log("userStore: Error in updateUser", err);
         throw err;
       }
     },

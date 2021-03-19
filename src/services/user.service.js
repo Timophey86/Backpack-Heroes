@@ -20,9 +20,23 @@ window.userService = userService
 // userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', isAdmin: true})
 // userService.signup({fullname: 'Muki G', username: 'muki', password:'123'})
 
-function getUsers() {
-    return storageService.query('user')
-    // return httpService.get(`user`)
+async function getUsers() {
+    var user = await storageService.query('user')
+    if (!user || !user.length) {
+        user = {
+            _id: "u101",
+            fullname: "Orly Amdadi",
+            username: "orly@amdadi.com",
+            password: "123",
+            isAdmin: false,
+            imgUrl: "http://some-img",
+        };
+        await storageService.post('user',user)
+        return user
+   }
+   else {
+       return user
+   }
 }
 
 function getById(userId) {
