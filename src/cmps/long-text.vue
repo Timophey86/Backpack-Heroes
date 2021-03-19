@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ["txt"],
+  props: ["txt","length"],
   data() {
     return {
       isLongTxt: false,
@@ -25,10 +25,10 @@ export default {
   },
   computed: {
     txtDisplay() {
-      if (this.txt.length > 50) {
+      if (this.txt.length > this.length) {
         this.isLongTxt = true;
         if (!this.isShowMore) {
-          return this.txt.substring(0, 50) + "...";
+          return this.txt.substring(0, this.length) + "...";
         }
         return this.txt;
       }

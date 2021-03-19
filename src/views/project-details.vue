@@ -59,9 +59,9 @@
         <!-- <button @click="joinProj">Join Us!</button> -->
     </div>
   </div>
-        <div class="review-container">
+  
         <project-review :proj="displayedProj" />
-      </div>
+  
     
   </div>
 </template>

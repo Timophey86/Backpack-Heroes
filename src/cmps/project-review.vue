@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="review-container">
     <button @click="showForm">Add Review</button>
     <h1>{{ proj.name }} Review</h1>
     <div class="review-list">
@@ -7,7 +7,7 @@
         <div class="rate-review">
           <p v-for="star in review.rate" :key="star">⭐</p>
         </div>
-        <longText :txt="review.txt" />
+        <longText :txt="review.txt" :length="maxLength" />
         <p>By: {{ review.by.fullname }}</p>
       </div>
     </div>
@@ -35,6 +35,7 @@ export default {
   props: ["proj"],
   data() {
     return {
+      maxLength: 50,
       isShowForm: false,
       reviewToEdit: {
         txt: "",
