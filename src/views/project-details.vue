@@ -107,11 +107,11 @@ export default {
     edit(id) {
       this.$router.push(`/edit/${id}`);
     },
-    async addReview(rate) {
+    async addReview() {
       const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
       this.displayedProj.reviews.push(reviewCopy);
 
-      // await this.$store.dispatch({ type: "saveProj", project: this.displayedProj.reviewCopy });
+      await this.$store.dispatch({ type: "saveProj", project: this.displayedProj });
     },
     async getUser() {
       await this.$store.dispatch({ type: "loadUsers" });
