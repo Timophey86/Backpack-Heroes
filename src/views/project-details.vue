@@ -58,7 +58,7 @@
           </li>
         </ul>
         </p>
-        <button>Join Us!</button>
+        <button @click="joinProj">Join Us!</button>
     </div>
   </div>
       <div class="proj-reviews">
@@ -86,6 +86,7 @@ export default {
         rate: 5,
         fullname: "",
       },
+      currUser: null,
     };
   },
   computed: {
@@ -106,15 +107,41 @@ export default {
     edit(id) {
       this.$router.push(`/edit/${id}`);
     },
-    async addReview(rate) {
+    async addReview() {
       const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
       this.displayedProj.reviews.push(reviewCopy);
 
-      // await this.$store.dispatch({ type: "saveProj", project: this.displayedProj.reviewCopy });
+      await this.$store.dispatch({ type: "saveProj", project: this.displayedProj });
+    },
+    async getUser() {
+      await this.$store.dispatch({ type: "loadUsers" });
+      this.currUser = this.$store.getters.loggedinUser;
+    },
+    async joinProj() {
+      const minUser = {
+        _id: this.currUser._id,
+        fullname: this.currUser.fullname,
+        imgUrl: "imf.com / 2332443",
+      };
+      const minProj = {
+        _id: this.displayedProj._id,
+        name: this.displayedProj.name,
+      };
+      await this.$store.dispatch({
+        type: "sendOrder",
+        project: minProj, user: minUser
+      })
+      // this.displayedProj.members.push(minUser);
+      // await this.$store.dispatch({
+      //   type: "saveProj",
+      //   project: this.displayedProj,
+      // });
+      // this.getCurrProj(this.$route.params.id);
     },
   },
   created() {
     this.getCurrProj(this.$route.params.id);
+    this.getUser();
   },
 };
 </script>

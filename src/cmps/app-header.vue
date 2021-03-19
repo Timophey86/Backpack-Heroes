@@ -5,7 +5,10 @@
     </div>
     <div class="nav">
       <router-link to="/login-signup">Login/Signup</router-link>
+     <router-link to="/user/userId=1">User Details</router-link>
     </div>
+
+
   </div>
 </template>
 
