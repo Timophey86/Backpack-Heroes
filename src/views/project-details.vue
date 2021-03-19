@@ -40,10 +40,8 @@
         </ul>
       </div> -->
         <button @click="edit(displayedProj._id)">Edit Project Details</button>
-      <div class="proj reviews">
-        <button @click="addReview(displayedProj._id)">Add Review</button>
       </div>
-      </div>
+
       <div class="members-div">
         <h2>Members who decided to join us:</h2>
         <ul class="member-list">
@@ -61,33 +59,17 @@
         <button>Join Us!</button>
     </div>
   </div>
-      <div class="proj-reviews">
-        <label>Your full name:</label>
-        <input type="text" v-model="reviewToEdit.fullname" />
-        <label>Rate:</label>
-        <input type="number" v-model="reviewToEdit.rate" min="0" max="5" />
-        <textarea
-          placeholder="Your Opinion Matters..."
-          v-model="reviewToEdit.txt"
-        ></textarea>
-        {{ displayedProj.reviews }}
-        <button @click="addReview()">Add Review</button>
+        <div class="review-container">
+        <project-review :proj="displayedProj" />
       </div>
+    
   </div>
 </template>
 
 <script>
+import projectReview from '@/cmps/project-review'
 export default {
   name: "projectDetails",
-  data() {
-    return {
-      reviewToEdit: {
-        txt: "",
-        rate: 5,
-        fullname: "",
-      },
-    };
-  },
   computed: {
     displayedProj() {
       return this.$store.getters.projForDetails;
@@ -106,15 +88,12 @@ export default {
     edit(id) {
       this.$router.push(`/edit/${id}`);
     },
-    async addReview() {
-      const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
-      this.displayedProj.reviews.push(reviewCopy);
-
-      await this.$store.dispatch({ type: "saveProj", project: this.displayedProj });
-    },
   },
   created() {
     this.getCurrProj(this.$route.params.id);
   },
+  components:{
+    projectReview
+  }
 };
 </script>

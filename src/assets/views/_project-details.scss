@@ -152,15 +152,3 @@
   // }
   }
 
-.proj-reviews {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 0 auto;
-  align-items: center;
-  gap: 5px;
-  textarea {
-    height: 200px;
-    resize: none;
-  }
-}
