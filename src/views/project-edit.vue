@@ -39,9 +39,9 @@
       placeholder="Project Description"
     />
     <div class="project-dates">
-      <label>Project start at: {{ projectToEdit.startsAt }}</label>
+      <label>Project start at: {{ formatDateFrom }}</label>
       <input type="date" v-model="projectToEdit.startsAt" />
-      <label>| Project end at: {{ projectToEdit.startsEnd }}</label>
+      <label> Project end at: {{ formatDateTo }}</label>
       <input type="date" v-model="projectToEdit.startsEnd" />
     </div>
 
@@ -55,6 +55,17 @@ export default {
     return {
       projectToEdit: null,
     };
+  },
+  computed: {
+    displayedProj() {
+      return this.$store.getters.projForDetails;
+    },
+    formatDateFrom() {
+      return new Date(this.displayedProj.startsAt).toDateString();
+    },
+    formatDateTo() {
+      return new Date(this.displayedProj.startsEnd).toDateString();
+    },
   },
   methods: {
     async loadProject() {

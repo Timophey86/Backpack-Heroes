@@ -59,8 +59,8 @@ function getEmptyProj() {
       amenities: "",
     },
     imgUrls: [],
-    startsAt: 0,
-    startsEnd: 0,
+    startsAt: Date.now(),
+    startsEnd: Date.now(),
     members: [],
   };
 }
