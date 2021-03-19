@@ -24,9 +24,7 @@ export const orderStore = {
       context.commit({ type: "setProjs", orders });
     },
     async saveOrder(context, payload) {
-      const savedorder = await orderService.save(
-        payload.order
-      ); 
+      const savedorder = await orderService.save(payload.order);
       context.commit({
         type: "updateorder",
         order: savedorder,

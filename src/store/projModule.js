@@ -60,12 +60,10 @@ export const projStore = {
       context.commit({ type: "setEmptyProj", proj });
     },
     async getProj({ commit }, payload) {
-      
       try {
         const projFromStorage = await projService.getById(payload._id);
         commit({ type: "getproj", projFromStorage });
-      } catch (err) {
-      }
+      } catch (err) {}
     },
     async saveProj(context, payload) {
       const type = payload.project._id ? "updateProj" : "addProj";

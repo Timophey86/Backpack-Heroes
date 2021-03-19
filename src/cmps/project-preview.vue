@@ -16,28 +16,27 @@
         <div class="detail-headers">Volunteer Fields:</div>
         <ul>
           <li v-for="(tags, index) in proj.tags" :key="index">
-            {{tags}}
+            {{ tags }}
           </li>
         </ul>
       </div>
       <div class="decs-preview">
         <p>{{ proj.details.description }}</p>
         <button @click="openDetailsPage(proj._id)" class="continue-reading">
-            Discover More..
-          </button>
+          Discover More..
+        </button>
       </div>
     </div>
     <div class="previw-img">
       <img
         :src="
-          require(`../assets/images/${proj.name}/${proj.imgUrls[0]}` + '.jpg')
+          require(`../assets/images/${proj.name}/${proj.imgUrls[2]}` + '.jpg')
         "
         alt=""
       />
     </div>
   </section>
 </template>
-
 
 <script>
 export default {
@@ -58,4 +57,3 @@ export default {
   },
 };
 </script>
-
