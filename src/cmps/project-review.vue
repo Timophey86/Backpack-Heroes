@@ -1,16 +1,19 @@
 <template>
   <div>
+    <button @click="showForm">Add Review</button>
+    <h1>{{ proj.name }} Review</h1>
     <div class="review-list">
       <div class="review-card" v-for="review in proj.reviews" :key="review._id">
-        <p>Rate: {{ review.rate }}</p>
-        <h3>{{ review.txt }}</h3>
+        <div class="rate-review">
+          <p v-for="star in review.rate" :key="star">⭐</p>
+        </div>
+        <longText :txt="review.txt" />
         <p>By: {{ review.by.fullname }}</p>
       </div>
     </div>
-    <button @click="toggleForm">Add Review</button>
     <hr />
     <form v-if="isShowForm" @submit.prevent="addReview()" class="review-form">
-      <h2>Your gossip:</h2>
+      <h2>Your Review:</h2>
       <label>Your full name:</label>
       <input type="text" v-model="reviewToEdit.by.fullname" required />
       <label>Rate:</label>
@@ -21,11 +24,12 @@
         required
       ></textarea>
       <button>Save</button>
-      <button @click="toggleForm" class="close-review">x</button>
+      <button @click.prevent="hideForm" class="close-review">x</button>
     </form>
   </div>
 </template>
 <script>
+import longText from "./long-text";
 export default {
   name: "home",
   props: ["proj"],
@@ -43,16 +47,7 @@ export default {
   },
 
   methods: {
-    toggleForm() {
-      this.isShowForm = !this.isShowForm;
-    },
-    async addReview() {
-      const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
-      this.proj.reviews.push(reviewCopy);
-      await this.$store.dispatch({
-        type: "saveProj",
-        project: this.proj,
-      });
+    clearForm() {
       this.reviewToEdit = {
         txt: "",
         rate: 5,
@@ -61,6 +56,25 @@ export default {
         },
       };
     },
+    hideForm() {
+      this.isShowForm = false;
+      this.clearForm();
+    },
+    showForm() {
+      this.isShowForm = true;
+    },
+    async addReview() {
+      const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
+      this.proj.reviews.unshift(reviewCopy);
+      await this.$store.dispatch({
+        type: "saveProj",
+        project: this.proj,
+      });
+      this.hideForm();
+    },
+  },
+  components: {
+    longText,
   },
 };
 </script>
