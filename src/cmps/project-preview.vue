@@ -30,7 +30,7 @@
     <div class="previw-img">
       <img
         :src="
-          require(`../assets/images/${proj.name}/${proj.imgUrls[0]}` + '.jpg')
+          require(`../assets/images/${proj.name}/${proj.imgUrls[2]}` + '.jpg')
         "
         alt=""
       />
