@@ -1,7 +1,7 @@
 <template>
   <section class="home-page main-container">
     <div class="hero">
-      <h3>Hero Photo Home Page</h3>
+      
     </div>
     <div class="main-img-container">    
     <div class=" img-category-container">
