@@ -10,7 +10,7 @@ function getProj () {
 const proj = [
   {
     _id: "10006546",
-    name: "Animal rescue",
+    name: "Animal-rescue",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Support an Animal Rescue Centre team to care for injured, sick and abused animals",
