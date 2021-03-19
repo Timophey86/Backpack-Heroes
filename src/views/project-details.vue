@@ -59,15 +59,35 @@
         </ul>
         </p>
         <button>Join Us!</button>
-      </div>
     </div>
   </div>
+      <div class="proj-reviews">
+        <label>Your full name:</label>
+        <input type="text" v-model="reviewToEdit.fullname" />
+        <label>Rate:</label>
+        <input type="number" v-model="reviewToEdit.rate" min="0" max="5" />
+        <textarea
+          placeholder="Your Opinion Matters..."
+          v-model="reviewToEdit.txt"
+        ></textarea>
+        {{ displayedProj.reviews }}
+        <button @click="addReview()">Add Review</button>
+      </div>
+  </div>
 </template>
-
 
 <script>
 export default {
   name: "projectDetails",
+  data() {
+    return {
+      reviewToEdit: {
+        txt: "",
+        rate: 5,
+        fullname: "",
+      },
+    };
+  },
   computed: {
     displayedProj() {
       return this.$store.getters.projForDetails;
@@ -86,8 +106,11 @@ export default {
     edit(id) {
       this.$router.push(`/edit/${id}`);
     },
-    addReview(id) {
-      this.$store.dispatch({ type: "addReview", id });
+    async addReview(rate) {
+      const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
+      this.displayedProj.reviews.push(reviewCopy);
+
+      // await this.$store.dispatch({ type: "saveProj", project: this.displayedProj.reviewCopy });
     },
   },
   created() {
