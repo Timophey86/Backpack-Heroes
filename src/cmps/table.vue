@@ -1,8 +1,8 @@
 <template>
   <el-table :data="tableData" stripe style="width: 100%">
-    <el-table-column prop="orders" label="Applicants Name" width="180"> </el-table-column>
-    <el-table-column prop="name" label="Name" width="180"> </el-table-column>
-    <el-table-column prop="address" label="Address"> </el-table-column>
+    <el-table-column v-for="member in tableData" :key="member._id" prop="member.fullName" label="Applicants Name" width="180"> </el-table-column>
+    <el-table-column prop="name" label="Projects Name" width="180"> </el-table-column>
+    <el-table-column prop="address" label="Status"> </el-table-column>
   </el-table>
 </template>
 
@@ -11,32 +11,12 @@ export default {
   props: ["orders"],
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-03",
-          name: "Tom",
-          address: "No. 189, Grove St, Los Angeles",
-        },
-        {
-          date: "2016-05-02",
-          name: "Tom",
-          address: "No. 189, Grove St, Los Angeles",
-        },
-        {
-          date: "2016-05-04",
-          name: "Tom",
-          address: "No. 189, Grove St, Los Angeles",
-        },
-        {
-          date: "2016-05-01",
-          name: "Tom",
-          address: "No. 189, Grove St, Los Angeles",
-        },
-      ],
-    };
+      tableData: this.orders
+  }
   },
   created() {
-      console.log(this.orders)
+      this.tableData = this.orders
+      console.log( this.tableData)
   }
 };
 </script>
