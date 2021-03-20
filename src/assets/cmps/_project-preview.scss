@@ -18,6 +18,24 @@
     align-self: center;
   }
 }
+.previw-img {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 1px solid $clr2;
+  }
+}
+
+.project-details{
+  h1{
+    font-family: fira-sans;
+  }
+}
+
 
 // .project-preview {
 //   position: relative;

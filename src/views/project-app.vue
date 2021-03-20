@@ -1,6 +1,5 @@
 <template>
   <div class="project-app-page">
-    <h1>Project App Page</h1>
     <project-list :projects="projs" />
   </div>
 </template>
