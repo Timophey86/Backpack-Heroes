@@ -1,50 +1,44 @@
 <template>
   <section class="project-preview">
-    <div class="project-details">
+    <h1>{{ proj.name }}</h1>
+    <h6>Country: {{ proj.loc.country }}</h6>
+    <h6>Duration of program:</h6>
+    <p>{{ formatDateFrom }} to {{ formatDateTo }}</p>
+
+    <el-image :src="img" fit="fit"></el-image>
+
+    <h6>Volunteer Fields:</h6>
+    <div class="preview-tags">
+      <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
+        {{ tag }}
+      </el-tag>
+    </div>
+
+
+    <p>{{ proj.details.description }}</p>
+    <div class="preview-footer">
       <el-rate
         v-model="proj.reviews[0].rate"
         disabled
         show-score
         text-color="#ff9900"
         score-template="{value} points"
-      >
-      </el-rate>
-
-      <h1>{{ proj.name }}</h1>
-      <div class="location-preview">
-        <h4>{{ proj.loc.country }}</h4>
-      </div>
-      <div class="date-preview">
-        <div class="detail-headers">Duration of program:</div>
-        <span>{{ formatDateFrom }}</span> to <span>{{ formatDateTo }}</span>
-      </div>
-      <div>
-        <div class="detail-headers">Volunteer Fields:</div>
-        <ul>
-          <li v-for="(tags, index) in proj.tags" :key="index">
-            {{ tags }}
-          </li>
-        </ul>
-      </div>
-      <div class="decs-preview">
-        <p>{{ proj.details.description }}</p>
-        <button @click="openDetailsPage(proj._id)" class="continue-reading">
-          Discover More..
-        </button>
-      </div>
-    </div>
-    <div class="previw-img">
-      <img
-        :src="
-          require(`../assets/images/${proj.name}/${proj.imgUrls[2]}` + '.jpg')
-        "
-        alt=""
       />
+      <button @click="openDetailsPage(proj._id)" class="continue-reading">
+        Discover More..
+      </button>
     </div>
+
+    <!-- <img
+      :src="
+        require(`../assets/images/${proj.name}/${proj.imgUrls[2]}` + '.jpg')
+      "
+    /> -->
   </section>
 </template>
 
 <script>
+const test = require(`../assets/images/Agriculture/3.jpg`);
 export default {
   name: "projectPreview",
   props: ["proj"],
@@ -54,6 +48,10 @@ export default {
     },
     formatDateTo() {
       return new Date(this.proj.startsEnd).toDateString();
+    },
+    img() {
+      return require(`../assets/images/${this.proj.name}/${this.proj.imgUrls[2]}` +
+        ".jpg");
     },
     // averageRate(){
     //   return
