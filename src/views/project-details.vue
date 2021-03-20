@@ -56,12 +56,12 @@
           </li>
         </ul>
         </p>
-        <button @click="joinProj">Join Us!</button>
+        <!-- <button @click="joinProj">Join Us!</button> -->
     </div>
   </div>
-        <div class="review-container">
+  
         <project-review :proj="displayedProj" />
-      </div>
+  
     
   </div>
 </template>
@@ -91,7 +91,7 @@ export default {
   },
   created() {
     this.getCurrProj(this.$route.params.id);
-    this.getUser();
+    // this.getUser();
   },
   components:{
     projectReview
