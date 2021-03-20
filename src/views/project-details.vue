@@ -48,7 +48,8 @@
           </li>
         </ul>
         </p>
-        <button @click="joinProj">Join Us!</button>
+        <button v-if="!isJoined" @click="joinProj">{{joinProjBtnTxt}}</button>
+        <button v-else>Thank you for joinig us!</button>
     </div>
   </div>
   
@@ -59,13 +60,15 @@
 </template>
 
 <script>
-import projectReview from '@/cmps/project-review'
+import projectReview from "@/cmps/project-review";
 export default {
   name: "projectDetails",
   data() {
     return {
-      currUser: null
-    }
+      currUser: null,
+      joinProjStatus: true,
+      isJoined: false
+    };
   },
   computed: {
     displayedProj() {
@@ -77,6 +80,13 @@ export default {
     formatDateTo() {
       return new Date(this.displayedProj.startsEnd).toDateString();
     },
+    joinProjBtnTxt() {
+      if (this.joinProjStatus) {
+        return "Join Us!";
+      } else {
+        return "Your Request was sent fo approval";
+      }
+    },
   },
   methods: {
     getCurrProj(_id) {
@@ -87,18 +97,36 @@ export default {
     },
     async getCurrUser() {
       await this.$store.dispatch({ type: "loadUsers" });
-      this.currUser = this.$store.getters.loggedinUser
+      this.currUser = this.$store.getters.loggedinUser;
     },
     async joinProj() {
-      await this.$store.dispatch({ type: "sendOrder", user:this.currUser, project:this.displayedProj });
-    }
+      if (this.joinProjStatus === false) return;
+      await this.$store.dispatch({
+        type: "sendOrder",
+        user: this.currUser,
+        project: this.displayedProj,
+      });
+      this.toggleJoinProj();
+    },
+    toggleJoinProj() {
+      this.joinProjStatus = !this.joinProjStatus;
+    },
+    checkIfUserJoined() {
+      var user = this.displayedProj.members.find(member => {
+        return member._id === this.currUser._id
+      })
+      if (user) {
+        this.isJoined = true
+      }
+    },
   },
-  created() {
-    this.getCurrProj(this.$route.params.id);
-    this.getCurrUser();
+  async created() {
+    await this.getCurrProj(this.$route.params.id);
+    await this.getCurrUser();
+    this.checkIfUserJoined();
   },
-  components:{
-    projectReview
-  }
+  components: {
+    projectReview,
+  },
 };
 </script>

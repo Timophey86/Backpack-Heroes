@@ -1,4 +1,5 @@
-import {utilService} from "../services/util.service.js"
+import { utilService } from "../services/util.service.js";
+import { projService } from "../services/proj.service.js";
 // import { orderService } from "../services/order.service.js";
 
 export const orderStore = {
@@ -42,8 +43,7 @@ export const orderStore = {
         },
         status: "pending",
       };
-      console.log('from send order ',order);
-      context.dispatch({type:"updateUserOrder", order: order})
+      context.dispatch({ type: "updateUserOrder", order: order });
       // const orders = await orderService.query(payload._id);
     },
     async saveOrder(context, payload) {
@@ -62,6 +62,16 @@ export const orderStore = {
         throw err;
       }
     },
+    async approveOrder(context, payload) {
+      console.log(payload.order);
+      var proj = await projService.getById(payload.order.proj._id);
+      var memberObj = {
+        _id: payload.order.member._id,
+        fullname: payload.order.member.fullName,
+      };
+      proj.members.push(memberObj);
+      await projService.save(proj);
+    },
     async updateUserOrder(context, payload) {
       var currHost = await userService.getById(payload.order.host._id);
       if (!currHost.orders) {
@@ -69,13 +79,12 @@ export const orderStore = {
         currHost.orders.push(payload.order);
       } else {
         currHost.orders = currHost.orders.filter((order) => {
-          console.log('order id',order._id);
-          console.log('payload id',payload.order._id );
-        return order._id !== payload.order._id });
+          return order._id !== payload.order._id;
+        });
         currHost.orders.push(payload.order);
       }
       try {
-      await userService.update(currHost);
+        await userService.update(currHost);
       } catch (err) {
         console.log("userStore: Error in updateUser", err);
         throw err;

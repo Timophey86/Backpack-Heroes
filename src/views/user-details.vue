@@ -10,22 +10,25 @@
       <!-- <h3>User Rating</h3> -->
       <h3>Pending Requests:</h3>
       <div v-if="pendingOrders">
-        <div v-for="(order, index) in pendingOrders" :key="index">
-          <span>Applicants Name:</span>{{ order.member.fullName }} <br />
-          <span>Projects Name:</span>{{ order.proj.name }} <br />
-          <span>Press to approve:</span
-          ><button @click="approve(order)">{{ order.status }}</button>
-        </div>
+        <ul>
+        <li v-for="(order, index) in pendingOrders" :key="index">
+          <span>Applicants Name: </span>{{ order.member.fullName }} <br />
+          <span>Projects Name: </span>{{ order.proj.name }} <br />
+          <span>Press to approve: </span
+          ><button @click="approve(order)">Approve</button>
+        </li>
+        </ul>
       </div>
       <div v-else>No Pending Reservations</div>
       <div v-if="approvedOrders">
         <h3>Reservations this month:</h3>
-        <div v-for="(order, index) in approvedOrders" :key="index">
-          <span>Applicants Name:</span>{{ order.member.fullName }} <br />
-          <span>Projects Name:</span>{{ order.proj.name }} <br />
-          <span>Status:</span>{{ order.status }}
-    <!-- <el-table :orders="approvedOrders"/> -->
-        </div>
+        <ul>
+        <li v-for="(order, index) in approvedOrders" :key="index">
+          <span>Applicants Name: </span>{{ order.member.fullName }} <br />
+          <span>Projects Name: </span>{{ order.proj.name }} <br />
+          <span>Status: </span>{{ order.status }}
+        </li>
+        </ul>
       </div>
       <div v-else>No approved reservations yet</div>
     </div>
@@ -90,6 +93,7 @@ export default {
       var newOrder = JSON.parse(JSON.stringify(order));
       newOrder.status = "approved";
       await this.$store.dispatch({ type: "updateUserOrder", order: newOrder });
+      await this.$store.dispatch({ type: "approveOrder", order: newOrder });
       this.getUser();
     },
   },
