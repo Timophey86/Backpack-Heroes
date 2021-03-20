@@ -1,11 +1,9 @@
 <template>
-  <div class="main-container">
-    <ul class="project-list">
-      <li v-for="proj in projects" :key="proj._id">
-        <project-preview :proj="proj" />
-      </li>
-    </ul>
-  </div>
+  <section class="project-list">
+    <div class="project-card" v-for="proj in projects" :key="proj._id">
+      <project-preview :proj="proj" />
+    </div>
+  </section>
 </template>
 <script>
 import projectPreview from "@/cmps/project-preview.vue";

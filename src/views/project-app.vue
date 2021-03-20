@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import ProjectList from "../cmps/project-list.vue";
+import ProjectList from "@/cmps/project-list";
 
 export default {
   name: "projectApp",
