@@ -130,5 +130,128 @@ const proj = [
         },
       },
     ],
+  },
+  {
+    _id: "322349",
+    name: "Education",
+    imgUrls: ["1", "2", "3"],
+    details: {
+      description: "Join the team to help teach English to children in schools, help to improve the communication and creative skills of the children",
+      amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
+    },
+    startsAt: 1615998001209,
+    startsEnd: 2015998049209,
+    tags: ["Education", "Community"],
+    members: [
+      { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
+      { _id: 111153, fullname: "puki", imgUrl: "imf.com / 233" },
+    ],
+    host: {
+      _id: 51399391,
+      fullname: "Davit Pok",
+      imgUrl: "https://x.com/pic.jpg",
+    },
+    loc: {
+      imgUrls: ["MG"],
+      country: "Madagascar",
+      countryCode: "MG",
+      address: "Nosy Komba, Madagascar",
+      lat: -8.61308,
+      lng: 41.1413,
+    },
+    reviews: [
+      {
+        id: 237242,
+        txt: "Very fun great expirence",
+        rate: 4,
+        by: {
+          _id: "u102",
+          fullname: "user2",
+          imgUrl: "/img/img2.jpg",
+        },
+      },
+    ],
+  },
+  {
+    _id: "312349",
+    name: "Environment",
+    imgUrls: ["1", "2", "3"],
+    details: {
+      description: "Volunteer and be part of organized beach cleanups in order to protect our oceans",
+      amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
+    },
+    startsAt: 1615998001209,
+    startsEnd: 2015998049209,
+    tags: ["Environment"],
+    members: [
+      { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
+      { _id: 111153, fullname: "puki", imgUrl: "imf.com / 233" },
+    ],
+    host: {
+      _id: 51399391,
+      fullname: "Davit Pok",
+      imgUrl: "https://x.com/pic.jpg",
+    },
+    loc: {
+      imgUrls: ["CR"],
+      country: "Costa Rica",
+      countryCode: "CR",
+      address: "Puntarenas, Costa Rica",
+      lat: -8.61308,
+      lng: 41.1413,
+    },
+    reviews: [
+      {
+        id: 237242,
+        txt: "Very fun great expirence",
+        rate: 4,
+        by: {
+          _id: "u102",
+          fullname: "user2",
+          imgUrl: "/img/img2.jpg",
+        },
+      },
+    ],
+  },
+  {
+    _id: "3152349",
+    name: "Agriculture",
+    imgUrls: ["1", "2", "3"],
+    details: {
+      description: "Our program is designed especially for those who want to experience the life of an eco village, engage in sustainable activities such as organic farming and much more",
+      amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
+    },
+    startsAt: 1615998001209,
+    startsEnd: 2015998049209,
+    tags: ["Agriculture"],
+    members: [
+      { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
+      { _id: 111153, fullname: "puki", imgUrl: "imf.com / 233" },
+    ],
+    host: {
+      _id: 51399391,
+      fullname: "Davit Pok",
+      imgUrl: "https://x.com/pic.jpg",
+    },
+    loc: {
+      imgUrls: ["NP"],
+      country: "Nepal",
+      countryCode: "NP",
+      address: "Kathmandu, Nepal",
+      lat: -8.61308,
+      lng: 41.1413,
+    },
+    reviews: [
+      {
+        id: 237242,
+        txt: "Very fun great expirence",
+        rate: 4,
+        by: {
+          _id: "u102",
+          fullname: "user2",
+          imgUrl: "/img/img2.jpg",
+        },
+      },
+    ],
   }
 ]
