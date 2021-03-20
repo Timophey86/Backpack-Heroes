@@ -31,14 +31,6 @@
         <div class="displyed-proj-details">
         <p>{{ displayedProj.details.description }}</p>
         </div>
-        <!-- <div class="amneties">
-        <div class="detail-headers">Amneties for the volunteer:</div>
-        <ul>
-          <li v-for="(amenities, index) in displayedProj.details.amenities" :key="index">
-            {{amenities}}
-          </li>
-        </ul>
-      </div> -->
         <button @click="edit(displayedProj._id)">Edit Project Details</button>
       </div>
 
@@ -56,7 +48,7 @@
           </li>
         </ul>
         </p>
-        <!-- <button @click="joinProj">Join Us!</button> -->
+        <button @click="joinProj">Join Us!</button>
     </div>
   </div>
   
@@ -70,6 +62,11 @@
 import projectReview from '@/cmps/project-review'
 export default {
   name: "projectDetails",
+  data() {
+    return {
+      currUser: null
+    }
+  },
   computed: {
     displayedProj() {
       return this.$store.getters.projForDetails;
@@ -88,10 +85,17 @@ export default {
     edit(id) {
       this.$router.push(`/edit/${id}`);
     },
+    async getCurrUser() {
+      await this.$store.dispatch({ type: "loadUsers" });
+      this.currUser = this.$store.getters.loggedinUser
+    },
+    async joinProj() {
+      await this.$store.dispatch({ type: "sendOrder", user:this.currUser, project:this.displayedProj });
+    }
   },
   created() {
     this.getCurrProj(this.$route.params.id);
-    // this.getUser();
+    this.getCurrUser();
   },
   components:{
     projectReview
