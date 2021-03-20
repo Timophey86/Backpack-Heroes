@@ -1,17 +1,33 @@
 <template>
-  <div class="user-details-page">
+  <div v-if="currUser" class="user-details-page main-container">
     <h1>User Details Page</h1>
     <div class="user-orders">
       <h3>List of orders Pending/Accepted</h3>
     </div>
-      <h3>{{displayedUser}}</h3>
     <div class="user-summary">
-      <h3>{{displayedUser.fullname}}</h3>
-      <h3>User avatar</h3>
-      <h3>User Rating</h3>
-      <h3>Pending: NUM</h3>
-      <h3>Reservations this month: : NUM</h3>
-      <h3>New Reviews: NUM</h3>
+      <h3>{{ displayedUser.fullname }}</h3>
+      <!-- <h3>User avatar</h3> -->
+      <!-- <h3>User Rating</h3> -->
+      <h3>Pending Requests:</h3>
+      <div v-if="pendingOrders">
+        <div v-for="(order, index) in pendingOrders" :key="index">
+          <span>Applicants Name:</span>{{ order.member.fullName }} <br />
+          <span>Projects Name:</span>{{ order.proj.name }} <br />
+          <span>Press to approve:</span
+          ><button @click="approve(order)">{{ order.status }}</button>
+        </div>
+      </div>
+      <div v-else>No Pending Reservations</div>
+      <div v-if="approvedOrders">
+        <h3>Reservations this month:</h3>
+        <div v-for="(order, index) in approvedOrders" :key="index">
+          <span>Applicants Name:</span>{{ order.member.fullName }} <br />
+          <span>Projects Name:</span>{{ order.proj.name }} <br />
+          <span>Status:</span>{{ order.status }}
+    <!-- <el-table :orders="approvedOrders"/> -->
+        </div>
+      </div>
+      <div v-else>No approved reservations yet</div>
     </div>
     <div class="user-projects">
       <h3>List of project that i am hosting</h3>
@@ -21,6 +37,8 @@
 
 
 <script>
+import elTable from "../cmps/table.vue"
+
 export default {
   name: "userDetails",
   data() {
@@ -31,18 +49,55 @@ export default {
   computed: {
     displayedUser() {
       return this.$store.getters.loggedinUser;
-    }, 
+    },
     pendingOrders() {
-    }
+      if (this.currUser.orders) {
+        const pendingOrders = [];
+        this.currUser.orders.forEach((order) => {
+          if (order.status === "pending") {
+            pendingOrders.push(order);
+          }
+        });
+        if (!pendingOrders[0]) {
+          return null;
+        } else {
+          return pendingOrders;
+        }
+      } else return null;
+    },
+    approvedOrders() {
+      if (this.currUser.orders) {
+        const pendingOrders = [];
+        this.currUser.orders.forEach((order) => {
+          if (order.status === "approved") {
+            pendingOrders.push(order);
+          }
+        });
+        if (!pendingOrders.length) {
+          return null;
+        } else {
+          return pendingOrders;
+        }
+      } else return null;
+    },
   },
   methods: {
     async getUser() {
       await this.$store.dispatch({ type: "loadUsers" });
       this.currUser = this.$store.getters.loggedinUser;
     },
+    async approve(order) {
+      var newOrder = JSON.parse(JSON.stringify(order));
+      newOrder.status = "approved";
+      await this.$store.dispatch({ type: "updateUserOrder", order: newOrder });
+      this.getUser();
+    },
   },
   created() {
     this.getUser();
   },
+  components: {
+    elTable
+  }
 };
 </script>

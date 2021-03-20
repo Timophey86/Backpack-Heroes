@@ -1,3 +1,4 @@
+import {utilService} from "../services/util.service.js"
 // import { orderService } from "../services/order.service.js";
 
 export const orderStore = {
@@ -25,7 +26,7 @@ export const orderStore = {
     },
     async sendOrder(context, payload) {
       const order = {
-        _id: "o1225",
+        _id: utilService.makeId(),
         createdAt: 9898989,
         member: {
           _id: payload.user._id,
@@ -41,6 +42,7 @@ export const orderStore = {
         },
         status: "pending",
       };
+      console.log('from send order ',order);
       context.dispatch({type:"updateUserOrder", order: order})
       // const orders = await orderService.query(payload._id);
     },
@@ -66,6 +68,10 @@ export const orderStore = {
         currHost.orders = [];
         currHost.orders.push(payload.order);
       } else {
+        currHost.orders = currHost.orders.filter((order) => {
+          console.log('order id',order._id);
+          console.log('payload id',payload.order._id );
+        return order._id !== payload.order._id });
         currHost.orders.push(payload.order);
       }
       try {

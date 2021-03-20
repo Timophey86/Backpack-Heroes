@@ -1,19 +1,30 @@
-.app-header {
+.app-header{
+    background-color: #2c3e50;
+    border-bottom: 1px solid black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    
+}
+.header{
     display: flex;
     height: 80px;
     justify-content: space-between;
     align-items: center;
     .logo {
-        h1{
+        a{
             cursor: pointer;
             font-family: caveat;
+            color: white;
+            font-size: 2rem;
         }
     }
     .nav{
         a{
             font-family: caveat;
             font-size: 1.8rem;
-            color: #2c3e50;
+            color: white;
             margin-inline-end: 50px;
             &:last-child{
                 margin-inline-end: 0;

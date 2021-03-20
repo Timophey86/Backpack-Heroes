@@ -1,7 +1,7 @@
 <template>
-  <div class="app-header main-container">
+  <div class="app-header">
+  <div class="header main-container">
     <div class="logo">
-      <!-- <h1 @click="projList">Backpack Heroes</h1> -->
       <router-link to="/">Backpack Heroes</router-link>
     </div>
     <div class="nav">
@@ -12,14 +12,12 @@
       ></router-link>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 export default {
   methods: {
-    projList() {
-      this.$router.push("/");
-    },
   },
 };
 </script>
