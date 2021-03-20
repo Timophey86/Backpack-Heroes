@@ -1,10 +1,16 @@
 <template>
   <section class="project-preview">
     <div class="project-details">
+      <el-rate
+        v-model="proj.reviews[0].rate"
+        disabled
+        show-score
+        text-color="#ff9900"
+        score-template="{value} points"
+      >
+      </el-rate>
+
       <h1>{{ proj.name }}</h1>
-      <div class="rating-preview">
-        <h2>{{ proj.reviews.rate }}</h2>
-      </div>
       <div class="location-preview">
         <h4>{{ proj.loc.country }}</h4>
       </div>
@@ -49,6 +55,9 @@ export default {
     formatDateTo() {
       return new Date(this.proj.startsEnd).toDateString();
     },
+    // averageRate(){
+    //   return
+    // }
   },
   methods: {
     openDetailsPage(id) {

@@ -1,51 +1,74 @@
 <template>
   <div v-if="projectToEdit" class="project-edit-page">
-    <label>Project Name:</label>
-    <input
-      type="text"
-      v-model="projectToEdit.name"
-      placeholder="Project Name"
-    />
+    <el-form
+      :model="projectToEdit"
+      ref="ruleForm"
+      label-width="auto"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="Project Name">
+        <el-input
+          v-model="projectToEdit.name"
+          placeholder="Project Name..."
+          clearable
+        />
+      </el-form-item>
 
-    <h2>Project Location:</h2>
-    <label>Project country:</label>
-    <input
-      type="text"
-      v-model="projectToEdit.loc.country"
-      placeholder="Project country"
-    />
-    <label>Project countryCode:</label>
-    <input
-      type="text"
-      v-model="projectToEdit.loc.countryCode"
-      placeholder="Project countryCode"
-    />
-    <label>Project address:</label>
-    <input
-      type="text"
-      v-model="projectToEdit.loc.address"
-      placeholder="Project address"
-    />
+      <el-form-item label="Project Country">
+        <el-input
+          v-model="projectToEdit.loc.country"
+          placeholder="Country..."
+          clearable
+        />
+      </el-form-item>
 
-    <div class="project-gallery">
-      <h2>Project image gallery</h2>
-    </div>
+      <el-form-item label="Country Code">
+        <el-input
+          v-model="projectToEdit.loc.countryCode"
+          placeholder="Country code..."
+          clearable
+        />
+      </el-form-item>
 
-    <label>Project Description:</label>
+      <el-form-item label="Project Address">
+        <el-input
+          v-model="projectToEdit.loc.address"
+          placeholder="Address..."
+          clearable
+        />
+      </el-form-item>
 
-    <textarea
-      type="text"
-      v-model="projectToEdit.details.description"
-      placeholder="Project Description"
-    />
-    <div class="project-dates">
-      <label>Project start at: {{ formatDateFrom }}</label>
-      <input type="date" v-model="projectToEdit.startsAt" />
-      <label> Project end at: {{ formatDateTo }}</label>
-      <input type="date" v-model="projectToEdit.startsEnd" />
-    </div>
+      <el-form-item label="Project Description">
+        <el-input
+          type="textarea"
+          :rows="10"
+          placeholder="Please input"
+          v-model="projectToEdit.details.description"
+          clearable
+          resize="none"
+        />
+      </el-form-item>
 
-    <button @click="update">Submit</button>
+      <el-form-item label="Project date">
+        <div class="block">
+          <el-date-picker
+            v-model="projectToEdit.startsAt"
+            type="date"
+            placeholder="Pick a day"
+          />
+          <el-date-picker
+            v-model="projectToEdit.startsEnd"
+            type="date"
+            placeholder="Pick a day"
+          />
+        </div>
+      </el-form-item>
+      <el-button
+        @click="update"
+        type="primary"
+        icon="el-icon-check"
+      ></el-button>
+    </el-form>
   </div>
 </template>
 <script>
