@@ -10,7 +10,7 @@ function getProj () {
 const proj = [
   {
     _id: "10006546",
-    name: "Animal-rescue",
+    name: "Farm Animal Rescue and Caretaker",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Support an Animal Rescue Centre team to care for injured, sick and abused animals",
@@ -18,7 +18,7 @@ const proj = [
     },
     startsAt: 1616074293009,
     startsEnd: 1616074283009,
-    tags: ["Animal Care", "Farmstay help"],
+    tags: ["Animals", "Farmstay help"],
     members: [
       { _id: 111122, fullname: 'muki', imgUrl: 'imf.com / 2332443' },
       { _id: 111123, fullname: 'shuki', imgUrl: 'imf.com / 233' },
@@ -51,7 +51,7 @@ const proj = [
   },
   {
     _id: "32234421",
-    name: "Children",
+    name: "Childcare Center Supporter",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Provide support and education at day care centres and community outreach projects",
@@ -59,7 +59,7 @@ const proj = [
     },
     startsAt: 1615998009209,
     startsEnd: 2015998009209,
-    tags: ["Education", "Community"],
+    tags: ["Children", "Education", "Community"],
     members: [
       { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443 "},
       { _id: 111153, fullname: "puki", imgUrl: "imf.com / 233" },
@@ -92,7 +92,7 @@ const proj = [
   },
   {
     _id: "32234",
-    name: "Building",
+    name: "Construction work in a community school",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Join a team of local builders to help improve community buildings in India",
@@ -133,7 +133,7 @@ const proj = [
   },
   {
     _id: "322349",
-    name: "Education",
+    name: "School Development Assistance",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Join the team to help teach English to children in schools, help to improve the communication and creative skills of the children",
@@ -174,7 +174,7 @@ const proj = [
   },
   {
     _id: "312349",
-    name: "Environment",
+    name: "Make our oceans plastic free",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Volunteer and be part of organized beach cleanups in order to protect our oceans",
@@ -215,7 +215,7 @@ const proj = [
   },
   {
     _id: "3152349",
-    name: "Agriculture",
+    name: "Eco Farm Supporter",
     imgUrls: ["1", "2", "3"],
     details: {
       description: "Our program is designed especially for those who want to experience the life of an eco village, engage in sustainable activities such as organic farming and much more",
