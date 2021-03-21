@@ -11,7 +11,7 @@
         <p>By: {{ review.by.fullname }}</p>
       </div>
     </div>
-    <hr />
+
     <!-- <form v-if="isShowForm" @submit.prevent="addReview()" class="review-form">
       <h2>Your Review:</h2>
       <label>Your full name:</label>
