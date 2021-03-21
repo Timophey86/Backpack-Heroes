@@ -1,17 +1,22 @@
 <template>
   <div class="review-container">
     <button @click="showForm">Add Review</button>
-    <h1>{{ proj.name }} Review</h1>
+    <h2>Reviews:</h2>
     <div class="review-list">
-      <div class="review-card" v-for="review in proj.reviews" :key="review._id">
-        <div class="rate-review">
-          <p v-for="star in review.rate" :key="star">⭐</p>
-        </div>
-        <longText :txt="review.txt" :length="maxLength" />
-        <p>By: {{ review.by.fullname }}</p>
-      </div>
+      <el-carousel :interval="4000" type="card" >
+        <el-carousel-item v-for="review in proj.reviews" :key="review._id">
+          <div class="review-card">
+            <div class="rate-review">
+              <p v-for="star in review.rate" :key="star">⭐</p>
+            </div>
+            <h6>{{ review.txt }}</h6>
+            <p>By: {{ review.by.fullname }}</p>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </div>
 
+<<<<<<< HEAD
     <!-- <form v-if="isShowForm" @submit.prevent="addReview()" class="review-form">
       <h2>Your Review:</h2>
       <label>Your full name:</label>
@@ -27,25 +32,33 @@
       <button @click.prevent="hideForm" class="close-review">x</button>
     </form> -->
     <el-form v-if="isShowForm" ref="form" @submit="addReview()" v:model="reviewToEdit" class="review-form">
+=======
+    <el-form
+      v-if="isShowForm"
+      @submit.prevent="addReview()"
+      ref="form"
+      class="review-form"
+    >
+>>>>>>> 623703202d478412efe100f6822d77b4e88156cc
       <h2>Your Review:</h2>
       <el-form-item label="Your name:">
         <el-input v-model="reviewToEdit.by.fullname"></el-input>
       </el-form-item>
-
-      <el-form-item >
+      <el-form-item>
         <el-rate v-model="reviewToEdit.rate" :colors="colors"> </el-rate>
       </el-form-item>
-
       <el-form-item>
         <el-input
           type="textarea"
           :rows="5"
           placeholder="Your Opinion Matters..."
           v-model="reviewToEdit.txt"
+          maxlength="100"
+          show-word-limit
         >
         </el-input>
       </el-form-item>
-            <button>Save</button>
+      <button @click.prevent="addReview()">Save</button>
       <button @click.prevent="hideForm" class="close-review">x</button>
     </el-form>
   </div>
@@ -102,3 +115,20 @@ export default {
   },
 };
 </script>
+<style>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+</style>

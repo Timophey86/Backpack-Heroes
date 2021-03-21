@@ -3,18 +3,16 @@
     <h1>{{ proj.name }}</h1>
     <h6>Country: {{ proj.loc.country }}</h6>
     <h6>Duration of program:</h6>
-    <p>{{ formatDateFrom }} to {{ formatDateTo }}</p>
-
+    <h5>{{ proj.startsAt | moment("dddd, MMMM Do YYYY") }} to
+    {{ proj.startsEnd | moment("dddd, MMMM Do YYYY") }}</h5>
+    <!-- <p>{{ formatDateFrom }} to {{ formatDateTo }}</p> -->
     <el-image :src="img" fit="fit"></el-image>
-
     <h6>Volunteer Fields:</h6>
     <div class="preview-tags">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}
       </el-tag>
     </div>
-
-
     <p>{{ proj.details.description }}</p>
     <div class="preview-footer">
       <el-rate
@@ -28,12 +26,6 @@
         Discover More..
       </button>
     </div>
-
-    <!-- <img
-      :src="
-        require(`../assets/images/${proj.name}/${proj.imgUrls[2]}` + '.jpg')
-      "
-    /> -->
   </section>
 </template>
 
@@ -54,8 +46,8 @@ export default {
         ".jpg");
     },
     // averageRate(){
-    //   return
-    // }
+    //  return this.proj.reviews.acc / this.proj.reviews.length
+    // // }
   },
   methods: {
     openDetailsPage(id) {
