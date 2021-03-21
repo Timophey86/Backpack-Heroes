@@ -8,7 +8,7 @@
       <h4>Pending Requests:</h4>
       <div v-if="pendingOrders">
         <ul>
-        <li v-for="(order, index) in pendingOrders" :key="index">
+        <li class="pending" v-for="(order, index) in pendingOrders" :key="index">
           <span>Applicants Name: </span>{{ order.member.fullName }} <br />
           <span>Projects Name: </span>{{ order.proj.name }} <br />
           <span>Press to approve: </span
@@ -21,10 +21,10 @@
       <div v-if="approvedOrders">
         <h4>Reservations this month:</h4>
         <ul>
-        <li v-for="(order, index) in approvedOrders" :key="index">
+        <li class="reservations" v-for="(order, index) in approvedOrders" :key="index">
           <span>Applicants Name: </span>{{ order.member.fullName }} <br />
           <span>Projects Name: </span>{{ order.proj.name }} <br />
-          <span>Status: </span>{{ order.status }}
+          <span>Status: </span><span class="approved">Approved</span>
         </li>
         </ul>
       </div>

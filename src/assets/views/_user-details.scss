@@ -1,3 +1,18 @@
 .user-summary {
     padding: 10px 0;
 }
+
+.reservations {
+    border-bottom: 2px dotted lightgray;
+    .approved{
+        background-color: lightgreen;
+        padding: 2px;
+        border: 1px solid black;
+        font-size: medium;
+    }
+}
+
+.pending{
+    border-bottom: 2px dotted lightgray;
+}
+
