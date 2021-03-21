@@ -1,33 +1,35 @@
 .review-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 10px;
     margin-top: 10px;
+    h2 {
+        display: inline-block;
+        margin-inline-end: 10px;
+    }
+    .el-input {
+        width: 200px;
+    }
 
-    .review-card {
-        border-radius: 10px;
-        border: 1px solid black;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        text-align: center;
-        background-color: lightyellow;
-        .proj-description {
-            flex: 1;
-        }
-    }
-    .rate-review {
-        display: flex;
-    }
     .review-list {
-        // display: flex;
-        width: 100%;
-        .el-carousel__container {
-            height: 200px;
+        display: grid;
+        gap: 10px;
+        margin: 20px;
+        grid-template-rows: repeat(auto-fill, 200px);
+        grid-template-columns: repeat(auto-fill, 200px);
+        .review-card {
+            border-radius: 10px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+            .proj-description {
+                flex: 1;
+            }
+            .rate-review {
+                display: flex;
+            }
         }
     }
 }
@@ -36,12 +38,12 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    background-color: lightyellow;
+    background-color: white;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    width: 300px;
+    width: 350px;
     z-index: 1000;
 
     .close-review {

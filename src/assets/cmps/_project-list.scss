@@ -1,14 +1,13 @@
 .project-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
     margin: 40px;
-    justify-content: center;
+    gap: 10px;
+    // margin: 40px;
     .project-card {
         background-color: #f8f5f1;
         border: 2px solid #2c3e50;
         border-radius: 20px;
-        width: 300px;
     }
 }
 // .project-list {

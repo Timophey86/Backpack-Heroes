@@ -2,10 +2,13 @@
   <section class="project-preview">
     <h1>{{ proj.name }}</h1>
     <h6>Country: {{ proj.loc.country }}</h6>
-    <h6>Duration of program:</h6>
-    <h5>{{ proj.startsAt | moment("dddd, MMMM Do YYYY") }} to
-    {{ proj.startsEnd | moment("dddd, MMMM Do YYYY") }}</h5>
-    <!-- <p>{{ formatDateFrom }} to {{ formatDateTo }}</p> -->
+    <h6>
+      Duration of program:
+    </h6>
+    <h6>
+      {{ proj.startsAt | moment(" MMMM Do YYYY") }} to
+      {{ proj.startsEnd | moment("MMMM Do YYYY") }}
+    </h6>
     <el-image :src="img" fit="fit"></el-image>
     <h6>Volunteer Fields:</h6>
     <div class="preview-tags">
@@ -13,7 +16,8 @@
         {{ tag }}
       </el-tag>
     </div>
-    <p>{{ proj.details.description }}</p>
+    <p>{{ descToDisplay }}</p>
+    <!-- <p>{{ proj.details.description }}</p> -->
     <div class="preview-footer">
       <el-rate
         v-model="proj.reviews[0].rate"
@@ -43,6 +47,13 @@ export default {
     },
     img() {
       return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
+    },
+    descToDisplay() {
+      if (this.proj.details.description.length > 100) {
+        return this.proj.details.description.substring(0, 100) + "...";
+      } else {
+        return this.proj.details.description;
+      }
     },
     // averageRate(){
     //  return this.proj.reviews.acc / this.proj.reviews.length

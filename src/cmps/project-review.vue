@@ -1,19 +1,20 @@
 <template>
   <div class="review-container">
-    <button @click="showForm">Add Review</button>
     <h2>Reviews:</h2>
+    <!-- <button @click="showForm">Add Review</button> -->
+    <el-input
+      v-if="!isShowForm"
+      @focus="showForm"
+      placeholder="Add Review..."
+    ></el-input>
     <div class="review-list">
-      <el-carousel :interval="5000" type="card" >
-        <el-carousel-item v-for="review in proj.reviews" :key="review._id">
-          <div class="review-card">
-            <div class="rate-review">
-              <p v-for="star in review.rate" :key="star">⭐</p>
-            </div>
-            <h6>{{ review.txt }}</h6>
-            <p>By: {{ review.by.fullname }}</p>
-          </div>
-        </el-carousel-item>
-      </el-carousel>
+      <div v-for="review in proj.reviews" :key="review._id" class="review-card">
+        <div class="rate-review">
+          <p v-for="star in review.rate" :key="star">⭐</p>
+        </div>
+        <h6>{{ review.txt }}</h6>
+        <p>By: {{ review.by.fullname }}</p>
+      </div>
     </div>
 
     <el-form
@@ -26,7 +27,7 @@
       <el-form-item label="Your name:">
         <el-input v-model="reviewToEdit.by.fullname"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="Your Rate:">
         <el-rate v-model="reviewToEdit.rate" :colors="colors"> </el-rate>
       </el-form-item>
       <el-form-item>
@@ -98,20 +99,3 @@ export default {
   },
 };
 </script>
-<style>
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 200px;
-    margin: 0;
-  }
-
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
-  }
-</style>
