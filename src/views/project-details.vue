@@ -2,13 +2,12 @@
   <div v-if="displayedProj" class="project-details-page main-container">
     <div class="details-img-container">
       <div
-        :class="displayedProj.name + '-' + img"
+        :class="'img-' + img"
         v-for="(img, index) in displayedProj.imgUrls"
         :key="index"
-        :style="{
-          background: `url(${require(`../assets/images/${displayedProj.name}/${img}.jpg`)})`,backgroundSize: 'cover',backgroundPosition: 'center',}"
+      
       >
-        <!-- <img :src="require(`../assets/images/${displayedProj.name}/${img}.jpg`)"  alt=""/> -->
+        <img :src="require(`../assets/images/${displayedProj.tags[0]}/${img}.jpg`)"  alt=""/>
       </div>
     </div>
     <div class="main-details">

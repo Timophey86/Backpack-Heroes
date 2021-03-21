@@ -46,8 +46,7 @@ export default {
       return new Date(this.proj.startsEnd).toDateString();
     },
     img() {
-      return require(`../assets/images/${this.proj.name}/${this.proj.imgUrls[2]}` +
-        ".jpg");
+      return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
     },
     descToDisplay() {
       if (this.proj.details.description.length > 100) {

@@ -5,10 +5,10 @@
       <!-- <h3>User avatar</h3> -->
       <!-- <h3>User Rating</h3> -->
       <hr>
-      <h4>Pending Requests:</h4>
+      <h4>Admission requests:</h4>
       <div v-if="pendingOrders">
         <ul>
-        <li v-for="(order, index) in pendingOrders" :key="index">
+        <li class="pending" v-for="(order, index) in pendingOrders" :key="index">
           <span>Applicants Name: </span>{{ order.member.fullName }} <br />
           <span>Projects Name: </span>{{ order.proj.name }} <br />
           <span>Press to approve: </span
@@ -21,14 +21,27 @@
       <div v-if="approvedOrders">
         <h4>Reservations this month:</h4>
         <ul>
-        <li v-for="(order, index) in approvedOrders" :key="index">
+        <li class="reservations" v-for="(order, index) in approvedOrders" :key="index">
           <span>Applicants Name: </span>{{ order.member.fullName }} <br />
           <span>Projects Name: </span>{{ order.proj.name }} <br />
-          <span>Status: </span>{{ order.status }}
+          <span>Status: </span><span class="approved">Approved</span>
         </li>
         </ul>
       </div>
       <div v-else>No approved reservations yet</div>
+         <hr>
+         <h4>Your future adventures:</h4>
+        <div v-if="approvedOrders || pendingOrders">
+        <ul>
+        <li class="reservations" v-for="(order, index) in displayedUser.orders" :key="index">
+          <!-- <span>Applicants Name: </span>{{ order.member.fullName }} <br /> -->
+          <span>Projects Name: </span>{{ order.proj.name }} <br />
+          <span>Dates: </span>March 17th 2021 to  November 19th 2033 <br />
+          <span>Status: </span><span :class="order.status">{{order.status}}</span>
+        </li>
+        </ul>
+      </div>
+      <div v-else>Not signed for any project yet</div>
     </div>
   </div>
 </template>
@@ -42,6 +55,7 @@ export default {
   data() {
     return {
       currUser: null,
+
     };
   },
   computed: {
