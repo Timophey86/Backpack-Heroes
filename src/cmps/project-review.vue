@@ -3,7 +3,7 @@
     <button @click="showForm">Add Review</button>
     <h2>Reviews:</h2>
     <div class="review-list">
-      <el-carousel :interval="4000" type="card" >
+      <el-carousel :interval="5000" type="card" >
         <el-carousel-item v-for="review in proj.reviews" :key="review._id">
           <div class="review-card">
             <div class="rate-review">
@@ -37,6 +37,7 @@
           v-model="reviewToEdit.txt"
           maxlength="100"
           show-word-limit
+          resize="none"
         >
         </el-input>
       </el-form-item>
