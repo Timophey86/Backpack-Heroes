@@ -16,30 +16,12 @@
       </el-carousel>
     </div>
 
-<<<<<<< HEAD
-    <!-- <form v-if="isShowForm" @submit.prevent="addReview()" class="review-form">
-      <h2>Your Review:</h2>
-      <label>Your full name:</label>
-      <input type="text" v-model="reviewToEdit.by.fullname" required />
-      <label>Rate:</label>
-      <input type="number" v-model="reviewToEdit.rate" min="0" max="5" />
-      <textarea
-        placeholder="Your Opinion Matters..."
-        v-model="reviewToEdit.txt"
-        required
-      ></textarea>
-      <button>Save</button>
-      <button @click.prevent="hideForm" class="close-review">x</button>
-    </form> -->
-    <el-form v-if="isShowForm" ref="form" @submit="addReview()" v:model="reviewToEdit" class="review-form">
-=======
     <el-form
       v-if="isShowForm"
       @submit.prevent="addReview()"
       ref="form"
       class="review-form"
     >
->>>>>>> 623703202d478412efe100f6822d77b4e88156cc
       <h2>Your Review:</h2>
       <el-form-item label="Your name:">
         <el-input v-model="reviewToEdit.by.fullname"></el-input>
