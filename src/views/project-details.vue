@@ -7,7 +7,7 @@
         :key="index"
       
       >
-        <img :src="require(`../assets/images/${displayedProj.name}/${img}.jpg`)"  alt=""/>
+        <img :src="require(`../assets/images/${displayedProj.tags[0]}/${img}.jpg`)"  alt=""/>
       </div>
     </div>
     <div class="main-details">

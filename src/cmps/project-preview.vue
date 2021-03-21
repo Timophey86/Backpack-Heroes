@@ -42,8 +42,7 @@ export default {
       return new Date(this.proj.startsEnd).toDateString();
     },
     img() {
-      return require(`../assets/images/${this.proj.name}/${this.proj.imgUrls[2]}` +
-        ".jpg");
+      return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
     },
     // averageRate(){
     //  return this.proj.reviews.acc / this.proj.reviews.length
