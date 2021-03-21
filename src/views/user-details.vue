@@ -1,14 +1,11 @@
 <template>
   <div v-if="currUser" class="user-details-page main-container">
-    <h1>User Details Page</h1>
-    <div class="user-orders">
-      <h3>List of orders Pending/Accepted</h3>
-    </div>
     <div class="user-summary">
-      <h3>{{ displayedUser.fullname }}</h3>
+      <h3>Welcome {{ displayedUser.fullname }}</h3>
       <!-- <h3>User avatar</h3> -->
       <!-- <h3>User Rating</h3> -->
-      <h3>Pending Requests:</h3>
+      <hr>
+      <h4>Pending Requests:</h4>
       <div v-if="pendingOrders">
         <ul>
         <li v-for="(order, index) in pendingOrders" :key="index">
@@ -20,8 +17,9 @@
         </ul>
       </div>
       <div v-else>No Pending Reservations</div>
+      <hr>
       <div v-if="approvedOrders">
-        <h3>Reservations this month:</h3>
+        <h4>Reservations this month:</h4>
         <ul>
         <li v-for="(order, index) in approvedOrders" :key="index">
           <span>Applicants Name: </span>{{ order.member.fullName }} <br />
@@ -31,9 +29,6 @@
         </ul>
       </div>
       <div v-else>No approved reservations yet</div>
-    </div>
-    <div class="user-projects">
-      <h3>List of project that i am hosting</h3>
     </div>
   </div>
 </template>

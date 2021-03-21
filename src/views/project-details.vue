@@ -38,7 +38,7 @@
         <h2>Members who decided to join us:</h2>
         <ul class="member-list">
           <li v-for="(members, index) in displayedProj.members" :key="index">
-            {{members.fullname}}
+         <el-avatar :size="55">{{members.fullname}}</el-avatar>
           </li>
         </ul>
         <p class="amneties">As a member these are some of the bonuses we provide for the members of our program:

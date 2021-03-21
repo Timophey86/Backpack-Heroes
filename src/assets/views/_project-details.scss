@@ -1,15 +1,14 @@
 .main-details {
   display: flex;
-
 }
 
 .project-details-page {
-  .displyed-proj-details{
-  p {
-    margin: 10px auto;
-    font-size: 20px;
+  .displyed-proj-details {
+    p {
+      margin: 10px auto;
+      font-size: 20px;
+    }
   }
-}
 }
 
 .members-div {
@@ -17,27 +16,29 @@
   width: 50%;
   .amneties {
     font-size: smaller;
-
   }
-  .member-list{
+  .member-list {
     list-style-type: none;
     display: flex;
     li {
       font-weight: bold;
-      margin-left: 5px;  
-      &:not(:first-child)::before {
-            content: "," ;
-          } 
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-left: 25px;
+      // &:not(:first-child)::before {
+      //       content: "," ;
+      //     }
     }
     // li:nth-child(even) {
     //   &::before {
     //     content: "," ;
-    //   } 
+    //   }
     // }
   }
 }
 
-.categories{ 
+.categories {
   font-size: smaller;
 }
 
@@ -54,7 +55,6 @@
 .proj-details {
   width: 50%;
   margin-top: 20px;
-  
 }
 
 .Building-1 {
@@ -73,7 +73,7 @@
 
 .Children-1 {
   grid-column: 2/3;
-  grid-row: 1/2;  
+  grid-row: 1/2;
 }
 
 .Children-2 {
@@ -98,5 +98,4 @@
 .Animal-rescue-3 {
   grid-column: 2/3;
   grid-row: 2/3;
-  }
-
+}
