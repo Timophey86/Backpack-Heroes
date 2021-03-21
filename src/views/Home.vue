@@ -14,11 +14,11 @@
           <h1>Volunteering Categories:</h1>
           <ul>
             <li v-for="proj in projs" :key="proj._id">
-              <p>{{ proj.name }}</p>
+              <p>{{ proj.tags[0] }}</p>
               <img
                 @click="projList"
                 :src="
-                  require(`@/assets/images/${proj.name}/${proj.imgUrls[0]}.jpg`)
+                  require(`@/assets/images/${proj.tags[0]}/${proj.imgUrls[0]}.jpg`)
                 "
                 alt=""
               />
