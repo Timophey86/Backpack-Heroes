@@ -1,7 +1,6 @@
 <template>
   <div class="review-container">
-    <h2>Reviews:</h2>
-    <!-- <button @click="showForm">Add Review</button> -->
+    <h1>⭐ {{ averageRate }} ({{ proj.reviews.length }} Reviews)</h1>
     <el-input
       v-if="!isShowForm"
       @focus="showForm"
@@ -13,7 +12,8 @@
           <p v-for="star in review.rate" :key="star">⭐</p>
         </div>
         <h6>{{ review.txt }}</h6>
-        <p>By: {{ review.by.fullname }}</p>
+        <span>By: {{ review.by.fullname }}</span>
+        <span>Published: {{ Date.now() | moment("MMMM - DD - YYYY") }}</span>
       </div>
     </div>
 
@@ -48,14 +48,12 @@
   </div>
 </template>
 <script>
-import longText from "./long-text";
 export default {
   name: "home",
   props: ["proj"],
   data() {
     return {
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
-      maxLength: 50,
       isShowForm: false,
       reviewToEdit: {
         txt: "",
@@ -65,6 +63,16 @@ export default {
         },
       },
     };
+  },
+  computed: {
+    averageRate() {
+      const rates = this.proj.reviews.map((review) => {
+        return review.rate;
+      });
+      return (
+        rates.reduce((acc, rate) => acc + rate, 0) / this.proj.reviews.length
+      ).toFixed(1);
+    },
   },
 
   methods: {
@@ -93,9 +101,6 @@ export default {
       });
       this.hideForm();
     },
-  },
-  components: {
-    longText,
   },
 };
 </script>
