@@ -56,11 +56,11 @@ function getEmptyProj() {
     tags: [],
     details: {
       description: "",
-      amenities: "",
+      amenities: [],
     },
     imgUrls: [],
     startsAt: Date.now(),
-    startsEnd: Date.now(),
+    endAt: Date.now(),
     members: [],
   };
 }

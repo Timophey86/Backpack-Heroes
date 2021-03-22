@@ -4,7 +4,7 @@
     <p>{{ proj.loc.country }}</p>
     <p>
       {{ proj.startsAt | moment("MM/DD/YY") }} -
-      {{ proj.startsEnd | moment("MM/DD/YY") }}
+      {{ proj.endAt | moment("MM/DD/YY") }}
     </p>
     <el-image :src="img" fit="fit"></el-image>
     <div class="preview-tags">
@@ -15,12 +15,13 @@
     <p>{{ descToDisplay }}</p>
     <div class="preview-footer">
       <el-rate
-        v-model="proj.reviews[0].rate"
+        v-model="averageRate"
         disabled
         show-score
         text-color="#ff9900"
-        score-template="{value} stars"
+        score-template="{value}"
       />
+      <span>( {{ proj.reviews.length }} )</span>
     </div>
   </section>
 </template>
@@ -32,10 +33,10 @@ export default {
   props: ["proj"],
   computed: {
     formatDateFrom() {
-      return new Date(this.proj.startsAt).toDateString();
+      return new Date(this.proj.startsAt).toDateString;
     },
     formatDateTo() {
-      return new Date(this.proj.startsEnd).toDateString();
+      return new Date(this.proj.endAt).toDateString;
     },
     img() {
       return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
@@ -47,9 +48,14 @@ export default {
         return this.proj.details.description;
       }
     },
-    // averageRate(){
-    //  return this.proj.reviews.acc / this.proj.reviews.length
-    // // }
+    averageRate() {
+      const rates = this.proj.reviews.map((review) => {
+        return review.rate;
+      });
+      return +(
+        rates.reduce((acc, rate) => acc + rate, 0) / this.proj.reviews.length
+      ).toFixed(1);
+    },
   },
   methods: {
     openDetailsPage(id) {
