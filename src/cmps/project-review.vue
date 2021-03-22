@@ -11,9 +11,9 @@
         <div class="rate-review">
           <p v-for="star in review.rate" :key="star">⭐</p>
         </div>
-        <h6>{{ review.txt }}</h6>
-        <span>By: {{ review.by.fullname }}</span>
-        <span>Published: {{ Date.now() | moment("MMMM - DD - YYYY") }}</span>
+        <p>{{ review.txt }}</p>
+        <p>By: {{ review.by.fullname }}</p>
+        <p>{{ Date.now() | moment("MMMM - DD - YYYY") }}</p>
       </div>
     </div>
 
@@ -43,7 +43,8 @@
         </el-input>
       </el-form-item>
       <button @click.prevent="addReview()">Save</button>
-      <button @click.prevent="hideForm" class="close-review">x</button>
+      <el-button type="danger" class="close-review" size="medium" icon="el-icon-delete" circle @click.prevent="hideForm"></el-button>
+      <!-- <button @click.prevent="hideForm" class="close-review">x</button> -->
     </el-form>
   </div>
 </template>

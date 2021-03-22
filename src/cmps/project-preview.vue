@@ -3,8 +3,8 @@
     <h1>{{ proj.name }}</h1>
     <p>{{ proj.loc.country }}</p>
     <p>
-      {{ proj.startsAt | moment(" MMMM Do YYYY") }} to
-      {{ proj.startsEnd | moment("MMMM Do YYYY") }}
+      {{ proj.startsAt | moment("MM/DD/YY") }} -
+      {{ proj.startsEnd | moment("MM/DD/YY") }}
     </p>
     <el-image :src="img" fit="fit"></el-image>
     <div class="preview-tags">
@@ -19,7 +19,7 @@
         disabled
         show-score
         text-color="#ff9900"
-        score-template="{value} points"
+        score-template="{value} stars"
       />
     </div>
   </section>
