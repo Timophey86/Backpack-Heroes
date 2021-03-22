@@ -4,6 +4,7 @@
   padding: 10px;
   gap: 5px;
   height: 100%;
+  cursor: pointer;
   .el-image {
     height: 180px;
   }
@@ -17,73 +18,5 @@
     align-items: center;
     justify-content: space-between;
   }
-  h1 {
-    align-self: center;
-  }
 }
-// .project-details {
-//    h1 {
-//      font-family: fira-sans;
-//    }
-// }
-// .preview-img {
-//   position: absolute;
-//   top: 25px;
-//   right: 25px;
-//   img {
-//     height: 100px;
-//     width: 100px;
-//     border-radius: 50%;
-//     border: 1px solid $clr2;
-//   }
-// }
 
-// .project-preview {
-//   position: relative;
-//   padding: 20px;
-//   p {
-//     margin: 20px 0 10px;
-//     font-size: 20px;
-//   }
-//   .date-preview {
-//     margin: 25px 0;
-//     font-size: medium;
-//     div {
-//       font-weight: 700;
-//     }
-//   }
-//   ul {
-//     li {
-//       border: none;
-//       font-size: smaller;
-//     }
-//   }
-// }
-
-// .decs-preview {
-//   .continue-reading {
-//     float: right;
-//     margin: 15px 0;
-//     cursor: pointer;
-//     &:hover {
-//         background-color: lightcoral;
-//         transition: ease all .25s;
-//     }
-//   }
-// }
-
-// .detail-headers {
-//   font-size: 16px;
-// }
-
-// .previw-img {
-//   position: absolute;
-//   top: 25px;
-//   right: 25px;
-//   img {
-//     height: 100px;
-//     width: 100px;
-//     border-radius: 50%;
-//     border: 1px solid $clr2;
-//   }
-// }

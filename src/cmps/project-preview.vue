@@ -1,23 +1,18 @@
 <template>
-  <section class="project-preview">
+  <section class="project-preview" @click="openDetailsPage(proj._id)">
     <h1>{{ proj.name }}</h1>
-    <h6>Country: {{ proj.loc.country }}</h6>
-    <h6>
-      Duration of program:
-    </h6>
-    <h6>
+    <p>{{ proj.loc.country }}</p>
+    <p>
       {{ proj.startsAt | moment(" MMMM Do YYYY") }} to
       {{ proj.startsEnd | moment("MMMM Do YYYY") }}
-    </h6>
+    </p>
     <el-image :src="img" fit="fit"></el-image>
-    <h6>Volunteer Fields:</h6>
     <div class="preview-tags">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}
       </el-tag>
     </div>
     <p>{{ descToDisplay }}</p>
-    <!-- <p>{{ proj.details.description }}</p> -->
     <div class="preview-footer">
       <el-rate
         v-model="proj.reviews[0].rate"
@@ -26,9 +21,6 @@
         text-color="#ff9900"
         score-template="{value} points"
       />
-      <button @click="openDetailsPage(proj._id)" class="continue-reading">
-        Discover More..
-      </button>
     </div>
   </section>
 </template>
