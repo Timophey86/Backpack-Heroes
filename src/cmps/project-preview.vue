@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     openDetailsPage(id) {
+      console.log(id);
       this.$router.push(`/project/${id}`);
     },
   },
