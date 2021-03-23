@@ -124,7 +124,7 @@ export default {
   async created() {
     await this.getCurrProj(this.$route.params.id);
     // await this.getCurrUser();
-    this.checkIfUserJoined();
+    // this.checkIfUserJoined();
   },
   components: {
     projectReview,

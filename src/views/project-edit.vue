@@ -1,11 +1,6 @@
 <template>
-  <div v-if="projectToEdit" class="project-edit-page">
-    <el-form
-      :model="projectToEdit"
-      ref="ruleForm"
-      label-width="auto"
-      class="demo-ruleForm"
-    >
+  <div v-if="projectToEdit" class="project-edit">
+    <el-form @submit.native.prevent="submitProj">
       <el-form-item label="Project Name">
         <el-input
           v-model="projectToEdit.name"
@@ -37,6 +32,7 @@
           clearable
         />
       </el-form-item>
+
       <el-form-item label="Tags:">
         <el-select
           v-model="projectToEdit.tags"
@@ -98,9 +94,8 @@
         </div>
       </el-form-item>
 
-      <button @click.prevent="update">Submit</button>
       <el-button
-        @click.prevent="update"
+        @click.prevent="submitProj"
         type="primary"
         icon="el-icon-check"
       ></el-button>
@@ -113,34 +108,11 @@ export default {
   data() {
     return {
       projectToEdit: null,
-      // amenitieLabels: [
-      //   "private-room",
-      //   "Wifi",
-      //   "transportation",
-      //   "Meals Provided",
-      //   "Free-time activities",
-      // ],
-      // tagsLabels: [
-      //   "Animals",
-      //   "Farmstay help",
-      //   "Children",
-      //   "Education",
-      //   "Community",
-      //   "Building",
-      //   "Environment",
-      //   "Agriculture",
-      // ],
     };
   },
   computed: {
     displayedProj() {
       return this.$store.getters.projForDetails;
-    },
-    formatDateFrom() {
-      return new Date(this.displayedProj.startsAt).toDateString();
-    },
-    formatDateTo() {
-      return new Date(this.displayedProj.endAt).toDateString();
     },
   },
   methods: {
@@ -153,7 +125,7 @@ export default {
       }
       this.projectToEdit = this.$store.getters.projForDetails;
     },
-    async update() {
+    async submitProj() {
       const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
       await this.$store.dispatch({ type: "saveProj", project: projectCopy });
       this.$router.push("/project");

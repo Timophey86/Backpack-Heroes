@@ -1,5 +1,5 @@
 <template>
-  <div class="project-app-page">
+  <div class="project-app main-container">
     <project-list :projects="projs" />
   </div>
 </template>
