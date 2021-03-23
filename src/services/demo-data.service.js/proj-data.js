@@ -17,7 +17,7 @@ const proj = [
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
     },
     startsAt: 1616074293009,
-    startsEnd: 1616074283009,
+    endAt: 1616074283009,
     tags: ["Animals", "Farmstay help"],
     members: [
       { _id: 111122, fullname: 'muki', imgUrl: 'imf.com / 2332443' },
@@ -58,7 +58,7 @@ const proj = [
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
     },
     startsAt: 1615998009209,
-    startsEnd: 2015998009209,
+    endAt: 2015998009209,
     tags: ["Children", "Education", "Community"],
     members: [
       { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443 "},
@@ -99,7 +99,7 @@ const proj = [
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
     },
     startsAt: 1615998009209,
-    startsEnd: 2015998009209,
+    endAt: 2015998009209,
     tags: ["Building", "Community"],
     members: [
       { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
@@ -140,7 +140,7 @@ const proj = [
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
     },
     startsAt: 1615998001209,
-    startsEnd: 2015998049209,
+    endAt: 2015998049209,
     tags: ["Education", "Community"],
     members: [
       { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
@@ -181,7 +181,7 @@ const proj = [
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
     },
     startsAt: 1615998001209,
-    startsEnd: 2015998049209,
+    endAt: 2015998049209,
     tags: ["Environment"],
     members: [
       { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },
@@ -222,7 +222,7 @@ const proj = [
       amenities: ["private-room", "Wifi", "transportation", "Meals Provided", "Free-time activities"]
     },
     startsAt: 1615998001209,
-    startsEnd: 2015998049209,
+    endAt: 2015998049209,
     tags: ["Agriculture"],
     members: [
       { _id: 111142, fullname: "kuki", imgUrl: "imf.com / 2332443" },

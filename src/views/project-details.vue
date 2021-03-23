@@ -47,8 +47,10 @@
           </li>
         </ul>
         </p>
-        <button v-if="!isJoined" @click="joinProj">{{joinProjBtnTxt}}</button>
-        <button v-else>Thank you for joinig us!</button>
+        <!-- <button v-if="!isJoined" @click="joinProj">{{joinProjBtnTxt}}</button> -->
+            <el-button v-if="!isJoined" type="success"  @click="joinProj">{{joinProjBtnTxt}}</el-button>
+            <el-button v-else type="info" >Thank you for joinig us!</el-button>
+        <!-- <button v-else>Thank you for joinig us!</button> -->
     </div>
   </div>
   
@@ -77,7 +79,7 @@ export default {
       return new Date(this.displayedProj.startsAt).toDateString();
     },
     formatDateTo() {
-      return new Date(this.displayedProj.startsEnd).toDateString();
+      return new Date(this.displayedProj.endAt).toDateString();
     },
     joinProjBtnTxt() {
       if (this.joinProjStatus) {

@@ -1,34 +1,27 @@
 <template>
-  <section class="project-preview">
+  <section class="project-preview" @click="openDetailsPage(proj._id)">
     <h1>{{ proj.name }}</h1>
-    <h6>Country: {{ proj.loc.country }}</h6>
-    <h6>
-      Duration of program:
-    </h6>
-    <h6>
-      {{ proj.startsAt | moment(" MMMM Do YYYY") }} to
-      {{ proj.startsEnd | moment("MMMM Do YYYY") }}
-    </h6>
+    <p>{{ proj.loc.country }}</p>
+    <p>
+      {{ proj.startsAt | moment("MM/DD/YY") }} -
+      {{ proj.endAt | moment("MM/DD/YY") }}
+    </p>
     <el-image :src="img" fit="fit"></el-image>
-    <h6>Volunteer Fields:</h6>
     <div class="preview-tags">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}
       </el-tag>
     </div>
     <p>{{ descToDisplay }}</p>
-    <!-- <p>{{ proj.details.description }}</p> -->
     <div class="preview-footer">
       <el-rate
-        v-model="proj.reviews[0].rate"
+        v-model="averageRate"
         disabled
         show-score
         text-color="#ff9900"
-        score-template="{value} points"
+        score-template="{value}"
       />
-      <button @click="openDetailsPage(proj._id)" class="continue-reading">
-        Discover More..
-      </button>
+      <span>( {{ proj.reviews.length }} )</span>
     </div>
   </section>
 </template>
@@ -40,10 +33,10 @@ export default {
   props: ["proj"],
   computed: {
     formatDateFrom() {
-      return new Date(this.proj.startsAt).toDateString();
+      return new Date(this.proj.startsAt).toDateString;
     },
     formatDateTo() {
-      return new Date(this.proj.startsEnd).toDateString();
+      return new Date(this.proj.endAt).toDateString;
     },
     img() {
       return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
@@ -55,9 +48,14 @@ export default {
         return this.proj.details.description;
       }
     },
-    // averageRate(){
-    //  return this.proj.reviews.acc / this.proj.reviews.length
-    // // }
+    averageRate() {
+      const rates = this.proj.reviews.map((review) => {
+        return review.rate;
+      });
+      return +(
+        rates.reduce((acc, rate) => acc + rate, 0) / this.proj.reviews.length
+      ).toFixed(1);
+    },
   },
   methods: {
     openDetailsPage(id) {

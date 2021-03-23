@@ -50,6 +50,7 @@ function save(proj) {
   }
 }
 
+<<<<<<< HEAD
 
 
 
@@ -108,6 +109,30 @@ function save(proj) {
 //     members: [],
 //   };
 // }
+=======
+function getEmptyProj() {
+  return {
+    _id: "",
+    name: "",
+    loc: {
+      country: "",
+      countryCode: "",
+      address: "",
+      lat: 0,
+      lng: 0,
+    },
+    tags: [],
+    details: {
+      description: "",
+      amenities: [],
+    },
+    imgUrls: [],
+    startsAt: Date.now(),
+    endAt: Date.now(),
+    members: [],
+  };
+}
+>>>>>>> 4e02f69571abdfc250b3a3fdf038a25c10e13284
 
 // Create Test Data:
 // function _createprojs() {
