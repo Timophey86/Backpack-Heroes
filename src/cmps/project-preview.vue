@@ -64,5 +64,7 @@ export default {
       this.$router.push(`/project/${id}`);
     },
   },
+  created() {
+  }
 };
 </script>

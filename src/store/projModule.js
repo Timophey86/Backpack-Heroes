@@ -4,7 +4,7 @@ export const projStore = {
   state: {
     projs: [],
     proj: null,
-    filterBy: { name: "", tags: "all", type: "all", pageDiff: 0 },
+    filterBy: { name: "", tags: "all", type: "all", userId:"", pageDiff: 0 },
     sortBy: { sortType: "location" },
   },
   getters: {
@@ -52,7 +52,7 @@ export const projStore = {
   },
   actions: {
     async loadProjs(context, payload) {
-      const projs = await projService.query();
+      const projs = await projService.query(payload);
       context.commit({ type: "setProjs", projs });
     },
     async loadEmptyProj(context, payload) {

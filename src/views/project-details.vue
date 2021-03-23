@@ -88,8 +88,8 @@ export default {
     },
   },
   methods: {
-    getCurrProj(_id) {
-      this.$store.dispatch({ type: "getProj", _id });
+ async getCurrProj(_id) {
+     await this.$store.dispatch({ type: "getProj", _id });
     },
     edit(id) {
       this.$router.push(`/edit/${id}`);
@@ -121,7 +121,7 @@ export default {
   },
   async created() {
     await this.getCurrProj(this.$route.params.id);
-    await this.getCurrUser();
+    // await this.getCurrUser();
     this.checkIfUserJoined();
   },
   components: {
