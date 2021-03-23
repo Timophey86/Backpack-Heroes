@@ -6,7 +6,9 @@
       @focus="showForm"
       placeholder="Add Review..."
     ></el-input>
-    <h1>⭐ {{ averageRate }} ({{ proj.reviews.length }} Reviews)</h1>
+    <h1 v-if="proj.reviews">
+      ⭐ {{ averageRate || "" }} ({{ proj.reviews.length }} Reviews)
+    </h1>
     <div class="review-list">
       <div v-for="review in proj.reviews" :key="review._id" class="review-card">
         <div class="review-header">

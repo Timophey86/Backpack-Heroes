@@ -3,7 +3,6 @@ import { demoData } from "./demo-data.service.js/proj-data.js";
 import { utilService } from "./util.service.js";
 import { httpService } from "./http.service.js";
 
-
 const KEY = "projDB";
 
 export const projService = {
@@ -11,16 +10,15 @@ export const projService = {
   getById,
   remove,
   save,
-  setFilter
-  // getEmptyProj,
+  setFilter,
+  getEmptyProj,
 };
 
-var gFilterBy = { name: "", type: "all", userId:'', pageDiff:0 };
+var gFilterBy = { name: "", type: "all", userId: "", pageDiff: 0 };
 // var gSort = { sortType: "name" };
 
 function setFilter(filter) {
   gFilterBy = filter;
-
 }
 
 // function setSort(sort) {
@@ -31,7 +29,7 @@ function setFilter(filter) {
 
 function query(filterBy = {}) {
   console.log(gFilterBy);
-  return httpService.get(`proj?userId=${gFilterBy.userId}`)
+  return httpService.get(`proj?userId=${gFilterBy.userId}`);
 }
 
 function getById(id) {
@@ -46,19 +44,10 @@ function save(proj) {
   if (proj._id) {
     return httpService.put(`proj/${proj._id}`, proj);
   } else {
+    
     return httpService.post(`proj`, proj);
   }
 }
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
 
 // async function query() {
 //   let projects = await storageService.query(KEY);
@@ -109,10 +98,9 @@ function save(proj) {
 //     members: [],
 //   };
 // }
-=======
 function getEmptyProj() {
   return {
-    _id: "",
+    // _id: "",
     name: "",
     loc: {
       country: "",
@@ -126,13 +114,14 @@ function getEmptyProj() {
       description: "",
       amenities: [],
     },
-    imgUrls: [],
+    imgCategory: "default",
+    imgUrls: ["1", "2", "3"],
     startsAt: Date.now(),
     endAt: Date.now(),
     members: [],
+    reviews: [],
   };
 }
->>>>>>> 4e02f69571abdfc250b3a3fdf038a25c10e13284
 
 // Create Test Data:
 // function _createprojs() {

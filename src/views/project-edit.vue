@@ -97,8 +97,10 @@
           />
         </div>
       </el-form-item>
+
+      <button @click.prevent="update">Submit</button>
       <el-button
-        @click="update"
+        @click.prevent="update"
         type="primary"
         icon="el-icon-check"
       ></el-button>

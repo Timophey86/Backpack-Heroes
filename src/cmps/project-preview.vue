@@ -15,19 +15,20 @@
     <p>{{ descToDisplay }}</p>
     <div class="preview-footer">
       <el-rate
+        v-if="proj.reviews.length"
         v-model="averageRate"
         disabled
         show-score
         text-color="#ff9900"
         score-template="{value}"
       />
+      <span v-else>No Ranking Yet</span>
       <span>( {{ proj.reviews.length }} )</span>
     </div>
   </section>
 </template>
 
 <script>
-const test = require(`../assets/images/Agriculture/3.jpg`);
 export default {
   name: "projectPreview",
   props: ["proj"],
@@ -42,13 +43,14 @@ export default {
       return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
     },
     descToDisplay() {
-      if (this.proj.details.description.length > 100) {
+      if (this.proj.details.description?.length > 100) {
         return this.proj.details.description.substring(0, 100) + "...";
       } else {
         return this.proj.details.description;
       }
     },
     averageRate() {
+      if (!this.proj.reviews) return;
       const rates = this.proj.reviews.map((review) => {
         return review.rate;
       });
@@ -62,7 +64,6 @@ export default {
       this.$router.push(`/project/${id}`);
     },
   },
-  created() {
-  }
+  created() {},
 };
 </script>
