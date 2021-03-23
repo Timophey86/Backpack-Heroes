@@ -16,6 +16,7 @@ export const userStore = {
   mutations: {
     setLoggedinUser(state, { user }) {
       state.loggedinUser = user;
+      console.log(state.loggedinUser);
     },
     setUsers(state, { users }) {
       state.users = users;
@@ -54,7 +55,7 @@ export const userStore = {
         throw err;
       }
     },
-    async loadUsers({ commit }) {
+    async loadUser({ commit }) {
       try {
         const users = await userService.getUsers();
         // commit({ type: "setUsers", users });

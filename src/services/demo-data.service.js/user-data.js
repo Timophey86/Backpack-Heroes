@@ -7,11 +7,12 @@ const minimalUser = {
 const user = {
     _id: "u101",
     fullname: "Orly Amdadi",
-    username: "orly@amdadi.com",
-    password: "tinkerbell",
+    username: "orly",
+    password: 123,
     isAdmin: true,
     imgUrl: "http://some-img",
-    orders: []
+    orders: [],
+    myProjs: []
 };
 
 

@@ -1,25 +1,32 @@
 <template>
   <div class="review-container">
-    <h1>⭐ {{ averageRate }} ({{ proj.reviews.length }} Reviews)</h1>
+    <hr />
     <el-input
       v-if="!isShowForm"
       @focus="showForm"
       placeholder="Add Review..."
     ></el-input>
+    <h1>⭐ {{ averageRate }} ({{ proj.reviews.length }} Reviews)</h1>
     <div class="review-list">
       <div v-for="review in proj.reviews" :key="review._id" class="review-card">
-        <div class="rate-review">
-          <p v-for="star in review.rate" :key="star">⭐</p>
+        <div class="review-header">
+          <el-avatar :size="40">{{ review.by.fullname }}</el-avatar>
+          <p>{{ review.by.fullname }}</p>
+          <el-rate v-model="review.rate" disabled text-color="#ff9900">
+          </el-rate>
         </div>
-        <p>{{ review.txt }}</p>
-        <p>By: {{ review.by.fullname }}</p>
-        <p>{{ Date.now() | moment("MMMM - DD - YYYY") }}</p>
+        <div class="review-body">
+          <pre>{{ review.txt }}</pre>
+        </div>
+        <div class="review-footer">
+          <p>{{ Date.now() | moment("MMMM - DD - YYYY") }}</p>
+        </div>
       </div>
     </div>
 
     <el-form
       v-if="isShowForm"
-      @submit.prevent="addReview()"
+      @submit.prevent="addReview"
       ref="form"
       class="review-form"
     >
@@ -42,8 +49,16 @@
         >
         </el-input>
       </el-form-item>
-      <button @click.prevent="addReview()">Save</button>
-      <el-button type="danger" class="close-review" size="medium" icon="el-icon-delete" circle @click.prevent="hideForm"></el-button>
+      <!-- <button @click.prevent="addReview()">Add</button> -->
+      <el-button type="success" size="medium" @click.prevent="addReview"
+        >Add</el-button
+      >
+      <el-button
+        class="close-review"
+        size="mini"
+        icon="el-icon-close"
+        @click.prevent="hideForm"
+      ></el-button>
       <!-- <button @click.prevent="hideForm" class="close-review">x</button> -->
     </el-form>
   </div>
@@ -72,7 +87,7 @@ export default {
       });
       return (
         rates.reduce((acc, rate) => acc + rate, 0) / this.proj.reviews.length
-      ).toFixed(1);
+      );
     },
   },
 

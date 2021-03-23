@@ -1,44 +1,45 @@
 .review-container {
-    // display: grid;
-    // grid-template-rows:1fr 1fr;
-    // grid-template-rows:1fr 1fr;
-    // grid-template-areas:"header header"
-    //                     "main sidebar"
-    //                     "footer footer";
-    // }
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin: 40px auto;
     h1 {
-        display: inline-block;
-        margin-inline-end: 20px;
+        margin: 10px 0;
+        line-height: normal;
     }
     .el-input {
         width: 200px;
     }
-
     .review-list {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        width: 80vw;
         gap: 20px;
-        // justify-items: center;
         margin: 10px;
-        // align-items: center;
-
         .review-card {
-            padding: 10px;
+            padding: 0 10px 10px 10px;
             height: 200px;
             width: 400px;
-            border-radius: 10px;
-            // border: 1px solid black;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-         
-            .proj-description {
-                flex: 1;
-            }
-            .rate-review {
+            display: grid;
+            grid-template-rows: 50px auto 20px;
+            grid-template-areas: "header" "body" "footer";
+            align-items: center;
+            .review-header {
+                grid-area: "header";
                 display: flex;
+                gap: 20px;
+                align-items: center;
+            }
+            .review-body {
+                grid-area: "body";
+                padding: 20px;
+                pre {
+                    font-family: "montserrat";
+                    margin: 0;
+                }
+            }
+            .review-footer {
+                grid-area: "footer";
+                justify-self: flex-end;
             }
         }
     }
@@ -54,17 +55,12 @@
         justify-content: center;
         width: 350px;
         z-index: 1000;
-
         .close-review {
-            top: 0;
-            right: 0;
+            top: 5px;
+            right: 5px;
             position: absolute;
-            width: 20px;
-            height: 20px;
-            padding-left: 0;
-            padding-right: 0;
-            padding-top: 0;
-            padding-bottom: 0;
+            background-color: grey;
+            color: white;
         }
     }
 }

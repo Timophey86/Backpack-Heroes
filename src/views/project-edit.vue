@@ -37,6 +37,40 @@
           clearable
         />
       </el-form-item>
+      <el-form-item label="Tags:">
+        <el-select
+          v-model="projectToEdit.tags"
+          multiple
+          filterable
+          allow-create
+          placeholder="Choose tags for your project"
+        >
+          <el-option
+            v-for="tag in projectToEdit.tags"
+            :key="tag"
+            :value="tag.value"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="Amenities:">
+        <el-select
+          v-model="projectToEdit.details.amenities"
+          multiple
+          filterable
+          allow-create
+          default-first-option
+          placeholder="Choose tags for your project"
+        >
+          <el-option
+            v-for="amenitie in projectToEdit.details.amenities"
+            :key="amenitie"
+            :value="amenitie.value"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
 
       <el-form-item label="Project Description">
         <el-input
@@ -57,7 +91,7 @@
             placeholder="Pick a day"
           />
           <el-date-picker
-            v-model="projectToEdit.startsEnd"
+            v-model="projectToEdit.endAt"
             type="date"
             placeholder="Pick a day"
           />
@@ -77,6 +111,23 @@ export default {
   data() {
     return {
       projectToEdit: null,
+      // amenitieLabels: [
+      //   "private-room",
+      //   "Wifi",
+      //   "transportation",
+      //   "Meals Provided",
+      //   "Free-time activities",
+      // ],
+      // tagsLabels: [
+      //   "Animals",
+      //   "Farmstay help",
+      //   "Children",
+      //   "Education",
+      //   "Community",
+      //   "Building",
+      //   "Environment",
+      //   "Agriculture",
+      // ],
     };
   },
   computed: {
@@ -87,7 +138,7 @@ export default {
       return new Date(this.displayedProj.startsAt).toDateString();
     },
     formatDateTo() {
-      return new Date(this.displayedProj.startsEnd).toDateString();
+      return new Date(this.displayedProj.endAt).toDateString();
     },
   },
   methods: {

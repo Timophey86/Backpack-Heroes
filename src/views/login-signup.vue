@@ -8,8 +8,6 @@
         {{ loggedinUser.username }}
         <button @click="doLogout">Logout</button>
       </h3>
-
-      <h1>My projects:</h1>
     </div>
     <div v-else>
       <h2>Login</h2>
@@ -65,7 +63,7 @@ export default {
     },
   },
   created() {
-    this.loadUsers();
+    // this.loadUsers();
   },
   methods: {
     async doLogin() {

@@ -10,7 +10,7 @@
       <router-link to="/login-signup">Login/Signup</router-link>
       <router-link class="user-link" to="/user/userId=1"
         ><i class="fas fa-user-circle"></i
-      >Orly Amdadi</router-link>
+      ></router-link>
     </div>
   </div>
   </div>
