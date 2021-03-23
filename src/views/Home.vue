@@ -3,9 +3,9 @@
 
     <div class="hero"
       :style="{
-        background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url(${require(`../assets/images/hero/1.jpg`)})`,backgroundSize: 'cover',position: 'relative',}"
+        background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url(${require(`../assets/images/hero/hero2.jpg`)})`,backgroundSize: 'cover',position: 'relative',}"
     >
-    <h1>Service to others is the rent you pay for your room here on earth</h1>
+    
     </div>
 
     <div class="main-container">
@@ -18,7 +18,7 @@
               <img
                 @click="projList"
                 :src="
-                  require(`@/assets/images/${proj.tags[0]}/${proj.imgUrls[0]}.jpg`)
+                  require(`@/assets/images/categories/${proj.tags[0]}.jpg`)
                 "
                 alt=""
               />
