@@ -12,13 +12,13 @@
     </div>
     <div class="main-details">
       <div class="proj-details">
-        <h2>{{ displayedProj.name }}</h2>
+        <h1>{{ displayedProj.name }}</h1>
         <h4>Hosted by: {{ displayedProj.host.fullname }}</h4>
         <div class="location-details">
-          Project Location: <span>{{ displayedProj.loc.address }}</span>
+          Location: <span>{{ displayedProj.loc.address }}</span>
         </div>
         <div class="dates-details">
-          Project Duration: <span>{{ formatDateFrom }}</span> to
+          Duration: <span>{{ formatDateFrom }}</span> to
           <span>{{ formatDateTo }}</span>
         </div>
         Categories:
@@ -34,7 +34,7 @@
       </div>
 
       <div class="members-div">
-        <h2>Members who decided to join us:</h2>
+        <h3>Members who decided to join us:</h3>
         <ul class="member-list">
           <li v-for="(members, index) in displayedProj.members" :key="index">
          <el-avatar :size="55">{{members.fullname}}</el-avatar>
