@@ -24,3 +24,17 @@ span.pending {
   padding: 2px;
   text-transform: capitalize;
 }
+
+.host span {
+  display: none;
+}
+
+.host {
+  &::after {
+    content: "Welcome Dear Host";
+  }
+}
+
+.myProjs{
+  font-weight: 500;
+}

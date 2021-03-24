@@ -11,10 +11,11 @@
             v-for="(order, index) in pendingOrders"
             :key="index"
           >
-            <span>Applicants Name: </span>{{ order.member.fullName }} <br />
+            <span>Applicants Name: </span>{{ order.member.fullname }} <br />
             <span>Projects Name: </span>{{ order.proj.name }} <br />
             <span>Press to approve: </span
             ><button @click="approve(order)">Approve</button>
+            <button @click="remove(order._id)">Reject</button>
           </li>
         </ul>
       </div>
@@ -28,23 +29,23 @@
             v-for="(order, index) in approvedOrders"
             :key="index"
           >
-            <span>Applicants Name: </span>{{ order.member.fullName }} <br />
+            <span>Applicants Name: </span>{{ order.member.fullname }} <br />
             <span>Projects Name: </span>{{ order.proj.name }} <br />
             <span>Status: </span><span class="approved">Approved</span>
+            <button @click="remove(order._id)">Delete</button>
           </li>
         </ul>
       </div>
       <div v-else>No approved reservations yet</div>
       <hr />
       <h4>Your future adventures:</h4>
-      <div v-if="approvedOrders || pendingOrders">
+      <div v-if="myRequests">
         <ul>
           <li
             class="reservations"
-            v-for="(order, index) in displayedUser.orders"
+            v-for="(order, index) in myRequests"
             :key="index"
           >
-            <!-- <span>Applicants Name: </span>{{ order.member.fullName }} <br /> -->
             <span>Projects Name: </span>{{ order.proj.name }} <br />
             <span>Dates: </span>March 17th 2021 to November 19th 2033 <br />
             <span>Status: </span
@@ -55,8 +56,10 @@
       <div v-else>Not signed for any project yet</div>
       <hr />
       <h4>Your Projects:</h4>
+      <div v-for="proj in userProjects" :key="proj._id"><span class="myProjs">{{ proj.name }}</span><button @click="removeProj(proj._id)">Remove</button></div>
     </div>
   </div>
+  <div v-else>Please use the login page to log in or sign up.</div>
 </template>
 
 
@@ -68,16 +71,20 @@ export default {
   data() {
     return {
       currUser: null,
+      userOrders: null,
     };
   },
   computed: {
     displayedUser() {
       return this.$store.getters.loggedinUser;
     },
+    userProjects() {
+      return this.$store.getters.projs;
+    },
     pendingOrders() {
-      if (this.currUser.orders) {
+      if (this.userOrders) {
         const pendingOrders = [];
-        this.currUser.orders.forEach((order) => {
+        this.userOrders.host.forEach((order) => {
           if (order.status === "pending") {
             pendingOrders.push(order);
           }
@@ -90,36 +97,59 @@ export default {
       } else return null;
     },
     approvedOrders() {
-      if (this.currUser.orders) {
-        const pendingOrders = [];
-        this.currUser.orders.forEach((order) => {
+      if (this.userOrders) {
+        const approvedOrders = [];
+        this.userOrders.host.forEach((order) => {
           if (order.status === "approved") {
-            pendingOrders.push(order);
+            approvedOrders.push(order);
           }
         });
-        if (!pendingOrders.length) {
+        if (!approvedOrders.length) {
           return null;
         } else {
-          return pendingOrders;
+          return approvedOrders;
         }
       } else return null;
+    },
+    myRequests() {
+      if (this.userOrders) {
+        return this.userOrders.reserved;
+      }
     },
   },
   methods: {
     async approve(order) {
       var newOrder = JSON.parse(JSON.stringify(order));
       newOrder.status = "approved";
-      await this.$store.dispatch({ type: "updateUserOrder", order: newOrder });
       await this.$store.dispatch({ type: "approveOrder", order: newOrder });
-      this.getUser();
+      this.getRequests();
     },
-    async getUserProjects(){
-      await this.$store.dispatch({ type: "setFilter", filter:{userId: this.currUser._id}});
-    }
+    async remove(id) {
+      await this.$store.dispatch({ type: "removeOrder", id});
+      this.getRequests();
+    },
+    async removeProj(projId) {
+       await this.$store.dispatch({ type: "removeProj", projId});
+       this.getUserProjects();
+    },
+    async getRequests() {
+      await this.$store.dispatch({
+        type: "loadOrders",
+        filter: { userId: this.currUser._id },
+      });
+      this.userOrders = this.$store.getters.orders;
+    },
+    async getUserProjects() {
+      await this.$store.dispatch({
+        type: "loadProjs",
+        filter: { userId: this.currUser._id },
+      });
+    },
   },
-  created() {
+  async created() {
     this.currUser = this.$store.getters.loggedinUser;
-    this.getUserProjects()
+    this.getUserProjects();
+    this.getRequests();
   },
   components: {
     elTable,
