@@ -1,14 +1,27 @@
 .project-preview {
   display: grid;
-  grid-template-rows: 0.5fr 0.25fr 0.5fr 200px 0.5fr 1fr 0.5fr;
-  padding: 10px;
+  grid-template-columns: 10px 1fr 10px;
+  //grid-template-rows: 1fr 0.25fr 0.5fr 200px 0.5fr 1fr 0.5fr;
+  //padding: 10px;
   height: 100%;
   align-items: center;
+  cursor: pointer;
+
   .el-image {
     height: 100%;
+    grid-area: 1 / 1;
   }
+
+  > * {
+    grid-column: 2;
+  }
+
+  > .full {
+    grid-column: 1 / -1;
+  }
+
   h1 {
-    align-self: flex-start;
+    // align-self: flex-start;
     text-align: center;
   }
   .el-rate {
@@ -20,5 +33,11 @@
     gap: 10px;
     color: #ff9900;
     align-items: center;
+  }
+
+  .preview-tags {
+    grid-area: 1 / 1;
+    justify-self: end;
+    align-self: end;
   }
 }

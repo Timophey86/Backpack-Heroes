@@ -27,14 +27,14 @@ const routes = [
     component: loginSignup,
   },
   {
-    path: "/project",
-    name: "project",
-    component: projectApp,
-  },
-  {
     path: "/project/:id",
     name: "project-details",
     component: projectDetails,
+  },
+  {
+    path: "/project",
+    name: "project",
+    component: projectApp,
   },
   {
     path: "/edit/:projId?",

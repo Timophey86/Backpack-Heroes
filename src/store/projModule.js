@@ -4,7 +4,7 @@ export const projStore = {
   state: {
     projs: [],
     proj: null,
-    filterBy: { name: "", tags: "all", type: "all", userId:"", pageDiff: 0 },
+    filterBy: { name: "", tags: "all", type: "all", userId: "", pageDiff: 0 },
     sortBy: { sortType: "location" },
   },
   getters: {
@@ -30,6 +30,7 @@ export const projStore = {
       state.projs.splice(idx, 1, proj);
     },
     addProj(state, { proj }) {
+      
       state.projs.push(proj);
     },
     removeProj(state, { projId }) {
