@@ -1,0 +1,13 @@
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  .app-container{
+    flex: 1;
+  }
+}
+
+
