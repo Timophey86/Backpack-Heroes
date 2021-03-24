@@ -1,16 +1,13 @@
-.project-edit-page {
-    // display: flex;
-    // flex-direction: column;
+.project-edit {
     width: 60%;
     margin: 0 auto;
-    // row-gap: 10px;
-    // margin: 70px;
+    textarea {
+        height: 200px;
+        resize: none;
+    }
+    margin-bottom: 20px;
 }
 .project-dates {
     display: flex;
     gap: 10px;
-}
-.project-edit-page > textarea {
-    height: 200px;
-    resize: none;
 }

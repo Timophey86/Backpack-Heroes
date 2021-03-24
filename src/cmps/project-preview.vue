@@ -1,12 +1,12 @@
 <template>
-  <section class="project-preview" @click="openDetailsPage(proj._id)">
+  <section class="project-preview" @click="showDetails(proj._id)">
     <h1>{{ proj.name }}</h1>
     <p>{{ proj.loc.country }}</p>
     <p>
       {{ proj.startsAt | moment("MM/DD/YY") }} -
       {{ proj.endAt | moment("MM/DD/YY") }}
     </p>
-    <el-image :src="img" fit="fit"></el-image>
+    <el-image :src="img" />
     <div class="preview-tags">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}
@@ -33,12 +33,6 @@ export default {
   name: "projectPreview",
   props: ["proj"],
   computed: {
-    formatDateFrom() {
-      return new Date(this.proj.startsAt).toDateString;
-    },
-    formatDateTo() {
-      return new Date(this.proj.endAt).toDateString;
-    },
     img() {
       return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
     },
@@ -60,11 +54,9 @@ export default {
     },
   },
   methods: {
-    openDetailsPage(id) {
-      console.log(id);
+    showDetails(id) {
       this.$router.push(`/project/${id}`);
     },
   },
-  created() {},
 };
 </script>
