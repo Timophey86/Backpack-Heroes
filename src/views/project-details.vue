@@ -30,7 +30,7 @@
         <div class="displyed-proj-details">
         <p>{{ displayedProj.details.description }}</p>
         </div>
-        <button @click="edit(displayedProj._id)">Edit Project Details</button>
+        <button v-if="isHost" @click="edit(displayedProj._id)">Edit Project Details</button>
       </div>
 
       <div class="members-div">
@@ -126,12 +126,7 @@ export default {
   },
   async created() {
     await this.getCurrProj(this.$route.params.id);
-
-    // await this.getCurrUser();
-    // this.checkIfUserJoined();
-
     this.checkIfUserJoined();
-
   },
   components: {
     projectReview,

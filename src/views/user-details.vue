@@ -15,7 +15,7 @@
             <span>Projects Name: </span>{{ order.proj.name }} <br />
             <span>Press to approve: </span
             ><button @click="approve(order)">Approve</button>
-            <button @click="remove(order._id)">Reject</button>
+            <button @click="remove(order)">Reject</button>
           </li>
         </ul>
       </div>
@@ -32,14 +32,14 @@
             <span>Applicants Name: </span>{{ order.member.fullname }} <br />
             <span>Projects Name: </span>{{ order.proj.name }} <br />
             <span>Status: </span><span class="approved">Approved</span>
-            <button @click="remove(order._id)">Delete</button>
+            <button @click="remove(order)">Delete</button>
           </li>
         </ul>
       </div>
       <div v-else>No approved reservations yet</div>
       <hr />
       <h4>Your future adventures:</h4>
-      <div v-if="myRequests">
+      <div v-if="myRequests && myRequests.length">
         <ul>
           <li
             class="reservations"
@@ -56,7 +56,18 @@
       <div v-else>Not signed for any project yet</div>
       <hr />
       <h4>Your Projects:</h4>
-      <div v-for="proj in userProjects" :key="proj._id"><span class="myProjs">{{ proj.name }}</span><button @click="removeProj(proj._id)">Remove</button></div>
+      <div v-if="userProjects" class="back-office-projs">
+        <table>
+      <tr v-for="proj in userProjects" :key="proj._id">
+       <th> <span class="myProjs">{{ proj.name }}</span
+        ></th>
+        <th><button @click="removeProj(proj._id)">Remove</button
+        ></th>
+        <th><button @click="edit(proj._id)">Edit</button></th>
+      </tr>
+      </table>
+      </div>
+      <div v-else>No projects to display</div>
     </div>
   </div>
   <div v-else>Please use the login page to log in or sign up.</div>
@@ -124,13 +135,16 @@ export default {
       await this.$store.dispatch({ type: "approveOrder", order: newOrder });
       this.getRequests();
     },
-    async remove(id) {
-      await this.$store.dispatch({ type: "removeOrder", id});
+    async remove(order) {
+      await this.$store.dispatch({ type: "removeOrder", order });
       this.getRequests();
     },
     async removeProj(projId) {
-       await this.$store.dispatch({ type: "removeProj", projId});
-       this.getUserProjects();
+      await this.$store.dispatch({ type: "removeProj", projId });
+      this.getUserProjects();
+    },
+    edit(id) {
+      this.$router.push(`/edit/${id}`);
     },
     async getRequests() {
       await this.$store.dispatch({
