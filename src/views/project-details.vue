@@ -47,10 +47,8 @@
           </li>
         </ul>
         </p>
-        <!-- <button v-if="!isJoined" @click="joinProj">{{joinProjBtnTxt}}</button> -->
-            <el-button v-if="!isJoined" type="success"  @click="joinProj">{{joinProjBtnTxt}}</el-button>
-            <el-button v-else type="info" >Thank you for joinig us!</el-button>
-        <!-- <button v-else>Thank you for joinig us!</button> -->
+            <el-button v-if="!isJoined" type="success"  :class="{ host: isHost}" @click="joinProj"><span>{{joinProjBtnTxt}}</span></el-button>
+            <el-button v-else type="info" :class="{ host: isHost}"><span>Thank you for joinig us!</span></el-button>
     </div>
   </div>
   
@@ -66,9 +64,10 @@ export default {
   name: "projectDetails",
   data() {
     return {
-      currUser: null,
+      currUser: this.$store.getters.loggedinUser,
       joinProjStatus: true,
-      isJoined: false
+      isJoined: false,
+      isHost: false,
     };
   },
   computed: {
@@ -90,8 +89,8 @@ export default {
     },
   },
   methods: {
- async getCurrProj(_id) {
-     await this.$store.dispatch({ type: "getProj", _id });
+    async getCurrProj(_id) {
+      await this.$store.dispatch({ type: "getProj", _id });
     },
     edit(id) {
       this.$router.push(`/edit/${id}`);
@@ -113,11 +112,15 @@ export default {
       this.joinProjStatus = !this.joinProjStatus;
     },
     checkIfUserJoined() {
-      var user = this.displayedProj.members.find(member => {
-        return member._id === this.currUser._id
-      })
+      var user = this.displayedProj.members.find((member) => {
+        return member._id === this.currUser._id;
+      });
+      if (this.displayedProj.host._id === this.currUser._id) {
+        this.isHost = true;
+        this.isJoined = true;
+      }
       if (user) {
-        this.isJoined = true
+        this.isJoined = true;
       }
     },
   },
@@ -126,6 +129,9 @@ export default {
 
     // await this.getCurrUser();
     // this.checkIfUserJoined();
+
+    this.checkIfUserJoined();
+
   },
   components: {
     projectReview,

@@ -6,7 +6,7 @@
       {{ proj.startsAt | moment("MM/DD/YY") }} -
       {{ proj.endAt | moment("MM/DD/YY") }}
     </p>
-    <el-image :src="img" />
+    <el-image :src="img" class="full" />
     <div class="preview-tags">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}

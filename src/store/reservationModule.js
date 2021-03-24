@@ -1,6 +1,6 @@
 import { utilService } from "../services/util.service.js";
 import { projService } from "../services/proj.service.js";
-// import { orderService } from "../services/order.service.js";
+import { orderService } from "../services/orders.service.js";
 
 export const orderStore = {
   state: {
@@ -11,31 +11,39 @@ export const orderStore = {
     order(state) {
       return state.order;
     },
+    orders(state) {
+      return state.orders;
+    }
   },
   mutations: {
-    loadOrder(state, { order }) {
-      state.order = order;
+    loadOrders(state, { orders }) {
+      state.orders = orders;
     },
     updateOrder(state, { order }) {
       state.orders = order;
     },
+    removeOrder(state, { id }) {
+      let idx = state.orders.host.findIndex((t) => {
+        return t._id === id;
+      });
+      state.orders.host.splice(idx, 1);
+    },
   },
   actions: {
     async loadOrders(context, payload) {
-      const orders = await orderService.query(payload._id);
-      context.commit({ type: "setProjs", orders });
+      const orders = await orderService.query(payload);
+      context.commit({ type: "loadOrders", orders });
     },
     async sendOrder(context, payload) {
       const order = {
-        _id: utilService.makeId(),
-        createdAt: 9898989,
+        createdAt: Date.now(),
         member: {
           _id: payload.user._id,
-          fullName: payload.user.fullname,
+          fullname: payload.user.fullname,
         },
         host: {
-          _id: payload.user._id,
-          fullName: payload.user.fullname,
+          _id: payload.project.host._id,
+          fullname: payload.project.host.fullname,
         },
         proj: {
           _id: payload.project._id,
@@ -43,8 +51,7 @@ export const orderStore = {
         },
         status: "pending",
       };
-      context.dispatch({ type: "updateUserOrder", order: order });
-      // const orders = await orderService.query(payload._id);
+      orderService.save(order);
     },
     async saveOrder(context, payload) {
       const savedorder = await orderService.save(payload.order);
@@ -63,32 +70,14 @@ export const orderStore = {
       }
     },
     async approveOrder(context, payload) {
-      console.log(payload.order);
-      var proj = await projService.getById(payload.order.proj._id);
-      var memberObj = {
-        _id: payload.order.member._id,
-        fullname: payload.order.member.fullName,
-      };
-      proj.members.push(memberObj);
-      await projService.save(proj);
+      var order = await orderService.save(payload.order);
+      var project = await projService.getById(order.proj._id)
+      project.members.push(order.member)
+      await projService.save(project)
     },
-    async updateUserOrder(context, payload) {
-      var currHost = await userService.getById(payload.order.host._id);
-      if (!currHost.orders) {
-        currHost.orders = [];
-        currHost.orders.push(payload.order);
-      } else {
-        currHost.orders = currHost.orders.filter((order) => {
-          return order._id !== payload.order._id;
-        });
-        currHost.orders.push(payload.order);
-      }
-      try {
-        await userService.update(currHost);
-      } catch (err) {
-        console.log("userStore: Error in updateUser", err);
-        throw err;
-      }
-    },
+    async removeOrder(context, {id}) {
+      await orderService.remove(id)
+      context.commit({ type: "removeOrder", id });
+    }
   },
 };
