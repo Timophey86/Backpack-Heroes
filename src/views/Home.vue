@@ -1,13 +1,8 @@
 <template>
   <section class="home-page">
-
-    <div class="hero"
-      :style="{
-        background: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url(${require(`../assets/images/hero/hero2.jpg`)})`,backgroundSize: 'cover',position: 'relative',}"
-    >
-    
+    <div class="hero"> 
+      <img :src="require(`@/assets/images/hero/hero2.jpg`)" alt="">
     </div>
-
     <div class="main-container">
       <div class="main-img-container">
         <div class=" img-category-container">
@@ -18,7 +13,7 @@
               <img
                 @click="projList"
                 :src="
-                  require(`@/assets/images/categories/${proj.tags[0]}.jpg`)
+                  require(`@/assets/images/${proj.tags[0]}/${proj.imgUrls[0]}.jpg`)
                 "
                 alt=""
               />
