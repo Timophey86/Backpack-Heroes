@@ -1,14 +1,13 @@
 .project-preview {
   display: grid;
+  gap: 10px;
   grid-template-columns: 10px 1fr 10px;
-  //grid-template-rows: 1fr 0.25fr 0.5fr 200px 0.5fr 1fr 0.5fr;
-  //padding: 10px;
   height: 100%;
   align-items: center;
   cursor: pointer;
 
   .el-image {
-    height: 100%;
+    height: 200px;
     grid-area: 1 / 1;
   }
 
@@ -21,23 +20,29 @@
   }
 
   h1 {
-    // align-self: flex-start;
+    margin: 0;
     text-align: center;
   }
   .el-rate {
     justify-self: center;
     display: inline-block;
   }
-  .preview-footer {
+  .preview-rate {
     display: flex;
     gap: 10px;
     color: #ff9900;
     align-items: center;
+    margin: 0 auto;
   }
 
-  .preview-tags {
-    grid-area: 1 / 1;
+  .preview-tag {
+    grid-area: 1 / -1 / 1 / 1;
     justify-self: end;
     align-self: end;
+    z-index: 1;
+  }
+  .preview-details{
+    display: flex;
+    justify-content: space-between;
   }
 }

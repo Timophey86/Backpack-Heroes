@@ -1,19 +1,21 @@
 <template>
   <section class="project-preview" @click="showDetails(proj._id)">
     <h1>{{ proj.name }}</h1>
-    <p>{{ proj.loc.country }}</p>
-    <p>
-      {{ proj.startsAt | moment("MM/DD/YY") }} -
-      {{ proj.endAt | moment("MM/DD/YY") }}
-    </p>
+    <div class="preview-details">
+      <p>{{ proj.loc.country }}</p>
+      <p>
+        {{ proj.startsAt | moment("MM/DD/YY") }} -
+        {{ proj.endAt | moment("MM/DD/YY") }}
+      </p>
+    </div>
     <el-image :src="img" class="full" />
-    <div class="preview-tags">
+    <div class="preview-tag">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}
       </el-tag>
     </div>
-    <p>{{ descToDisplay }}</p>
-    <div class="preview-footer">
+    <!-- <p>{{ descToDisplay }}</p> -->
+    <div class="preview-rate">
       <el-rate
         v-if="proj.reviews.length"
         v-model="averageRate"
