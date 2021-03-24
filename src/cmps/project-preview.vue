@@ -8,13 +8,12 @@
         {{ proj.endAt | moment("MM/DD/YY") }}
       </p>
     </div>
-    <el-image :src="img" class="full" />
+    <el-image :src="showImg" class="full" />
     <div class="preview-tag">
       <el-tag v-for="(tag, index) in proj.tags" :key="index" type="info">
         {{ tag }}
       </el-tag>
     </div>
-    <!-- <p>{{ descToDisplay }}</p> -->
     <div class="preview-rate">
       <el-rate
         v-if="proj.reviews.length"
@@ -22,7 +21,7 @@
         disabled
         show-score
         text-color="#ff9900"
-        score-template="{value}"
+        score-template="{value} "
       />
       <span v-else>No Ranking Yet</span>
       <span>( {{ proj.reviews.length }} )</span>
@@ -34,10 +33,19 @@
 export default {
   name: "projectPreview",
   props: ["proj"],
+  data() {
+    return {
+      img: null,
+    };
+  },
   computed: {
-    img() {
-      return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
+    showImg() {
+      if (this.proj.imgUrls.length) {
+        return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
+      }
+      return require("@/assets/images/categories/Agriculture.jpg");
     },
+
     descToDisplay() {
       if (this.proj.details.description?.length > 100) {
         return this.proj.details.description.substring(0, 100) + "...";
