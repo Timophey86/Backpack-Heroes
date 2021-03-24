@@ -58,8 +58,6 @@ export const userStore = {
     async loadUser({ commit }) {
       try {
         const users = await userService.getUsers();
-        // commit({ type: "setUsers", users });
-        //Remove after making a proper user login page
         commit({ type: "setLoggedinUser", user: users[0] });
       } catch (err) {
         console.log("userStore: Error in loadUsers", err);

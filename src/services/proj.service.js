@@ -15,21 +15,16 @@ export const projService = {
 };
 
 var gFilterBy = { name: "", type: "all", userId: "", pageDiff: 0 };
-// var gSort = { sortType: "name" };
 
 function setFilter(filter) {
   gFilterBy = filter;
 }
 
-// function setSort(sort) {
-//   gSort = sort;
-// }
-
-// TODO: support paging and filtering and sorting
-
 function query(filterBy = {}) {
-  console.log(gFilterBy);
-  return httpService.get(`proj?userId=${gFilterBy.userId}`);
+  if (!filterBy.filter) {
+    return httpService.get(`proj`);
+  }
+  return httpService.get(`proj?userId=${filterBy.filter.userId}`);
 }
 
 function getById(id) {
@@ -44,10 +39,18 @@ function save(proj) {
   if (proj._id) {
     return httpService.put(`proj/${proj._id}`, proj);
   } else {
-    
     return httpService.post(`proj`, proj);
   }
 }
+
+
+
+
+
+
+
+
+
 
 // async function query() {
 //   let projects = await storageService.query(KEY);
