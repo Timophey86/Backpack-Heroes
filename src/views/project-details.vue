@@ -126,13 +126,9 @@ export default {
   },
   async created() {
     await this.getCurrProj(this.$route.params.id);
-<<<<<<< HEAD
 
     // await this.getCurrUser();
     // this.checkIfUserJoined();
-=======
-    this.checkIfUserJoined();
->>>>>>> 8284282e1ff032333aca8be1b55caaf98fc19553
   },
   components: {
     projectReview,
