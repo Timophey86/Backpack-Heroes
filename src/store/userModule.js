@@ -2,21 +2,21 @@ import { userService } from "../services/user.service";
 
 export const userStore = {
   state: {
-    loggedinUser: userService.getLoggedinUser(),
+    loggedInUser: userService.getLoggedInUser(),
     users: [],
   },
   getters: {
     users({ users }) {
       return users;
     },
-    loggedinUser({ loggedinUser }) {
-      return loggedinUser;
+    loggedinUser({ loggedInUser }) {
+      return loggedInUser;
     },
   },
   mutations: {
-    setLoggedinUser(state, { user }) {
-      state.loggedinUser = user;
-      console.log(state.loggedinUser);
+    setLoggedInUser(state, { user }) {
+      state.loggedInUser = user;
+      console.log(state.loggedInUser);
     },
     setUsers(state, { users }) {
       state.users = users;
@@ -29,7 +29,7 @@ export const userStore = {
     async login({ commit }, { userCred }) {
       try {
         const user = await userService.login(userCred);
-        commit({ type: "setLoggedinUser", user });
+        commit({ type: "setLoggedInUser", user });
         return user;
       } catch (err) {
         console.log("userStore: Error in login", err);
@@ -39,7 +39,7 @@ export const userStore = {
     async signup({ commit }, { userCred }) {
       try {
         const user = await userService.signup(userCred);
-        commit({ type: "setLoggedinUser", user });
+        commit({ type: "setLoggedInUser", user });
         return user;
       } catch (err) {
         console.log("userStore: Error in signup", err);
@@ -49,7 +49,7 @@ export const userStore = {
     async logout({ commit }) {
       try {
         await userService.logout();
-        commit({ type: "setLoggedinUser", user: null });
+        commit({ type: "setLoggedInUser", user: null });
       } catch (err) {
         console.log("userStore: Error in logout", err);
         throw err;
@@ -60,7 +60,7 @@ export const userStore = {
         const users = await userService.getUsers();
         // commit({ type: "setUsers", users });
         //Remove after making a proper user login page
-        commit({ type: "setLoggedinUser", user: users[0] });
+        commit({ type: "setLoggedInUser", user: users[0] });
       } catch (err) {
         console.log("userStore: Error in loadUsers", err);
         throw err;

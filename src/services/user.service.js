@@ -6,7 +6,7 @@ export const userService = {
   login,
   signup,
   logout,
-  getLoggedinUser
+  getLoggedInUser
 };
 
 async function login(credentials) {
@@ -25,12 +25,12 @@ function logout() {
 }
 
 function _saveLocalUser(user) {
-  sessionStorage.setItem("loggedinUser", JSON.stringify(user));
+  sessionStorage.setItem("loggedInUser", JSON.stringify(user));
   return user;
 }
 
-function getLoggedinUser() {
-  return JSON.parse(sessionStorage.getItem("loggedinUser"));
+function getLoggedInUser() {
+  return JSON.parse(sessionStorage.getItem("loggedInUser"));
 }
 
 
