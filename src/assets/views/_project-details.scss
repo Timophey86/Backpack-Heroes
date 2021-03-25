@@ -1,13 +1,17 @@
 .main-details {
   display: flex;
+  .proj-details {
+    .details-text {
+      font-family: montserrat;
+      font-weight: normal;
+    }
+  }
 }
 
 .project-details-page {
   .displyed-proj-details {
-    p {
-      margin: 10px auto;
-      font-size: 20px;
-    }
+    margin: 10px auto;
+    font-size: 20px;
   }
 }
 
