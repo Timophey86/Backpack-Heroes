@@ -33,6 +33,7 @@ export const orderStore = {
     async loadOrders(context, payload) {
       const orders = await orderService.query(payload);
       context.commit({ type: "loadOrders", orders });
+      
     },
     async sendOrder(context, payload) {
       const order = {

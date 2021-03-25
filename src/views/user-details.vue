@@ -1,7 +1,7 @@
 <template>
   <div v-if="currUser" class="user-details-page main-container">
     <div class="user-summary">
-      <h3>Welcome {{ displayedUser.fullname }}</h3>
+      <h2>Welcome {{ displayedUser.fullname }}</h2>
       <hr />
       <h4>Admission requests:</h4>
       <div v-if="pendingOrders">
@@ -58,14 +58,24 @@
       <h4>Your Projects:</h4>
       <div v-if="userProjects" class="back-office-projs">
         <table>
-      <tr v-for="proj in userProjects" :key="proj._id">
-       <th> <span class="myProjs">{{ proj.name }}</span
-        ></th>
-        <th><button @click="removeProj(proj._id)">Remove</button
-        ></th>
-        <th><button @click="edit(proj._id)">Edit</button></th>
-      </tr>
-      </table>
+          <td>Name</td>
+          <td>Dates</td>
+          <td>Needed</td>
+          <td>Enrolled</td>
+          <td>Actions</td>
+          <tr v-for="proj in userProjects" :key="proj._id">
+            <td>
+              <span class="myProjs">{{ proj.name }}</span>
+            </td>
+            <td>{{proj.startsAt}}-{{proj.endAt}}</td>
+            <td>{{proj.numOfVolunteersNeeded}}</td>
+            <td>{{proj.members.length}}</td>
+            <td>
+              <button @click="removeProj(proj._id)">Remove</button
+              ><button @click="edit(proj._id)">Edit</button>
+            </td>
+          </tr>
+        </table>
       </div>
       <div v-else>No projects to display</div>
     </div>

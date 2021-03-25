@@ -1,7 +1,5 @@
 <template>
   <div class="container about main-container">
-    <p>{{ msg }}</p>
-
     <div v-if="loggedinUser">
       <h3>
         Loggedin User:
@@ -9,7 +7,7 @@
         <button @click="doLogout">Logout</button>
       </h3>
     </div>
-    <div v-else>
+    <div class="login" v-else>
       <h2>Login</h2>
       <form @submit.prevent="doLogin">
         <input

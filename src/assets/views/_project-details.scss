@@ -26,20 +26,18 @@
       align-items: center;
       flex-direction: column;
       margin-left: 25px;
-      // &:not(:first-child)::before {
-      //       content: "," ;
-      //     }
     }
-    // li:nth-child(even) {
-    //   &::before {
-    //     content: "," ;
-    //   }
-    // }
   }
 }
 
 .categories {
   font-size: smaller;
+}
+
+.join-btn {
+  button {
+    width: 100%;
+  }
 }
 
 .details-img-container {
