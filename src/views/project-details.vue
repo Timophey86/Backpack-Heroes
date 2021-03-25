@@ -47,8 +47,11 @@
           </li>
         </ul>
         </p>
+        <div class="join-btn" v-if="currUser">
             <el-button v-if="!isJoined" type="success"  :class="{ host: isHost}" @click="joinProj"><span>{{joinProjBtnTxt}}</span></el-button>
             <el-button v-else type="info" :class="{ host: isHost}"><span>Thank you for joinig us!</span></el-button>
+            </div>
+            <div class="join-btn" v-else><el-button type="info" :class="{ host: isHost}"><span>Please Log-In to join</span></el-button></div>
     </div>
   </div>
   

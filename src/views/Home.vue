@@ -8,12 +8,12 @@
         <div class="img-category-container">
           <h1>Volunteering Categories:</h1>
           <ul>
-            <li v-for="proj in projs" :key="proj._id">
-              <p>{{ proj.tags[0] }}</p>
+            <li v-for="(proj,index) in categories" :key="index">
+              <p>{{ proj }}</p>
               <img
                 @click="projList"
                 :src="
-                  require(`@/assets/images/${proj.tags[0]}/${proj.imgUrls[0]}.jpg`)
+                  require(`@/assets/images/categories/${proj}.jpg`)
                 "
                 alt=""
               />
@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       projs: [],
+      categories:['Agriculture','Animals']
     };
   },
   methods: {
