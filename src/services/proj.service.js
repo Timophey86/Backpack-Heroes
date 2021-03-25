@@ -14,7 +14,7 @@ export const projService = {
   getEmptyProj,
 };
 
-var gFilterBy = { name: "", type: "all", userId: "", pageDiff: 0 };
+var gFilterBy = { location: "all", category: "all", userId: "", pageDiff: 0 };
 
 function setFilter(filter) {
   gFilterBy = filter;
