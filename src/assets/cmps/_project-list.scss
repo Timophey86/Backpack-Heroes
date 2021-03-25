@@ -1,13 +1,13 @@
 .project-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);
-    gap: 10px;
+    gap: 50px;
     justify-content: center;
     margin: 40px auto;
     .project-card {
-        background-color: #f8f5f1;
-        border: 2px solid #3a0171;
-        border-radius: 20px;
+        // background-color: #f8f5f1;
+        border: 1px solid #e4e5e7;
+        // border-radius: 20px;
         overflow: hidden;
     }
 }

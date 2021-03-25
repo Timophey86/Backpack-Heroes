@@ -12,8 +12,8 @@
     }
     .review-list {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
         margin: 10px;
         .review-card {
             padding: 0 10px 10px 10px;
@@ -39,7 +39,8 @@
             }
             .review-footer {
                 grid-area: "footer";
-                justify-self: flex-end;
+                justify-self: center;
+                font-weight: 600;
             }
         }
     }
