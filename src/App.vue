@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header />
-    <router-view />
+    <router-view class="app-container "/>
     <app-footer />
   </div>
 </template>
@@ -17,24 +17,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-#app {
-  // font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: black;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #3a0171;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>

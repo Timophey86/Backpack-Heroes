@@ -1,61 +1,53 @@
 <template>
-  <div v-if="displayedProj" class="project-details-page main-container">
-    <div class="details-img-container">
-      <div
-        :class="'img-' + img"
-        v-for="(img, index) in displayedProj.imgUrls"
-        :key="index"
-      
-      >
-        <img :src="require(`../assets/images/${displayedProj.tags[0]}/${img}.jpg`)"  alt=""/>
-      </div>
-    </div>
-    <div class="main-details">
-      <div class="proj-details">
-        <h1>{{ displayedProj.name }}</h1>
-        <h4>Hosted by: {{ displayedProj.host.fullname }}</h4>
-        <div class="location-details">
+<div v-if="displayedProj" class="project-details-page main-container">
+  <div class="details-img-container">
+        <!-- <el-image :src="showImg" class="full" /> -->
+        <div :class="'img-' + img" v-for="(img, index) in displayedProj.imgUrls" :key="index">
+          <img :src="require(`../assets/images/${displayedProj.tags[0]}/${img}.jpg`)" />
+        </div>
+  </div>
+  <div class="main-details">
+    <div class="proj-details">
+      <h1>{{ displayedProj.name }}</h1>
+      <h4>Hosted by: {{ displayedProj.host.fullname }}</h4>
+      <div class="location-details">
           Location: <span>{{ displayedProj.loc.address }}</span>
-        </div>
-        <div class="dates-details">
-          Duration: <span>{{ formatDateFrom }}</span> to
-          <span>{{ formatDateTo }}</span>
-        </div>
-        Categories:
-        <ul>
-          <li v-for="(tags, index) in displayedProj.tags" :key="index">
-            {{ tags }}
-          </li>
-        </ul>
-        <div class="displyed-proj-details">
-        <p>{{ displayedProj.details.description }}</p>
-        </div>
-        <button @click="edit(displayedProj._id)">Edit Project Details</button>
-      </div>
-
-      <div class="members-div">
-        <h3>Members who decided to join us:</h3>
-        <ul class="member-list">
-          <li v-for="(members, index) in displayedProj.members" :key="index">
-         <el-avatar :size="55">{{members.fullname}}</el-avatar>
-          </li>
-        </ul>
-        <p class="amneties">As a member these are some of the bonuses we provide for the members of our program:
-            <ul>
-          <li v-for="(amenities, index) in displayedProj.details.amenities" :key="index">
-            {{amenities}}
-          </li>
-        </ul>
-        </p>
-            <el-button v-if="!isJoined" type="success"  :class="{ host: isHost}" @click="joinProj"><span>{{joinProjBtnTxt}}</span></el-button>
-            <el-button v-else type="info" :class="{ host: isHost}"><span>Thank you for joinig us!</span></el-button>
     </div>
+    <div class="dates-details">
+      Duration: <span>{{ formatDateFrom }}</span> to
+      <span>{{ formatDateTo }}</span>
+    </div>
+    <p>Categories:</p> 
+    <ul>
+      <li v-for="(tags, index) in displayedProj.tags" :key="index">
+        {{ tags }}
+      </li>
+    </ul>
+    <div class="displyed-proj-details">
+      <p>{{ displayedProj.details.description }}</p>
+    </div>
+    <button v-if="isHost" @click="edit(displayedProj._id)">Edit Project Details</button>
   </div>
-  
-        <project-review :proj="displayedProj" />
-  
-    
+  <div class="members-div">
+    <h3>Members who decided to join us:</h3>
+    <ul class="member-list">
+      <li v-for="(members, index) in displayedProj.members" :key="index">
+        <el-avatar :size="55">{{members.fullname}}</el-avatar>
+      </li>
+    </ul>
+    <p class="amneties">As a member these are some of the bonuses we provide for the members of our program:
+      <ul>
+        <li v-for="(amenities, index) in displayedProj.details.amenities" :key="index">
+          {{amenities}}
+        </li>
+      </ul>
+    </p>
+    <el-button v-if="!isJoined" type="success" :class="{ host: isHost}" @click="joinProj"><span>{{joinProjBtnTxt}}</span></el-button>
+    <el-button v-else type="info" :class="{ host: isHost}"><span>Thank you for joinig us!</span></el-button>
   </div>
+</div>
+  <project-review :proj="displayedProj" />
+</div>
 </template>
 
 <script>
@@ -86,6 +78,12 @@ export default {
       } else {
         return "Your Request was sent fo approval";
       }
+    },
+     showImg() {
+      if (this.displayedProj.imgUrls.length) {
+        return require(`@/assets/images/${this.displayedProj.tags[0]}/${this.displayedProj.imgUrls[2]}.jpg`);
+      }
+      return require("@/assets/images/categories/Agriculture.jpg");
     },
   },
   methods: {
@@ -126,12 +124,7 @@ export default {
   },
   async created() {
     await this.getCurrProj(this.$route.params.id);
-
-    // await this.getCurrUser();
-    // this.checkIfUserJoined();
-
     this.checkIfUserJoined();
-
   },
   components: {
     projectReview,

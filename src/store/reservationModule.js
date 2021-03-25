@@ -13,7 +13,7 @@ export const orderStore = {
     },
     orders(state) {
       return state.orders;
-    }
+    },
   },
   mutations: {
     loadOrders(state, { orders }) {
@@ -71,13 +71,21 @@ export const orderStore = {
     },
     async approveOrder(context, payload) {
       var order = await orderService.save(payload.order);
-      var project = await projService.getById(order.proj._id)
-      project.members.push(order.member)
-      await projService.save(project)
+      var project = await projService.getById(order.proj._id);
+      project.members.push(order.member);
+      await projService.save(project);
     },
-    async removeOrder(context, {id}) {
-      await orderService.remove(id)
-      context.commit({ type: "removeOrder", id });
-    }
+    async removeOrder(context, { order }) {
+      console.log(order);
+      await orderService.remove(order._id);
+      context.commit({ type: "removeOrder", id: order._id });
+      const proj = await projService.getById(order.proj._id);
+      var idx = proj.members.findIndex(members => {return members._id === order.member._id});
+      console.log('before ',proj);
+      if(idx > -1) {
+        proj.members.splice(idx, 1)
+        await projService.save(proj)
+      }
+    },
   },
 };
