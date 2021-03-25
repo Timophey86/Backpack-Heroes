@@ -26,6 +26,9 @@
       <span v-else>No Ranking Yet</span>
       <span>( {{ proj.reviews.length }} )</span>
     </div>
+    <p>
+      <span class="spots-left-num">{{ spotsLeft }}</span> Spots left
+    </p>
   </section>
 </template>
 
@@ -44,6 +47,9 @@ export default {
         return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
       }
       return require("@/assets/images/categories/Agriculture.jpg");
+    },
+    spotsLeft() {
+      return this.proj.numOfVolunteersNeeded - this.proj.members.length;
     },
 
     descToDisplay() {

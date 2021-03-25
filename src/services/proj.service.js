@@ -58,12 +58,12 @@ function getEmptyProj() {
       description: "",
       amenities: [],
     },
+    numOfVolunteersNeeded: 0,
     imgCategory: "default",
     imgUrls: [],
     startsAt: Date.now(),
-    endAt: Date.now(),
+    endAt: Date.now() + 86400000,
     members: [],
     reviews: [],
   };
 }
-

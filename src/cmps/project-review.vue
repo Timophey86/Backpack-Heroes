@@ -23,7 +23,7 @@
     </div>
     <el-form
       v-if="isShowForm"
-      @submit.native.prevent="addReview"
+      @submit.prevent.native="addReview"
       class="review-form"
     >
       <h2>Your Review:</h2>
@@ -104,11 +104,11 @@ export default {
     async addReview() {
       const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
       this.proj.reviews.unshift(reviewCopy);
+      this.hideForm();
       await this.$store.dispatch({
         type: "saveProj",
         project: this.proj,
       });
-      this.hideForm();
     },
   },
 };
