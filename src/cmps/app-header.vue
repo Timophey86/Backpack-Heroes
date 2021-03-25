@@ -10,7 +10,7 @@
       <router-link to="/login-signup">Login/Signup</router-link>
       <router-link v-if="currUser" class="user-link" to="/user/userId=1"
         ><i class="fas fa-user-circle"></i
-      >{{currUser.fullname}}</router-link>
+      > {{currUser.fullname}}</router-link>
       <router-link v-else class="user-link" to="/user/userId=1"
         ><i class="fas fa-user-circle"></i
       ></router-link>
