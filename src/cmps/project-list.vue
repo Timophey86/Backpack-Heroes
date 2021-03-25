@@ -1,5 +1,6 @@
 <template>
   <section class="project-list main-container">
+
     <div class="project-card" v-for="proj in projects" :key="proj._id">
       <project-preview :proj="proj" />
     </div>
@@ -12,6 +13,6 @@ export default {
   props: ["projects"],
   components: {
     projectPreview,
-  }
+  },
 };
 </script>
