@@ -1,7 +1,7 @@
 const minimalUser = {
     _id: "u101",
     fullName: "Orly Amdadi",
-    imgUrl: "http://some-img",
+    imgUrl: "Orly-Amdadi.jpg",
 };
 
 const user = {
@@ -10,7 +10,7 @@ const user = {
     username: "orly",
     password: 123,
     isAdmin: true,
-    imgUrl: "http://some-img",
+    imgUrl: "Orly-Amdadi.jpg",
     orders: [],
     myProjs: []
 };

@@ -7,9 +7,18 @@
     />
     <h1>⭐ {{ averageRate || "" }} ({{ proj.reviews.length }} Reviews)</h1>
     <div class="review-list">
-      <div v-for="review in proj.reviews" :key="review._id" class="review-card">
+      <div
+        v-for="(review, idx) in proj.reviews"
+        :key="review._id"
+        class="review-card"
+      >
         <div class="review-header">
-          <el-avatar :size="40" icon="el-icon-user-solid" />
+          <el-avatar
+            v-if="proj.reviews[idx].by.imgUrl"
+            :size="40"
+            :src="reviewAvatar(idx)"
+          />
+          <el-avatar v-else :size="40" icon="el-icon-user-solid" />
           <p>{{ review.by.fullname }}</p>
           <el-rate v-model="review.rate" disabled text-color="#ff9900" />
         </div>
@@ -69,6 +78,7 @@ export default {
         rate: 5,
         by: {
           fullname: "",
+          imgUrl: "",
         },
       },
     };
@@ -82,9 +92,31 @@ export default {
         rates.reduce((acc, rate) => acc + rate, 0) / this.proj.reviews.length
       ).toFixed(1);
     },
+    // randAvatar() {
+    //   //  retrun `https://randomuser.me/api/portraits/${this.maleFemale}/${this.getRandomNum}.jpg`;
+    //   // https://randomuser.me/api/portraits/thumb/women/78.jpg
+    //   return require(`https://randomuser.me/api/portraits/thumb/women/78.jpg`);
+    //   // return require(`https://randomuser.me/api/portraits/${this.maleFemale}/${this.getRandomNum}.jpg`);
+    // },
+    maleFemale() {
+      if (Math.random() > 0.5) {
+        return "women";
+      } else {
+        return "men";
+      }
+    },
+    getRandomNum() {
+      var min = Math.ceil(1);
+      var max = Math.floor(99);
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
   },
 
   methods: {
+    reviewAvatar(idx) {
+      return require("@/assets/images/avatars/" +
+        this.proj.reviews[idx].by.imgUrl);
+    },
     clearForm() {
       this.reviewToEdit = {
         txt: "",
@@ -105,6 +137,7 @@ export default {
       const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
       this.proj.reviews.unshift(reviewCopy);
       this.hideForm();
+     
       await this.$store.dispatch({
         type: "saveProj",
         project: this.proj,

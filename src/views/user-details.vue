@@ -5,7 +5,7 @@
         <div class="name-and-pic">
           <h2>Welcome {{ displayedUser.fullname }}</h2>
           <img
-            :src="`https://randomuser.me/api/portraits/${maleFemale}/${getRandomNum}.jpg`"
+            :src="avatarImg"
             alt=""
           />
         </div>
@@ -109,7 +109,6 @@
   <div v-else>Please use the login page to log in or sign up.</div>
 </template>
 
-
 <script>
 import elTable from "../cmps/table.vue";
 
@@ -122,6 +121,10 @@ export default {
     };
   },
   computed: {
+      avatarImg() {
+      return require("@/assets/images/avatars/" +
+        this.currUser.imgUrl);
+    },
     displayedUser() {
       return this.$store.getters.loggedinUser;
     },
@@ -171,8 +174,8 @@ export default {
       }
     },
     getRandomNum() {
-     var min = Math.ceil(1);
-     var max = Math.floor(99);
+      var min = Math.ceil(1);
+      var max = Math.floor(99);
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
   },

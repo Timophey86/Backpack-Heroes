@@ -28,7 +28,7 @@
       <!-- <span>( {{ proj.reviews.length }} )</span> -->
     </div>
     <p>
-      <span class="spots-left-num">{{ spotsLeft }} / {{proj.numOfVolunteersNeeded}}</span> Spots left
+      <span class="spots-left-num">{{ spotsLeft }}</span>/ {{proj.numOfVolunteersNeeded}} spots left
     </p>
   </section>
 </template>

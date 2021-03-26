@@ -46,12 +46,9 @@
         <h3>Vulenteers who decided to join us:</h3>
         <ul class="member-list">
           <li v-for="(members, index) in displayedProj.members" :key="index">
-            <el-avatar :src="displayedProj.members[index].imgUrl" :size="55">{{
-              displayedProj.members[index].fullname
-            }}</el-avatar>
+            <el-avatar :src="avatarImg(index)" :size="55"/>
           </li>
         </ul>
-        {{ displayedProj.members[0].imgUrl }}
         <p class="amneties">
           As a member these are some of the bonuses we provide for the members
           of our program:
@@ -118,6 +115,10 @@ export default {
     },
   },
   methods: {
+    avatarImg(index) {
+      return require("@/assets/images/avatars/" +
+        this.displayedProj.members[index].imgUrl);
+    },
     img(idx) {
       return this.displayedProj.members[idx].imgUrl;
       // return require(`@/assets/images/${this.displayedProj.tags[0]}/${this.displayedProj.imgUrls[2]}.jpg`);
