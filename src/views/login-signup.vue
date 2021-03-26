@@ -38,7 +38,7 @@
         <button>Signup</button>
       </form>
     </div>
-    <hr />
+    <!-- <hr /> -->
   </div>
 </template>
 
