@@ -10,7 +10,7 @@
           opportunities around the globe
         </p>
         <div @click="projList" class="call-to-action">
-          <h3>Get Started</h3>
+          <h3>Explore more</h3>
         </div>
       </div>
     </div>

@@ -41,10 +41,12 @@ export const orderStore = {
         member: {
           _id: payload.user._id,
           fullname: payload.user.fullname,
+          imgUrl: payload.user.imgUrl,
         },
         host: {
           _id: payload.project.host._id,
           fullname: payload.project.host.fullname,
+          imgUrl: payload.user.imgUrl,
         },
         proj: {
           _id: payload.project._id,
