@@ -3,12 +3,12 @@
     <div class="details-img-container">
       <!-- <el-image :src="showImg" class="full" /> -->
       <div
-        :class="'img-' + img"
         v-for="(img, index) in displayedProj.imgUrls"
         :key="index"
+        :class="'img-' + (index+1)"
       >
         <img
-          :src="require(`../assets/images/${displayedProj.tags[0]}/${img}.jpg`)"
+          :src="showImg(img)"
         />
       </div>
     </div>
@@ -44,11 +44,12 @@
       </div>
       <div class="members-div">
         <h3>Vulenteers who decided to join us:</h3>
-        <ul class="member-list">
+        <ul v-if="displayedProj.members.length" class="member-list">
           <li v-for="(members, index) in displayedProj.members" :key="index">
-            <el-avatar :src="avatarImg(index)" :size="55"/>
+            <el-avatar :src="avatarImg(index)" :size="55" />
           </li>
         </ul>
+        <p class="first-to-join" v-else>Be the first to join! Click the join button below.</p>
         <p class="amneties">
           As a member these are some of the bonuses we provide for the members
           of our program:
@@ -107,12 +108,6 @@ export default {
         return "Your Request was sent fo approval";
       }
     },
-    showImg() {
-      if (this.displayedProj.imgUrls.length) {
-        return require(`@/assets/images/${this.displayedProj.tags[0]}/${this.displayedProj.imgUrls[2]}.jpg`);
-      }
-      return require("@/assets/images/categories/Agriculture.jpg");
-    },
   },
   methods: {
     avatarImg(index) {
@@ -128,6 +123,17 @@ export default {
     },
     edit(id) {
       this.$router.push(`/edit/${id}`);
+    },
+    showImg(idx) {
+      if(this.displayedProj.imgUrls[0] === "1") {
+      if (this.displayedProj.imgUrls.length) {
+        console.log('noooooo')
+        return require(`@/assets/images/${this.displayedProj.tags[0]}/${idx}.jpg`);
+      }
+      return require("@/assets/images/categories/Agriculture.jpg");
+      } else {
+        return idx
+      }
     },
     async getCurrUser() {
       await this.$store.dispatch({ type: "loadUsers" });

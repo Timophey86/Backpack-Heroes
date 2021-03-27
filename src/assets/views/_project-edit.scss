@@ -1,13 +1,40 @@
 .project-edit {
-    width: 60%;
-    margin: 0 auto;
-    textarea {
-        height: 200px;
-        resize: none;
-    }
-    margin-bottom: 20px;
+  width: 60%;
+  margin: 0 auto;
+  textarea {
+    height: 200px;
+    resize: none;
+  }
+  margin-bottom: 20px;
 }
+
+.img-upload {
+  display: flex;
+  flex-direction: column;
+  label {
+    text-align: left;
+  }
+  .imgList{
+      display: flex;
+      img{
+          height: 130px;
+      }
+  }
+  img {
+    height: 130px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .loading{
+      height: 120px;
+  }
+  input {
+    display: none;
+  }
+}
+
 .project-dates {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
