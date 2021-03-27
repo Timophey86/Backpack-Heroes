@@ -5,9 +5,21 @@
     justify-content: center;
     margin: 40px auto;
     .project-card {
-        // background-color: #f8f5f1;
         border: 1px solid #e4e5e7;
-        // border-radius: 20px;
         overflow: hidden;
+    }
+}
+
+.select-filter {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    .el-button{
+        padding: 12px 15px;
+        background-color: #29ad92;
+        color: whitesmoke;
+        &:hover {
+            background-color: #5bc48a;
+        }
     }
 }

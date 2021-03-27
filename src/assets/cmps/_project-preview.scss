@@ -47,9 +47,10 @@
     grid-row: 4/5;
     justify-self: end;
     .spots-left-num {
-      color: #64c989;
+      color: red;
       margin-right: 5px;
       font-weight: 600;
+      font-size: larger;
     }
   }
   .el-tag {

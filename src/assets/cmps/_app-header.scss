@@ -1,46 +1,63 @@
+<<<<<<< HEAD
 .app-header{
     background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
+=======
+.app-header {
+    background-image: linear-gradient(to top, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
+>>>>>>> 52a681c843989f3af35bd73e346be477b2ac76c7
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
-    
 }
 
-.header{
+.header {
     display: flex;
     height: 45px;
     justify-content: space-between;
     align-items: center;
     .logo {
-        a{
+        a {
             cursor: pointer;
             font-family: caveat;
             color: white;
             font-size: 1.8rem;
         }
     }
+<<<<<<< HEAD
     nav{
         a{
+=======
+    .nav {
+        a {
+>>>>>>> 52a681c843989f3af35bd73e346be477b2ac76c7
             font-family: montserrat;
             font-size: 1rem;
             color: white;
             margin-inline-end: 50px;
-            &:last-child{
+            &:last-child {
                 margin-inline-end: 0;
             }
         }
+<<<<<<< HEAD
 
 
     }
     .fa-bars{
         color: white;
+=======
+        .user-link {
+            display: inline-flex;
+            gap: 15px;
+        }
+>>>>>>> 52a681c843989f3af35bd73e346be477b2ac76c7
     }
 }
 
 .fa-user-circle {
     margin-right: 5px;
 }
+<<<<<<< HEAD
 
 
 .menu {
@@ -50,3 +67,5 @@
     right: 50px;
     font-size: x-large;
 }
+=======
+>>>>>>> 52a681c843989f3af35bd73e346be477b2ac76c7
