@@ -1,3 +1,9 @@
+@media (max-width: $normal-breakpoint) {
+    ul{
+        padding-inline-start: 0;
+    }
+}
+
 @media (max-width: $narrow-breakpoint) {
     .app-header{
         .menu{ 
@@ -32,5 +38,24 @@
     
 
     }
+    .hero{
+        .hero-txt{
+            h1{
+                font-size: 2.5rem;
+            }
+            p{
+                font-size: 1rem;
+        
+            }
+            .call-to-action{
+                font-size: 0.9rem;
+                width: 145px;
+            }
+        }
+    }
   
+}
+
+@media (max-width: $mobile-breakpoint) {
+    
 }
