@@ -44,10 +44,14 @@ export default {
   },
   computed: {
     showImg() {
-      if (this.proj.imgUrls.length) {
-        return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
+      if(this.proj.imgUrls[0] === "1") {
+        if (this.proj.imgUrls.length) {
+          return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
+        }
+        return require("@/assets/images/categories/Agriculture.jpg");
+      } else {
+        return this.proj.imgUrls[0]
       }
-      return require("@/assets/images/categories/Agriculture.jpg");
     },
     spotsLeft() {
       return this.proj.numOfVolunteersNeeded - this.proj.members.length;
@@ -61,7 +65,7 @@ export default {
       }
     },
     averageRate() {
-      if (!this.proj.reviews) return;
+      if (!this.proj.reviews.length) {return 'No Rating Yet'};
       const rates = this.proj.reviews.map((review) => {
         return review.rate;
       });

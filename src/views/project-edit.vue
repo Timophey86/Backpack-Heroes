@@ -32,6 +32,9 @@
           clearable
         />
       </el-form-item>
+      <el-form-item label="Number of volunteers needed:">
+        <el-input-number v-model="projectToEdit.numOfVolunteersNeeded" :min="1" :max="100"></el-input-number>
+      </el-form-item>
 
       <el-form-item label="Tags:">
         <el-select
@@ -93,7 +96,16 @@
           />
         </div>
       </el-form-item>
-
+      <el-form-item class="img-upload" label="Upload Images">
+        <label for="imgUploader">
+          <img v-if="!isLoading"  src="http://simpleicon.com/wp-content/uploads/cloud-upload-2.png" alt="" />
+        <img v-else class="loading" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
+        </label>
+        <div class="imgList">
+        <img v-for="(imgUrl, index) in projectToEdit.imgUrls" :src="imgUrl" :key="index">
+        </div>
+        <input type="file" id="imgUploader" @change="onUploadImg" />
+      </el-form-item>
       <el-button
         @click.prevent="submitProj"
         type="primary"
@@ -103,11 +115,14 @@
   </div>
 </template>
 <script>
+import { uploadImg } from "../services/img-upload.service";
+
 export default {
   name: "project-edit",
   data() {
     return {
       projectToEdit: null,
+      isLoading: false
     };
   },
   computed: {
@@ -129,6 +144,13 @@ export default {
       const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
       await this.$store.dispatch({ type: "saveProj", project: projectCopy });
       this.$router.push("/project");
+    },
+    async onUploadImg(ev) {
+      this.isLoading=true
+      const res = await uploadImg(ev);
+      this.projectToEdit.imgUrls.push(res.url)
+      console.log(this.projectToEdit)
+      this.isLoading=false
     },
   },
   created() {

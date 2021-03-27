@@ -12,57 +12,58 @@
         :key="review._id"
         class="review-card"
       >
-        <div class="review-header">
-          <el-avatar
-            v-if="proj.reviews[idx].by.imgUrl"
-            :size="40"
-            :src="reviewAvatar(idx)"
-          />
-          <el-avatar v-else :size="40" icon="el-icon-user-solid" />
-          <p>{{ review.by.fullname }}</p>
-          <el-rate v-model="review.rate" disabled text-color="#ff9900" />
-        </div>
-        <div class="review-body">
-          <pre>{{ review.txt }}</pre>
-        </div>
-        <div class="review-footer">
-          <p>{{ Date.now() | moment("MMMM - DD - YYYY") }}</p>
-        </div>
+        <el-avatar
+          v-if="proj.reviews[idx].by.imgUrl"
+          :size="40"
+          :src="reviewAvatar(idx)"
+        />
+        <el-avatar v-else :size="40" icon="el-icon-user-solid" />
+        <p class="review-fullname">{{ review.by.fullname }}</p>
+        <el-rate
+          v-model="review.rate"
+          show-score
+          disabled
+          text-color="#ff9900"
+        />
+        <pre>‟ {{ review.txt }} ”</pre>
+        <p class="review-date">{{ Date.now() | moment("MMMM - DD - YYYY") }}</p>
       </div>
     </div>
-    <el-form
-      v-if="isShowForm"
-      @submit.prevent.native="addReview"
-      class="review-form"
-    >
-      <h2>Your Review:</h2>
-      <el-form-item label="Your name:">
-        <el-input v-model="reviewToEdit.by.fullname" />
-      </el-form-item>
-      <el-form-item label="Your Rate:">
-        <el-rate v-model="reviewToEdit.rate" :colors="colors" />
-      </el-form-item>
-      <el-form-item>
-        <el-input
-          type="textarea"
-          :rows="5"
-          placeholder="Your Opinion Matters..."
-          v-model="reviewToEdit.txt"
-          maxlength="100"
-          show-word-limit
-          resize="none"
-        />
-      </el-form-item>
-      <el-button type="success" size="medium" @click.prevent="addReview"
-        >Add</el-button
+    <transition name="el-zoom-in-center">
+      <el-form
+        v-if="isShowForm"
+        @submit.prevent.native="addReview"
+        class="review-form"
       >
-      <el-button
-        class="close-review"
-        size="mini"
-        icon="el-icon-close"
-        @click.prevent="hideForm"
-      />
-    </el-form>
+        <h2>Your Review:</h2>
+        <el-form-item label="Your name:">
+          <el-input v-model="reviewToEdit.by.fullname" />
+        </el-form-item>
+        <el-form-item label="Your Rate:">
+          <el-rate v-model="reviewToEdit.rate" :colors="colors" />
+        </el-form-item>
+        <el-form-item>
+          <el-input
+            type="textarea"
+            :rows="5"
+            placeholder="Your Opinion Matters..."
+            v-model="reviewToEdit.txt"
+            maxlength="100"
+            show-word-limit
+            resize="none"
+          />
+        </el-form-item>
+        <el-button type="success" size="medium" @click.prevent="addReview"
+          >Add</el-button
+        >
+        <el-button
+          class="close-review"
+          size="mini"
+          icon="el-icon-close"
+          @click.prevent="hideForm"
+        />
+      </el-form>
+    </transition>
   </section>
 </template>
 <script>
@@ -137,7 +138,7 @@ export default {
       const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
       this.proj.reviews.unshift(reviewCopy);
       this.hideForm();
-     
+
       await this.$store.dispatch({
         type: "saveProj",
         project: this.proj,
