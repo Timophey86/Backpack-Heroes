@@ -1,43 +1,41 @@
 <template>
   <section class="select-filter">
-    <form action="">
-      <el-select v-model="value" placeholder="What field intrests you?">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
-      <el-select v-model="location" placeholder="Where do you want to go?">
-        <el-option
-          v-for="item in locations"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
-      <el-date @pickRange="setRange" />
-      <el-button
-        @click.prevent="
-          setCategory(value);
-          setLocation(location);
-        "
-        >Go!</el-button
+    <el-select v-model="category" placeholder="What field intrests you?">
+      <el-option
+        v-for="item in categoryOptions"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
       >
-    </form>
+      </el-option>
+    </el-select>
+    <el-select v-model="location" placeholder="Where do you want to go?">
+      <el-option
+        v-for="item in locationOptions"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      >
+      </el-option>
+    </el-select>
+    <el-date-picker
+      @change="setRange"
+      v-model="fromTodates"
+      type="daterange"
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date"
+    >
+    </el-date-picker>
+    <el-button @click.prevent="goSearch">Go!</el-button>
   </section>
 </template>
 
 <script>
-import elDate from "./elDate.cmp.vue";
-
 export default {
   data() {
     return {
-      options: [
+      categoryOptions: [
         {
           value: " ",
           label: "All",
@@ -67,7 +65,7 @@ export default {
           label: "Children",
         },
       ],
-      locations: [
+      locationOptions: [
         {
           value: " ",
           label: "All",
@@ -97,44 +95,30 @@ export default {
           label: "Thailand",
         },
       ],
-      value: "",
+      fromTodates: [],
+      category: "",
       location: "",
-      date1: "",
-      date2: "",
+      dateFrom: "",
+      dateTo: "",
     };
   },
   methods: {
-    setCategory(val) {
-      this.$emit("setFilter", {
-        category: val,
+    async goSearch() {
+      await this.$emit("setFilter", {
+        category: this.category,
         location: this.location,
-        from: this.date1,
-        to: this.date2,
+        from: this.dateFrom,
+        to: this.dateTo,
       });
     },
-    setLocation(val) {
-      this.$emit("setFilter", {
-        location: val,
-        category: this.value,
-        from: this.date1,
-        to: this.date2,
-      });
+    setRange() {
+      // this.dateFrom = this.fromTodates[0];
+      this.dateFrom = Date.parse(this.fromTodates[0]);
+      // console.log("from", this.dateFrom);
+      // this.dateTo = this.fromTodates[1];
+      this.dateTo = Date.parse(this.fromTodates[1]);
+      // console.log("to", this.dateTo);
     },
-    setRange(val) {
-      this.date1 = Date.parse(val[0]);
-      this.date2 = Date.parse(val[1]);
-    },
-    setDates() {
-      this.$emit("setFilter", {
-        category: this.value,
-        location: this.location,
-        from: this.date1,
-        to: this.date2,
-      });
-    },
-  },
-  components: {
-    elDate,
   },
 };
 </script>
