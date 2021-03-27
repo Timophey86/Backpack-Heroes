@@ -22,7 +22,7 @@
       @change="setRange"
       v-model="fromTodates"
       type="daterange"
-      range-separator="To"
+      range-separator="-"
       start-placeholder="Start date"
       end-placeholder="End date"
     >
