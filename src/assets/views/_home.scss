@@ -52,20 +52,22 @@
     .hero-txt{
         color: white;
         position: absolute;
-        top: 200px;
-        right: 17px;
+        top: 20vh;
+        right: 4vw;
+        max-width: 510px;
         h1{
-            font-size: 50px;
-            max-width: 500px;
+            text-align: center;
+            font-size: 3rem;
             font-family: montserrat-bold;
             margin: auto;
             text-shadow: 3px 4px 5px #000;
         }
         p{
-            font-size: 25px;
-            max-width: 650px;
+            font-size: 1.3rem;
+            max-width: 42ch;
             font-weight: 600;
-            margin-top: 25px;
+            text-align: center;
+            margin: auto;
             text-shadow: 3px 4px 5px #000;
         }
         .call-to-action {
