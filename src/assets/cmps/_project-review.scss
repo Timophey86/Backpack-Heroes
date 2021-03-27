@@ -1,8 +1,5 @@
 .review-container {
-    * {
-        text-transform: capitalize;
-    }
-    display: flex;
+        display: flex;
     flex-direction: column;
     gap: 10px;
     margin: 40px auto;
@@ -32,6 +29,7 @@
             }
             .review-fullname {
                 grid-row: 1/2;
+                text-transform: capitalize;
             }
             pre {
                 font-family: "montserrat";

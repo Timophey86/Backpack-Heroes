@@ -132,7 +132,9 @@ export default {
   },
   computed: {
     avatarImg() {
-      return require("@/assets/images/avatars/" + this.currUser.imgUrl);
+       return require("@/assets/images/avatars/" +
+        this.currUser.imgUrl);
+      // return this.currUser.imgUrl;
     },
     displayedUser() {
       return this.$store.getters.loggedinUser;
