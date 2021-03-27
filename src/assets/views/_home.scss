@@ -24,12 +24,12 @@
             bottom: 16px;
             right: 5px;
             color: #fff;
-            background-image: linear-gradient(to top, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
-            border-radius: 20px;
+            background-color: #989e9ce6;
             padding: 2px 7px;
             background-position: 50%;
             background-size: contain;
             background-repeat: no-repeat;
+            font-weight: 600;
         }
     }
     h1 {
@@ -59,12 +59,14 @@
             max-width: 500px;
             font-family: montserrat-bold;
             margin: auto;
+            text-shadow: 3px 4px 5px #000;
         }
         p{
             font-size: 25px;
             max-width: 650px;
             font-weight: 600;
             margin-top: 25px;
+            text-shadow: 3px 4px 5px #000;
         }
         .call-to-action {
             cursor: pointer;

@@ -4,17 +4,20 @@
       <div class="logo">
         <router-link to="/">Backpack Heroes</router-link>
       </div>
-      <div class="nav">
+
+      <div class="menu" @click="toggleMenu"><i class="fas fa-bars"></i></div>
+
+      <nav :class="menuClass">
         <router-link to="/project">Explore</router-link>
-        <router-link to="/about">About</router-link>
         <router-link to="/login-signup">Login/Signup</router-link>
-        <router-link v-if="currUser" class="user-link" to="/user/userId=1">
-          {{ currUser.fullname }} <el-avatar :src="avatarImg" :size="25"/>
-          </router-link>
-        <router-link v-else to="/login-signup"
+        <router-link v-if="currUser" class="user-link" to="/user/userId=1"
+          ><i class="fas fa-user-circle"></i
+          >{{ currUser.fullname }}</router-link
+        >
+        <router-link v-else class="user-link" to="/user/userId=1"
           ><i class="fas fa-user-circle"></i
         ></router-link>
-      </div>
+      </nav>
     </div>
   </div>
 </template>
@@ -22,7 +25,11 @@
 <script>
 export default {
   data() {
-    return {};
+
+    return {
+      menuClass: "closeMenu",
+    };
+
   },
   computed: {
     avatarImg() {
@@ -32,6 +39,15 @@ export default {
       return this.$store.getters.loggedinUser;
     },
   },
-  methods: {},
+  methods: {
+    toggleMenu() {
+      if (this.menuClass === "openMenu") {
+        this.menuClass = "closeMenu";
+      } else {
+        this.menuClass = "openMenu";
+      }
+    },
+
+  },
 };
 </script>

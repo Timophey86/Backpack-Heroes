@@ -1,5 +1,5 @@
-.app-header {
-    background-image: linear-gradient(to top, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
+.app-header{
+    background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
     position: sticky;
     top: 0;
     width: 100%;
@@ -19,6 +19,7 @@
             font-size: 1.8rem;
         }
     }
+
     .nav {
         a {
             font-family: montserrat;
@@ -29,6 +30,11 @@
                 margin-inline-end: 0;
             }
         }
+
+
+    }
+    .fa-bars{
+        color: white;
         .user-link {
             display: inline-flex;
             gap: 15px;
@@ -39,3 +45,13 @@
 .fa-user-circle {
     margin-right: 5px;
 }
+
+
+.menu {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    right: 50px;
+    font-size: x-large;
+}
+
