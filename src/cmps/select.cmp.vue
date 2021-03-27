@@ -37,8 +37,8 @@ export default {
     return {
       categoryOptions: [
         {
-          value: " ",
-          label: "All",
+          value: "",
+          label: "What field intrests you?",
         },
         {
           value: "Agriculture",
@@ -67,8 +67,8 @@ export default {
       ],
       locationOptions: [
         {
-          value: " ",
-          label: "All",
+          value: "",
+          label: "Where do you want to go?",
         },
         {
           value: "Costa Rica",
