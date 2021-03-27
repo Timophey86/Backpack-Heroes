@@ -1,0 +1,36 @@
+@media (max-width: $narrow-breakpoint) {
+    .app-header{
+        .menu{ 
+            display: flex;
+        }
+        nav {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            z-index: 1;
+            transform: translateY(-150%);
+            a{
+                padding: 10px;
+                display: inline-block;
+                margin: 0;
+                border-bottom: 1px solid white;
+                &:last-child{
+                    border-bottom:none
+                }
+            }
+            a:hover{
+                background-color: rgba(255, 255, 255, 0.651);
+                transition: 1s;
+            }
+        } 
+        .openMenu{
+            transform: translateY(-5%);
+            background-color: #02a093f3;
+        }
+    
+
+    }
+  
+}

@@ -1,5 +1,5 @@
 .app-header{
-    background-image: linear-gradient(to top, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
+    background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
     position: sticky;
     top: 0;
     width: 100%;
@@ -20,7 +20,7 @@
             font-size: 1.8rem;
         }
     }
-    .nav{
+    nav{
         a{
             font-family: montserrat;
             font-size: 1rem;
@@ -31,6 +31,10 @@
             }
         }
 
+
+    }
+    .fa-bars{
+        color: white;
     }
 }
 
@@ -39,4 +43,10 @@
 }
 
 
-
+.menu {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    right: 50px;
+    font-size: x-large;
+}
