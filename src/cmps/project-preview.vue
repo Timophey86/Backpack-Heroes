@@ -52,14 +52,6 @@ export default {
     spotsLeft() {
       return this.proj.numOfVolunteersNeeded - this.proj.members.length;
     },
-
-    descToDisplay() {
-      if (this.proj.details.description?.length > 100) {
-        return this.proj.details.description.substring(0, 100) + "...";
-      } else {
-        return this.proj.details.description;
-      }
-    },
     averageRate() {
       if (!this.proj.reviews) return;
       const rates = this.proj.reviews.map((review) => {
