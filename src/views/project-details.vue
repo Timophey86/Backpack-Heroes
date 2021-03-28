@@ -5,11 +5,9 @@
       <div
         v-for="(img, index) in displayedProj.imgUrls"
         :key="index"
-        :class="'img-' + (index+1)"
+        :class="'img-' + (index + 1)"
       >
-        <img
-          :src="showImg(img)"
-        />
+        <img :src="showImg(img)" />
       </div>
     </div>
     <div class="main-details">
@@ -49,7 +47,9 @@
             <el-avatar :src="avatarImg(index)" :size="55" />
           </li>
         </ul>
-        <p class="first-to-join" v-else>Be the first to join! Click the join button below.</p>
+        <p class="first-to-join" v-else>
+          Be the first to join! Click the join button below.
+        </p>
         <p class="amneties">
           As a member these are some of the bonuses we provide for the members
           of our program:
@@ -67,7 +67,7 @@
           v-if="!isJoined"
           type="success"
           :class="{ host: isHost }"
-          @click="joinProj"
+          @click="joinProj();requestSocket()"
           ><span>{{ joinProjBtnTxt }}</span></el-button
         >
         <el-button v-else type="info" :class="{ host: isHost }"
@@ -81,6 +81,7 @@
 
 <script>
 import projectReview from "@/cmps/project-review";
+import { socketService } from "../services/socket.service";
 export default {
   name: "projectDetails",
   data() {
@@ -125,14 +126,13 @@ export default {
       this.$router.push(`/edit/${id}`);
     },
     showImg(idx) {
-      if(this.displayedProj.imgUrls[0] === "1") {
-      if (this.displayedProj.imgUrls.length) {
-        console.log('noooooo')
-        return require(`@/assets/images/${this.displayedProj.tags[0]}/${idx}.jpg`);
-      }
-      return require("@/assets/images/categories/Agriculture.jpg");
+      if (this.displayedProj.imgUrls[0] === "1") {
+        if (this.displayedProj.imgUrls.length) {
+          return require(`@/assets/images/${this.displayedProj.tags[0]}/${idx}.jpg`);
+        }
+        return require("@/assets/images/categories/Agriculture.jpg");
       } else {
-        return idx
+        return idx;
       }
     },
     async getCurrUser() {
@@ -147,11 +147,16 @@ export default {
         project: this.displayedProj,
       });
       this.toggleJoinProj();
+      socketService.emit("joinRequest", {
+        user: this.currUser,
+        proj: this.displayedProj,
+      });
     },
     toggleJoinProj() {
       this.joinProjStatus = !this.joinProjStatus;
     },
     checkIfUserJoined() {
+      if (!this.currUser) return;
       var user = this.displayedProj.members.find((member) => {
         return member._id === this.currUser._id;
       });
@@ -163,10 +168,17 @@ export default {
         this.isJoined = true;
       }
     },
+    requestSocket() {
+      socketService.emit("joinRequest", {
+        user: this.currUser,
+        proj: this.displayedProj,
+      });
+    },
   },
   async created() {
     await this.getCurrProj(this.$route.params.id);
     this.checkIfUserJoined();
+    socketService.setup();
   },
   components: {
     projectReview,

@@ -51,6 +51,9 @@
 </template>
 
 <script>
+import { socketService } from "../services/socket.service";
+import { showMsg } from "../services/eventBusServices.js";
+
 export default {
   name: "homePage",
   data() {
@@ -74,6 +77,11 @@ export default {
       ],
     };
   },
+  computed: {
+        currUser() {
+      return this.$store.getters.loggedinUser;
+    },
+  },
   methods: {
     async loadProjs() {
       await this.$store.dispatch({
@@ -88,6 +96,17 @@ export default {
   async created() {
     await this.loadProjs();
     this.projs = this.$store.getters.projs;
+    socketService.setup();
+    socketService.on("requestFromUser", (request) => {
+      console.log(request.proj.host._id);
+      console.log(this.currUser._id);
+      if (this.currUser._id === request.proj.host._id) {
+        console.log("same same");
+        showMsg(`You've got a new "Admission Request" request.`);
+      } else {
+        return;
+      }
+    });
   },
 };
 </script>

@@ -7,11 +7,15 @@ import router from "./router";
 import locale from "element-ui/lib/locale/lang/en";
 import store from "./store";
 import "./assets/main.scss";
+import Msg from 'vue-message'
 import 'element-ui/lib/theme-chalk/base.css';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI, { locale });
 Vue.use(require("vue-moment"));
+Vue.use(Msg, {
+  text: 'Hello world', duration: 3000, background: 'rgba(7,17,27,0.6)'
+})
 
 new Vue({
   router,

@@ -121,6 +121,8 @@
 
 <script>
 import elTable from "../cmps/table.vue";
+import { socketService } from "../services/socket.service";
+import { showMsg } from "../services/eventBusServices.js";
 
 export default {
   name: "userDetails",
@@ -132,8 +134,7 @@ export default {
   },
   computed: {
     avatarImg() {
-       return require("@/assets/images/avatars/" +
-        this.currUser.imgUrl);
+      return require("@/assets/images/avatars/" + this.currUser.imgUrl);
       // return this.currUser.imgUrl;
     },
     displayedUser() {
@@ -219,6 +220,7 @@ export default {
       this.userOrders = this.$store.getters.orders;
     },
     async getUserProjects() {
+      console.log('hhhhhhhhhhhh')
       await this.$store.dispatch({
         type: "loadProjs",
         filter: { userId: this.currUser._id },
@@ -238,6 +240,15 @@ export default {
     this.currUser = this.$store.getters.loggedinUser;
     this.getUserProjects();
     this.getRequests();
+    socketService.setup();
+    socketService.on("requestFromUser", (request) => {
+      if (this.displayedUser._id === request.proj.host._id) {
+        console.log("same same");
+        showMsg(`You've got a new "Admission Request" request.`);
+      } else {
+        return;
+      }
+    });
   },
   components: {
     elTable,

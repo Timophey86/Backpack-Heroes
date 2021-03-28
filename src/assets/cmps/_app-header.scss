@@ -1,57 +1,84 @@
-.app-header{
-    background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+.app-header {
+  background-image: linear-gradient(
+    to left,
+    #02a092,
+    #21ab92,
+    #38b590,
+    #4ebf8d,
+    #64c989
+  );
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .header {
-    display: flex;
-    height: 45px;
-    justify-content: space-between;
-    align-items: center;
-    .logo {
-        a {
-            cursor: pointer;
-            font-family: caveat;
-            color: white;
-            font-size: 1.8rem;
-        }
+  display: flex;
+  height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  .logo {
+    a {
+      cursor: pointer;
+      font-family: caveat;
+      color: white;
+      font-size: 1.8rem;
     }
+  }
 
-    nav {
-        a {
-            font-family: montserrat;
-            font-size: 1rem;
-            color: white;
-            margin-inline-end: 50px;
-            &:last-child {
-                margin-inline-end: 0;
-            }
-        }
-
-
+  nav {
+    a {
+      font-family: montserrat;
+      font-size: 1rem;
+      color: white;
+      margin-inline-end: 50px;
+      &:last-child {
+        margin-inline-end: 0;
+      }
     }
-    .fa-bars{
-        color: white;
-        .user-link {
-            display: inline-flex;
-            gap: 15px;
-        }
+  }
+  .fa-bars {
+    color: white;
+    .user-link {
+      display: inline-flex;
+      gap: 15px;
     }
+  }
 }
 
 .fa-user-circle {
-    margin-right: 5px;
+  margin-right: 5px;
 }
-
 
 .menu {
-    cursor: pointer;
-    display: none;
-    position: absolute;
-    right: 50px;
-    font-size: x-large;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  right: 50px;
+  font-size: x-large;
 }
 
+.user-icon {
+  position: relative;
+  .notification-counter {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 8px Verdana;
+  }
+}
+
+.alert {
+  background-color: yellowgreen;
+  height: 200px;
+  width: 200px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}

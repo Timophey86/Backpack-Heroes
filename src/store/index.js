@@ -4,6 +4,7 @@ import { userStore } from "./userModule.js";
 import { projStore } from "./projModule.js";
 import { reviewStore } from "./reviewsModule";
 import { orderStore } from "./reservationModule.js";
+import { socketStore } from "./socketModule.js";
 
 Vue.use(Vuex);
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     projStore,
     reviewStore,
     orderStore,
+    socketStore
   },
 });
