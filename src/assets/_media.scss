@@ -86,8 +86,10 @@
                 transition: 1s;
             }
         }
-
-
+    }
+    .project-details{
+        display: flex;
+        flex-direction: column;
     }
 
 }

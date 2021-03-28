@@ -1,5 +1,5 @@
 <template>
-  <div v-if="displayedProj" class="project-details-page main-container">
+  <div v-if="displayedProj" class="project-details main-container">
     <div class="details-img-container">
       <!-- <el-image :src="showImg" class="full" /> -->
       <div
@@ -10,12 +10,12 @@
         <img :src="showImg(img)" />
       </div>
     </div>
-    <div class="main-details">
-      <div class="proj-details">
+ 
+      <div class="project-info">
         <h1>{{ displayedProj.name }}</h1>
         <h4>
           Hosted by:
-          <span class="details-text"> {{ displayedProj.host.fullname }}</span>
+          <span> {{ displayedProj.host.fullname }}</span>
         </h4>
         <h4>
           Location:
@@ -33,14 +33,14 @@
             {{ tags }}
           </li>
         </ul>
-        <div class="displyed-proj-details">
+        <div class="project-description">
           <p>{{ displayedProj.details.description }}</p>
         </div>
         <button v-if="isHost" @click="edit(displayedProj._id)">
           Edit Project Details
         </button>
       </div>
-      <div class="members-div">
+      <div class="members">
         <h3>Vulenteers who decided to join us:</h3>
         <ul v-if="displayedProj.members.length" class="member-list">
           <li v-for="(members, index) in displayedProj.members" :key="index">
@@ -74,7 +74,7 @@
           ><span>Thank you for joinig us!</span></el-button
         >
       </div>
-    </div>
+ 
     <project-review :proj="displayedProj" />
   </div>
 </template>
