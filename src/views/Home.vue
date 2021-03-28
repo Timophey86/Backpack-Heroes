@@ -63,6 +63,8 @@ export default {
         "Children",
         "Education",
         "Environment",
+        "Medical Care",
+        "Women's Empowerment"
       ],
       locations: [
         "Costa Rica",
@@ -71,6 +73,8 @@ export default {
         "Nepal",
         "Peru",
         "Thailand",
+        "South Africa",
+        "Tanzania"
       ],
     };
   },
