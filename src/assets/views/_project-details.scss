@@ -1,20 +1,14 @@
 .project-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  // gap:10px ;
   .details-img-container {
-    // height: 100vh;
     margin-top: 10px;
     grid-column: 1/-1;
     grid-row: 1/2;
-    list-style-type: none;
     display: grid;
-    padding: 0;
-    // grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 15px;
-    // grid-auto-rows: 300px;
-    grid-auto-flow: dense;
-  
+    list-style-type: none;
+    padding: 0;
     .img-1 {
       grid-column: 2/3;
       grid-row: 1/2;
@@ -45,21 +39,16 @@
     }
   }
   .project-info {
+    margin-top: 20px;
     grid-row: 2/3;
     grid-column: 1/2;
-    gap: 20px;
-    // width: 50%;
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 20px;
     border-top: 1px dotted lightgrey;
     border-left: 1px dotted lightgrey;
-    padding-top: 5px;
     padding-left: 5px;
-    button {
-      width: 30%;
-    }
     h1 {
       text-align: center;
     }
@@ -67,8 +56,9 @@
       font-weight: normal;
     }
     .project-description {
-      margin: 10px;
-      font-size: larger;
+      p {
+        margin: 10px;
+      }
     }
   }
   .members {
@@ -83,36 +73,26 @@
     padding-left: 5px;
     padding-top: 5px;
     margin-top: 20px;
-    // width: 50%;
     h3 {
       align-self: center;
     }
     .amneties {
       font-size: smaller;
     }
-    .el-button {
-      width: 50%;
-      align-self: center;
-    }
     .member-list {
       list-style-type: none;
       display: flex;
+      flex-wrap: wrap;
       gap: 5px;
       li {
         font-weight: bold;
         display: flex;
         align-items: center;
         flex-direction: column;
-        // margin-left: 25px;
       }
     }
     .first-to-join {
       text-align: center;
     }
-  }
-  .review-container{
-    grid-row: 3/4;
-    grid-column: 1/-1;
-    margin-top: 25px;
   }
 }
