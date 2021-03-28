@@ -180,6 +180,9 @@ export default {
     this.checkIfUserJoined();
     socketService.setup();
   },
+    destroyed() {
+    socketService.terminate();
+  },
   components: {
     projectReview,
   },
