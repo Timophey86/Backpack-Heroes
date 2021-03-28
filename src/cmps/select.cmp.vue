@@ -1,5 +1,7 @@
 <template>
   <section class="select-filter">
+
+    <div>
     <el-select v-model="category" placeholder="What field intrests you?">
       <el-option
         v-for="item in categoryOptions"
@@ -18,6 +20,9 @@
       >
       </el-option>
     </el-select>
+    </div>
+
+    <div>
     <el-date-picker
       @change="setRange"
       v-model="fromTodates"
@@ -28,6 +33,8 @@
     >
     </el-date-picker>
     <el-button @click.prevent="goSearch">Go!</el-button>
+    </div>
+
   </section>
 </template>
 
@@ -72,7 +79,7 @@ export default {
         },
         {
           value: "Costa Rica",
-          label: "Costa Ricae",
+          label: "Costa Rica",
         },
         {
           value: "India",

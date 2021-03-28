@@ -1,9 +1,18 @@
+// 960px
 @media (max-width: $normal-breakpoint) {
     ul{
         padding-inline-start: 0;
     }
+    .select-filter{
+        flex-direction: column;
+        align-items: center;
+        .el-date-editor--daterange.el-input__inner{
+            width: 220px;
+        }
+    }
 }
 
+// 760px
 @media (max-width: $narrow-breakpoint) {
     .app-header{
         .menu{ 
@@ -53,9 +62,32 @@
             }
         }
     }
+
+
   
 }
 
+// 540px
 @media (max-width: $mobile-breakpoint) {
-    
+    .hero{
+        .hero-txt {
+            background-color: #02a093f3;
+            position: unset;
+            width: 100%;
+            padding: 5px;
+            h1{
+                padding: 5px;
+            }
+            .call-to-action{
+                background-color: #60c78a;
+            }
+            .call-to-action:hover{
+                background-color: #92DB80;
+                transition: 1s;
+            }
+        }
+
+
+    }
+
 }
