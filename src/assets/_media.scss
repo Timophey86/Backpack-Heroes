@@ -120,13 +120,9 @@
 
 // 540px
 @media (max-width: $mobile-breakpoint) {
-<<<<<<< HEAD
-    .hero{
+    .hero {
         background-color: #02a093f3;
         height: 100vh;
-=======
-    .hero {
->>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b
         .hero-txt {
             
             position: unset;
@@ -135,8 +131,12 @@
             h1 {
                 padding: 5px;
             }
+            p{
+                margin-top: 25px;
+            }
             .call-to-action {
                 background-color: #60c78a;
+                margin-top: 25px;
             }
             .call-to-action:hover {
                 background-color: #92db80;
@@ -144,7 +144,6 @@
             }
         }
     }
-<<<<<<< HEAD
     .category-select{
         text-align: center;
     }
@@ -155,13 +154,9 @@
     .project-list{
         grid-template-columns: repeat(auto-fill, 290px);
     }
-}
-=======
-
     .review-container {
         .review-form {
             width: 320px;
         }
     }
 }
->>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b
