@@ -2,7 +2,7 @@
   <div v-if="currUser" class="user-details main-container">
     <div class="user-profile">
       <img :src="avatarImg" alt="" />
-      <h2>Hello, {{ displayedUser.fullname }}</h2>
+      <h2>Hello, {{ currUser.fullname }}</h2>
     </div>
     <el-tabs tab-position="left">
       <el-tab-pane>
@@ -38,7 +38,41 @@
             v-if="userProjects && userProjects.length"
             class="back-office-projs"
           >
-            <table>
+            <el-table :data="userProjects" stripe border>
+              <el-table-column fixed prop="name" label="Name">
+              </el-table-column>
+              <el-table-column prop="startsAt" label="StartAt" width="120">
+              </el-table-column>
+              <el-table-column prop="endAt" label="EndAt" width="120">
+              </el-table-column>
+              <el-table-column
+                prop="numOfVolunteersNeeded"
+                label="Needed"
+                width="120"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="members.length"
+                label="Enrolled"
+                width="120"
+              >
+              </el-table-column>
+              <el-table-column label="Actions" width="120">
+                <el-button
+                  @click.native.prevent="edit(userProjects._id)"
+                  type="text"
+                  size="small"
+                  >Edit</el-button
+                >
+                <el-button
+                  @click.native.prevent="removeProj(userProjects._id)"
+                  type="text"
+                  size="small"
+                  >Remove</el-button
+                >
+              </el-table-column>
+            </el-table>
+            <!-- <table>
               <th>Name</th>
               <th>Dates</th>
               <th>Needed</th>
@@ -60,7 +94,7 @@
                   ><button @click="edit(proj._id)">Edit</button>
                 </td>
               </tr>
-            </table>
+            </table> -->
           </div>
           <div v-else>No projects to display</div>
         </div>
@@ -96,7 +130,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane>
-        <span slot="label">Approved Orders ({{ approvedOrders }})</span>
+        <span slot="label">Approved Orders ({{ approvedOrders.length }})</span>
         <div class="approved-orders" v-if="approvedOrders">
           <h4>Reservations this month:</h4>
           <ul>
@@ -117,16 +151,15 @@
             </li>
           </ul>
         </div>
-
         <p v-else>No approved reservations yet</p>
       </el-tab-pane>
     </el-tabs>
   </div>
+
   <div v-else>Please use the login page to log in or sign up.</div>
 </template>
 
 <script>
-import elTable from "../cmps/table.vue";
 import { socketService } from "../services/socket.service";
 import { showMsg } from "../services/eventBusServices.js";
 import { increaseCount } from "../services/eventBusServices.js";
@@ -144,41 +177,23 @@ export default {
       return require("@/assets/images/avatars/" + this.currUser.imgUrl);
       // return this.currUser.imgUrl;
     },
-    displayedUser() {
-      return this.$store.getters.loggedinUser;
-    },
     userProjects() {
       return this.$store.getters.projs;
     },
     pendingOrders() {
       if (this.userOrders) {
-        const pendingOrders = [];
-        this.userOrders.host.forEach((order) => {
-          if (order.status === "pending") {
-            pendingOrders.push(order);
-          }
+        var test = [];
+        return this.userOrders.host.filter((order) => {
+          return order.status === "pending";
         });
-        if (!pendingOrders[0]) {
-          return 0;
-        } else {
-          return pendingOrders;
-        }
-      } else return 0;
+      }
     },
     approvedOrders() {
       if (this.userOrders) {
-        const approvedOrders = [];
-        this.userOrders.host.forEach((order) => {
-          if (order.status === "approved") {
-            approvedOrders.push(order);
-          }
+        return this.userOrders.host.filter((order) => {
+          return order.status === "approved";
         });
-        if (!approvedOrders.length) {
-          return 0;
-        } else {
-          return approvedOrders;
-        }
-      } else return 0;
+      }
     },
     myRequests() {
       if (this.userOrders) {
@@ -247,17 +262,14 @@ export default {
     this.currUser = this.$store.getters.loggedinUser;
     this.getUserProjects();
     this.getRequests();
-    // socketService.setup();
-    // socketService.on("requestFromUser", (request) => {
-    //   if (this.displayedUser._id === request.proj.host._id) {
-    //     increaseCount()
-    //   } else {
-    //     return;
-    //   }
-    // });
-  },
-  components: {
-    elTable,
+    socketService.setup();
+    socketService.on("requestFromUser", (request) => {
+      if (this.cuurUser._id === request.proj.host._id) {
+        increaseCount();
+      } else {
+        return;
+      }
+    });
   },
 };
 </script>
