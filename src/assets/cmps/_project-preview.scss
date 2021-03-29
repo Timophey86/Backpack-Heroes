@@ -32,6 +32,16 @@
     margin-bottom: 10px;
     grid-row: 4/5;
   }
+  .spots-left-num {
+    grid-row: 4/5;
+    justify-self: end;
+    span {
+      color: red;
+      margin-right: 5px;
+      font-weight: 600;
+      font-size: larger;
+    }
+  }
 
   .preview-tag {
     grid-area: 1 / -1 / 1 / 1;
@@ -42,16 +52,6 @@
   .preview-details {
     display: flex;
     justify-content: space-between;
-  }
-  p {
-    grid-row: 4/5;
-    justify-self: end;
-    .spots-left-num {
-      color: red;
-      margin-right: 5px;
-      font-weight: 600;
-      font-size: larger;
-    }
   }
   .el-tag {
     margin-block-end: 2.5px;

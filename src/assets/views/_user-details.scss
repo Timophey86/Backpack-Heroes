@@ -8,7 +8,7 @@
     gap: 40px;
     margin-top: 40px;
     margin-left: 30px;
-    img{
+    img {
       border-radius: 50%;
     }
     span {
@@ -16,6 +16,12 @@
     }
   }
   .el-tabs {
+    .user-projects {
+      button {
+        margin-bottom: 20px;
+        margin-left: 0;
+      }
+    }
   }
 }
 
@@ -37,7 +43,7 @@ button {
     text-align: center;
   }
   td {
-    margin-right:10px ;
+    margin-right: 10px;
     // border: 1px solid black;
     padding: 3px 5px;
     &:not(:first-child) {
@@ -45,7 +51,6 @@ button {
     }
   }
 }
-
 
 .user-summary {
   padding: 10px 0;
@@ -117,8 +122,8 @@ span.pending {
   font-weight: 500;
 }
 
-.name-and-pic{
-  img{
+.name-and-pic {
+  img {
     width: 128px;
     height: 128px;
   }

@@ -1,40 +1,38 @@
 <template>
   <section class="select-filter">
-
     <div>
-    <el-select v-model="category" placeholder="What field intrests you?">
-      <el-option
-        v-for="item in categoryOptions"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      >
-      </el-option>
-    </el-select>
-    <el-select v-model="location" placeholder="Where do you want to go?">
-      <el-option
-        v-for="item in locationOptions"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      >
-      </el-option>
-    </el-select>
+      <el-select v-model="category" placeholder="What field intrests you?">
+        <el-option
+          v-for="item in categoryOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+      <el-select v-model="location" placeholder="Where do you want to go?">
+        <el-option
+          v-for="item in locationOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
     </div>
 
     <div>
-    <el-date-picker
-      @change="setRange"
-      v-model="fromTodates"
-      type="daterange"
-      range-separator="-"
-      start-placeholder="Start date"
-      end-placeholder="End date"
-    >
-    </el-date-picker>
-    <el-button @click.prevent="goSearch">Go!</el-button>
+      <el-date-picker
+        @change="setRange"
+        v-model="fromTodates"
+        type="daterange"
+        range-separator="-"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+      >
+      </el-date-picker>
+      <el-button @click.prevent="goSearch">Go!</el-button>
     </div>
-
   </section>
 </template>
 

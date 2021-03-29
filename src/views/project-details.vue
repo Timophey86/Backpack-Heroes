@@ -44,12 +44,20 @@
     <div class="members">
       <h3>Vulenteers who decided to join us:</h3>
       <ul v-if="displayedProj.members.length" class="member-list">
-        <li v-for="(members, index) in displayedProj.members" :key="index">
-          <el-avatar :src="avatarImg(index)" :size="55" />
+        <li v-for="(member, index) in displayedProj.members" :key="index">
+          <el-avatar
+            :title="member.fullname"
+            :src="avatarImg(index)"
+            :size="55"
+          />
         </li>
       </ul>
       <p class="first-to-join" v-else>
         Be the first to join! Click the join button below.
+      </p>
+      <p class="spots-left-num">
+        <span>{{ spotsLeft }}</span
+        >/ {{ displayedProj.numOfVolunteersNeeded }} spots left
       </p>
       <p class="amneties">
         As a member these are some of the bonuses we provide for the members of
@@ -112,6 +120,12 @@ export default {
       } else {
         return "Your Request was sent fo approval";
       }
+    },
+    spotsLeft() {
+      return (
+        this.displayedProj.numOfVolunteersNeeded -
+        this.displayedProj.members.length
+      );
     },
   },
   methods: {

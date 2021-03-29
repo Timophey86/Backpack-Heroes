@@ -71,7 +71,6 @@
         .project-info {
             gap: 5px;
         }
-
         .details-img-container {
             grid-gap: 5px;
         }
@@ -88,12 +87,19 @@
             .el-button {
                 margin: 0 auto;
             }
+            .spots-left-num {
+                text-align: center;
+                span {
+                    color: red;
+                    font-weight: 600;
+                    font-size: larger;
+                }
+            }
         }
     }
     .review-container {
         .el-input {
             margin: 25px auto 0 auto;
-
         }
         h1 {
             text-align: center;

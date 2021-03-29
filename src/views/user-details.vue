@@ -5,7 +5,8 @@
       <h2>Hello, {{ displayedUser.fullname }}</h2>
     </div>
     <el-tabs tab-position="left">
-      <el-tab-pane label="My Adventures">
+      <el-tab-pane>
+        <span slot="label">My Adventures ({{ myRequests.length }})</span>
         <div class="adventures">
           <h4>Your future adventures:</h4>
           <div v-if="myRequests && myRequests.length">
@@ -28,8 +29,10 @@
           <div v-else>Not signed for any project yet</div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="My Projects">
+      <el-tab-pane>
+        <span slot="label">My Projects ({{ userProjects.length }})</span>
         <div class="user-projects">
+          <button class="btn" @click="goToEdit()">Add a new project!</button>
           <h4>My Projects:</h4>
           <div
             v-if="userProjects && userProjects.length"
@@ -60,10 +63,12 @@
             </table>
           </div>
           <div v-else>No projects to display</div>
-          <button class="btn" @click="goToEdit()">Add a new project!</button>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Admission Requests">
+      <el-tab-pane>
+        <span slot="label"
+          >Admission Requests ({{ pendingOrders.length }})</span
+        >
         <div class="admission-requests">
           <h4>Admission requests:</h4>
           <div v-if="pendingOrders">
@@ -90,7 +95,8 @@
           <div v-else>No Pending Reservations</div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Approved Orders">
+      <el-tab-pane>
+        <span slot="label">Approved Orders ({{ approvedOrders }})</span>
         <div class="approved-orders" v-if="approvedOrders">
           <h4>Reservations this month:</h4>
           <ul>
@@ -153,11 +159,11 @@ export default {
           }
         });
         if (!pendingOrders[0]) {
-          return null;
+          return 0;
         } else {
           return pendingOrders;
         }
-      } else return null;
+      } else return 0;
     },
     approvedOrders() {
       if (this.userOrders) {
@@ -168,16 +174,17 @@ export default {
           }
         });
         if (!approvedOrders.length) {
-          return null;
+          return 0;
         } else {
           return approvedOrders;
         }
-      } else return null;
+      } else return 0;
     },
     myRequests() {
       if (this.userOrders) {
         return this.userOrders.reserved;
       }
+      return 0;
     },
     maleFemale() {
       if (Math.random() > 0.5) {

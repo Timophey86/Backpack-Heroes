@@ -6,6 +6,9 @@
     grid-column: 1/-1;
     grid-row: 1/2;
     display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+
     grid-gap: 15px;
     list-style-type: none;
     padding: 0;
@@ -73,6 +76,19 @@
     padding-left: 5px;
     padding-top: 5px;
     margin-top: 20px;
+    .el-button {
+      width: fit-content;
+    }
+    .spots-left-num {
+      text-align: end;
+      margin-right: 20px;
+      margin-top: 20px;
+      span {
+        color: red;
+        font-weight: 600;
+        font-size: larger;
+      }
+    }
     h3 {
       align-self: center;
     }
@@ -83,7 +99,8 @@
       list-style-type: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
+      gap: 20px;
+
       li {
         font-weight: bold;
         display: flex;
