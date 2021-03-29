@@ -6,10 +6,10 @@
     </div>
     <el-tabs tab-position="left">
       <el-tab-pane>
-        <span slot="label">My Adventures ({{ myRequests.length }})</span>
+        <span slot="label">My Adventures ({{ myRequestsLength }})</span>
         <div class="adventures">
           <h4>Your future adventures:</h4>
-          <div v-if="myRequests && myRequests.length">
+          <div v-if="myRequests">
             <ul>
               <li
                 class="reservations"
@@ -30,14 +30,11 @@
         </div>
       </el-tab-pane>
       <el-tab-pane>
-        <span slot="label">My Projects ({{ userProjects.length }})</span>
+        <span slot="label">My Projects ({{ userProjectsLength }})</span>
         <div class="user-projects">
           <button class="btn" @click="goToEdit()">Add a new project!</button>
           <h4>My Projects:</h4>
-          <div
-            v-if="userProjects && userProjects.length"
-            class="back-office-projs"
-          >
+          <div v-if="userProjects" class="back-office-projs">
             <el-table :data="userProjects" stripe border>
               <el-table-column fixed prop="name" label="Name">
               </el-table-column>
@@ -72,37 +69,12 @@
                 >
               </el-table-column>
             </el-table>
-            <!-- <table>
-              <th>Name</th>
-              <th>Dates</th>
-              <th>Needed</th>
-              <th>Enrolled</th>
-              <th>Actions</th>
-              <tr v-for="proj in userProjects" :key="proj._id">
-                <td class="goToProj" @click="goToProjectPage(proj._id)">
-                  <span class="myProjs">{{ proj.name }}</span>
-                </td>
-                <td>
-                  {{ formatDateFrom(proj.startsAt) | moment("MM/DD/YY") }}-{{
-                    formatDateTo(proj.endAt) | moment("MM/DD/YY")
-                  }}
-                </td>
-                <td>{{ proj.numOfVolunteersNeeded }}</td>
-                <td>{{ proj.members.length }}</td>
-                <td>
-                  <button @click="removeProj(proj._id)">Remove</button
-                  ><button @click="edit(proj._id)">Edit</button>
-                </td>
-              </tr>
-            </table> -->
           </div>
           <div v-else>No projects to display</div>
         </div>
       </el-tab-pane>
       <el-tab-pane>
-        <span slot="label"
-          >Admission Requests ({{ pendingOrders.length }})</span
-        >
+        <span slot="label">Admission Requests ({{ pendingOrdersLength }})</span>
         <div class="admission-requests">
           <h4>Admission requests:</h4>
           <div v-if="pendingOrders">
@@ -130,7 +102,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane>
-        <span slot="label">Approved Orders ({{ approvedOrders.length }})</span>
+        <span slot="label">Approved Orders ({{ approvedOrdersLength }})</span>
         <div class="approved-orders" v-if="approvedOrders">
           <h4>Reservations this month:</h4>
           <ul>
@@ -173,6 +145,18 @@ export default {
     };
   },
   computed: {
+    approvedOrdersLength() {
+      return this.approvedOrders?.length || 0;
+    },
+    myRequestsLength() {
+      return this.myRequests?.length || 0;
+    },
+    userProjectsLength() {
+      return this.userProjects?.length || 0;
+    },
+    pendingOrdersLength() {
+      return this.pendingOrders?.length || 0;
+    },
     avatarImg() {
       return require("@/assets/images/avatars/" + this.currUser.imgUrl);
       // return this.currUser.imgUrl;
@@ -197,9 +181,8 @@ export default {
     },
     myRequests() {
       if (this.userOrders) {
-        return this.userOrders.reserved;
+        return this.userOrders.reserved || 0;
       }
-      return 0;
     },
     maleFemale() {
       if (Math.random() > 0.5) {

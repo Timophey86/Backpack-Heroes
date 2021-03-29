@@ -1,10 +1,6 @@
 <template>
   <section class="select-filter">
-<<<<<<< HEAD
     <div class="category-select">
-=======
-    <div>
->>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b
       <el-select v-model="category" placeholder="What field intrests you?">
         <el-option
           v-for="item in categoryOptions"
@@ -25,11 +21,7 @@
       </el-select>
     </div>
 
-<<<<<<< HEAD
     <div class="date-select">
-=======
-    <div>
->>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b
       <el-date-picker
         @change="setRange"
         v-model="fromTodates"
