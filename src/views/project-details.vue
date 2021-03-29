@@ -1,5 +1,5 @@
 <template>
-  <div v-if="displayedProj" class="project-details-page main-container">
+  <div v-if="displayedProj" class="project-details main-container">
     <div class="details-img-container">
       <!-- <el-image :src="showImg" class="full" /> -->
       <div
@@ -10,71 +10,83 @@
         <img :src="showImg(img)" />
       </div>
     </div>
-    <div class="main-details">
-      <div class="proj-details">
-        <h1>{{ displayedProj.name }}</h1>
-        <h4>
-          Hosted by:
-          <span class="details-text"> {{ displayedProj.host.fullname }}</span>
-        </h4>
-        <h4>
-          Location:
-          <span class="details-text">{{ displayedProj.loc.address }}</span>
-        </h4>
-        <h4>
-          Duration:
-          <span class="details-text"
-            >{{ formatDateFrom }} to {{ formatDateTo }}</span
-          >
-        </h4>
-        <h4>Categories:</h4>
-        <ul>
-          <li v-for="(tags, index) in displayedProj.tags" :key="index">
-            {{ tags }}
-          </li>
-        </ul>
-        <div class="displyed-proj-details">
-          <p>{{ displayedProj.details.description }}</p>
-        </div>
-        <button v-if="isHost" @click="edit(displayedProj._id)">
-          Edit Project Details
-        </button>
-      </div>
-      <div class="members-div">
-        <h3>Vulenteers who decided to join us:</h3>
-        <ul v-if="displayedProj.members.length" class="member-list">
-          <li v-for="(members, index) in displayedProj.members" :key="index">
-            <el-avatar :src="avatarImg(index)" :size="55" />
-          </li>
-        </ul>
-        <p class="first-to-join" v-else>
-          Be the first to join! Click the join button below.
-        </p>
-        <p class="amneties">
-          As a member these are some of the bonuses we provide for the members
-          of our program:
-        </p>
-        <ul>
-          <li
-            v-for="(amenities, index) in displayedProj.details.amenities"
-            :key="index"
-          >
-            {{ amenities }}
-          </li>
-        </ul>
 
-        <el-button
-          v-if="!isJoined"
-          type="success"
-          :class="{ host: isHost }"
-          @click="joinProj();requestSocket()"
-          ><span>{{ joinProjBtnTxt }}</span></el-button
+    <div class="project-info">
+      <h1>{{ displayedProj.name }}</h1>
+      <h4>
+        Hosted by:
+        <span> {{ displayedProj.host.fullname }}</span>
+      </h4>
+      <h4>
+        Location:
+        <span class="details-text">{{ displayedProj.loc.address }}</span>
+      </h4>
+      <h4>
+        Duration:
+        <span class="details-text"
+          >{{ formatDateFrom }} to {{ formatDateTo }}</span
         >
-        <el-button v-else type="info" :class="{ host: isHost }"
-          ><span>Thank you for joinig us!</span></el-button
-        >
+      </h4>
+      <h4>Categories:</h4>
+      <ul>
+        <li v-for="(tags, index) in displayedProj.tags" :key="index">
+          {{ tags }}
+        </li>
+      </ul>
+      <div class="project-description">
+        <h4>Description:</h4>
+        <p>{{ displayedProj.details.description }}</p>
       </div>
+      <button v-if="isHost" @click="edit(displayedProj._id)">
+        Edit Project Details
+      </button>
     </div>
+    <div class="members">
+      <h3>Vulenteers who decided to join us:</h3>
+      <ul v-if="displayedProj.members.length" class="member-list">
+        <li v-for="(member, index) in displayedProj.members" :key="index">
+          <el-avatar
+            :title="member.fullname"
+            :src="avatarImg(index)"
+            :size="55"
+          />
+        </li>
+      </ul>
+      <p class="first-to-join" v-else>
+        Be the first to join! Click the join button below.
+      </p>
+      <p class="spots-left-num">
+        <span>{{ spotsLeft }}</span
+        >/ {{ displayedProj.numOfVolunteersNeeded }} spots left
+      </p>
+      <p class="amneties">
+        As a member these are some of the bonuses we provide for the members of
+        our program:
+      </p>
+      <ul>
+        <li
+          v-for="(amenities, index) in displayedProj.details.amenities"
+          :key="index"
+        >
+          {{ amenities }}
+        </li>
+      </ul>
+
+      <el-button
+        v-if="!isJoined"
+        type="success"
+        :class="{ host: isHost }"
+        @click="
+          joinProj();
+          requestSocket();
+        "
+        ><span>{{ joinProjBtnTxt }}</span></el-button
+      >
+      <el-button v-else type="info" :class="{ host: isHost }"
+        ><span>Thank you for joinig us!</span></el-button
+      >
+    </div>
+
     <project-review :proj="displayedProj" />
   </div>
 </template>
@@ -108,6 +120,12 @@ export default {
       } else {
         return "Your Request was sent fo approval";
       }
+    },
+    spotsLeft() {
+      return (
+        this.displayedProj.numOfVolunteersNeeded -
+        this.displayedProj.members.length
+      );
     },
   },
   methods: {
@@ -179,6 +197,9 @@ export default {
     await this.getCurrProj(this.$route.params.id);
     this.checkIfUserJoined();
     socketService.setup();
+  },
+  destroyed() {
+    socketService.terminate();
   },
   components: {
     projectReview,

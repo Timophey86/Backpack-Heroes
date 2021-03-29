@@ -11,10 +11,10 @@
         <router-link to="/project">Explore</router-link>
         <router-link to="/login-signup">Login/Signup</router-link>
         <router-link v-if="currUser" class="user-link" to="/user/userId=1"
-          > 
-          <span class="user-icon"><i class="fas fa-user-circle"></i
-          ><span v-if="requestCount>0" class="notification-counter">1</span></span>
-          {{ currUser.fullname }}</router-link
+         > 
+          <span  @click="requestCountToZero" class="user-icon"><i class="fas fa-user-circle"></i
+          ><span v-if="requestCount>0" class="notification-counter">{{requestCount}}</span></span>
+          <span @click="requestCountToZero">{{ currUser.fullname }}</span></router-link
         >
         <router-link v-else class="user-link" to="/user/userId=1"
           ><i class="fas fa-user-circle"></i
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       menuClass: "closeMenu",
-      requestCount: 1
+      requestCount: 0
     };
   },
   computed: {
@@ -52,16 +52,15 @@ export default {
         this.menuClass = "openMenu";
       }
     },
+    requestCountToZero() {
+      console.log('im hereee');
+      this.requestCount =0
+    }
   },
   created() {
-     eventBusService.$on(SHOW_MSG, (msg) => {
-      this.msg = msg;
-      var delay = msg.delay || 5000;
-      this.alive = true;
-      setTimeout(() => {
-        this.alive = false;
-      }, delay);
-    });
+    eventBusService.$on('addCount', () => {
+      this.requestCount +=1
+    })
   },
   components: {
     userMsg,

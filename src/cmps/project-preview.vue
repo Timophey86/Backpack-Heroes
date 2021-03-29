@@ -15,7 +15,9 @@
       </el-tag>
     </div>
     <div class="preview-rate">
-      <p>⭐ {{averageRate}} <span>( {{ proj.reviews.length }} )</span> </p>
+      <p>
+        ⭐ {{ averageRate }} <span>( {{ proj.reviews.length }} )</span>
+      </p>
       <!-- <el-rate
         v-if="proj.reviews.length"
         v-model="averageRate"
@@ -27,8 +29,9 @@
       <!-- <span v-else>No Ranking Yet</span> -->
       <!-- <span>( {{ proj.reviews.length }} )</span> -->
     </div>
-    <p>
-      <span class="spots-left-num">{{ spotsLeft }}</span>/ {{proj.numOfVolunteersNeeded}} spots left
+    <p class="spots-left-num">
+      <span>{{ spotsLeft }}</span
+      >/ {{ proj.numOfVolunteersNeeded }} spots left
     </p>
   </section>
 </template>
@@ -44,20 +47,22 @@ export default {
   },
   computed: {
     showImg() {
-      if(this.proj.imgUrls[0] === "1") {
+      if (this.proj.imgUrls[0] === "1") {
         if (this.proj.imgUrls.length) {
           return require(`@/assets/images/${this.proj.tags[0]}/${this.proj.imgUrls[2]}.jpg`);
         }
         return require("@/assets/images/categories/Agriculture.jpg");
       } else {
-        return this.proj.imgUrls[0]
+        return this.proj.imgUrls[0];
       }
     },
     spotsLeft() {
       return this.proj.numOfVolunteersNeeded - this.proj.members.length;
     },
     averageRate() {
-      if (!this.proj.reviews.length) {return 'No Rating Yet'};
+      if (!this.proj.reviews.length) {
+        return "No Rating Yet";
+      }
       const rates = this.proj.reviews.map((review) => {
         return review.rate;
       });

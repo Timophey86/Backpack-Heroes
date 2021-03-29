@@ -53,6 +53,7 @@
 <script>
 import { socketService } from "../services/socket.service";
 import { showMsg } from "../services/eventBusServices.js";
+import { increaseCount } from "../services/eventBusServices.js";
 
 export default {
   name: "homePage",
@@ -105,12 +106,15 @@ export default {
       console.log(request.proj.host._id);
       console.log(this.currUser._id);
       if (this.currUser._id === request.proj.host._id) {
-        console.log("same same");
-        showMsg(`You've got a new "Admission Request" request.`);
+        increaseCount()
       } else {
         return;
       }
     });
+  },
+  destroyed() {
+    socketService.off('requestFromUser', this.addMsg)
+    socketService.terminate();
   },
 };
 </script>
