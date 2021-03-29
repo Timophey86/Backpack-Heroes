@@ -70,8 +70,10 @@
 // 540px
 @media (max-width: $mobile-breakpoint) {
     .hero{
+        background-color: #02a093f3;
+        height: 100vh;
         .hero-txt {
-            background-color: #02a093f3;
+            
             position: unset;
             width: 100%;
             padding: 5px;
@@ -89,5 +91,14 @@
 
 
     }
-
+    .category-select{
+        text-align: center;
+    }
+    .date-select{
+        display: flex;
+        flex-direction: column;
+    }
+    .project-list{
+        grid-template-columns: repeat(auto-fill, 290px);
+    }
 }

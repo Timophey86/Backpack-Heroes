@@ -10,6 +10,8 @@
     margin-left: 30px;
     img{
       border-radius: 50%;
+      width: 128px;
+      height: 128px;
     }
   
   }
@@ -116,9 +118,4 @@ span.pending {
   font-weight: 500;
 }
 
-.name-and-pic{
-  img{
-    width: 128px;
-    height: 128px;
-  }
-}
+
