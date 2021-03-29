@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" style="width: 40%">
+  <el-table :data="orders" style="width: 40%">
     <el-table-column label="Name" width="180">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
@@ -30,11 +30,7 @@
 <script>
 export default {
   props: ["orders"],
-  data() {
-    return {
-      tableData: this.orders,
-    };
-  },
+
   methods: {
     handleEdit(index, row) {
       console.log(index, row);

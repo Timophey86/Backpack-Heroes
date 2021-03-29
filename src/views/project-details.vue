@@ -57,7 +57,7 @@
       </p>
       <p class="spots-left-num">
         <span>{{ spotsLeft }}</span
-        >/ {{ displayedProj.numOfVolunteersNeeded }} spots left
+        > / {{ displayedProj.numOfVolunteersNeeded }} spots left
       </p>
       <p class="amneties">
         As a member these are some of the bonuses we provide for the members of
