@@ -103,8 +103,6 @@ export default {
     this.projs = this.$store.getters.projs;
     socketService.setup();
     socketService.on("requestFromUser", (request) => {
-      console.log(request.proj.host._id);
-      console.log(this.currUser._id);
       if (this.currUser._id === request.proj.host._id) {
         increaseCount()
       } else {
