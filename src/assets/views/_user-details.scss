@@ -10,6 +10,8 @@
     margin-left: 30px;
     img {
       border-radius: 50%;
+      width: 128px;
+      height: 128px;
     }
     span {
       font-family: Arial, Helvetica, sans-serif;
@@ -122,9 +124,13 @@ span.pending {
   font-weight: 500;
 }
 
+<<<<<<< HEAD
+
+=======
 .name-and-pic {
   img {
     width: 128px;
     height: 128px;
   }
 }
+>>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b

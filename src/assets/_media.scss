@@ -120,9 +120,15 @@
 
 // 540px
 @media (max-width: $mobile-breakpoint) {
+<<<<<<< HEAD
+    .hero{
+        background-color: #02a093f3;
+        height: 100vh;
+=======
     .hero {
+>>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b
         .hero-txt {
-            background-color: #02a093f3;
+            
             position: unset;
             width: 100%;
             padding: 5px;
@@ -138,6 +144,19 @@
             }
         }
     }
+<<<<<<< HEAD
+    .category-select{
+        text-align: center;
+    }
+    .date-select{
+        display: flex;
+        flex-direction: column;
+    }
+    .project-list{
+        grid-template-columns: repeat(auto-fill, 290px);
+    }
+}
+=======
 
     .review-container {
         .review-form {
@@ -145,3 +164,4 @@
         }
     }
 }
+>>>>>>> 08b4a7806e0ef3411beaeac1658255a359a1299b
