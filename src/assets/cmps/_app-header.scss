@@ -1,5 +1,6 @@
 .app-header {
   background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
+  // background-color:white ;
   position: sticky;
   top: 0;
   width: 100%;
@@ -15,7 +16,7 @@
   .closeMenu {
     display: flex;
     align-items: center;
-    .user-link{
+    .user-link {
       margin-right: 20px;
     }
   }
