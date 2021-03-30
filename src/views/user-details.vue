@@ -1,7 +1,10 @@
 <template>
   <div v-if="currUser" class="user-details main-container">
     <div class="user-profile">
-      <img :src="avatarImg" alt="" />
+      <!-- <img :src="avatarImg" alt="" /> -->
+      <el-image
+      :src="avatarImg"
+      fit="cover"></el-image>
       <h1>Hello, {{ currUser.fullname }}!</h1>
       <p>
         Hello, im Shiran a volunteer project manager from Israel. <br />
@@ -86,7 +89,6 @@
           <div v-else>Not signed for any project yet</div>
         </div>
       </el-tab-pane>
-
       <el-tab-pane>
         <span slot="label">Admission Requests ({{ pendingOrdersLength }})</span>
         <div class="admission-requests">
@@ -98,7 +100,7 @@
                 v-for="(order, index) in pendingOrders"
                 :key="index"
               >
-                <span>Applicants Name: </span>{{ order.member.fullname }} <br />
+                <span>Applicants Name: </span>{{ order.member.fullname }}
                 <span>Projects Name: </span
                 ><span
                   class="goToProj"
@@ -144,10 +146,10 @@
         <p v-else>No approved reservations yet</p>
       </el-tab-pane>
     </el-tabs>
+    <el-button class="logout-btn" @click="doLogout" type="danger" round>Logout</el-button>
     <!-- <chart :chartdata="chartdata" /> -->
     <!-- <button @click="fillData">click</button> -->
   </div>
-
   <div v-else>Please use the login page to log in or sign up.</div>
 </template>
 
@@ -218,6 +220,9 @@ export default {
       var max = Math.floor(99);
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
+    avatarImg() {
+      return require("@/assets/images/avatars/" + this.currUser.imgUrl);
+    },
   },
   methods: {
     async approve(order) {
@@ -266,6 +271,10 @@ export default {
     },
     formatDate(timeStamp) {
       return new Date(timeStamp).toDateString();
+    },
+    doLogout() {
+      this.$store.dispatch({ type: "logout" });
+      this.$router.push("/");
     },
     fillData() {
       this.chartdata = {

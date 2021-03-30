@@ -1,4 +1,14 @@
 .user-details {
+  .el-tabs__content{
+    .el-button{
+      margin: 10px;
+    }
+  }
+  .logout-btn{
+    width: fit-content;
+    position: absolute;
+    bottom: 45px;
+  }
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -10,9 +20,9 @@
     flex-wrap: wrap;
     align-items: center;
     margin-top: 40px;
-    margin-left: 30px;
+    // margin-left: 30px;
     p{
-      margin-left: 170px;
+      margin-left:200px;
     }
     img {
       border-radius: 50%;
@@ -24,7 +34,7 @@
     }
     h1 {
       text-transform: capitalize;
-      margin-left: 40px;
+      margin-left: 70px;
     }
   }
   .el-tabs {

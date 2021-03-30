@@ -20,6 +20,15 @@
 // 760px
 @media (max-width: $narrow-breakpoint) {
     .app-header {
+        .header {
+            padding: 10px;
+        }
+        .main-container {
+            width: 100%;
+            .menu {
+                position: static;
+            }
+        }
         .menu {
             display: flex;
         }
@@ -133,7 +142,7 @@
             h1 {
                 padding: 5px;
             }
-            p{
+            p {
                 margin-top: 25px;
             }
             .call-to-action {
@@ -157,19 +166,63 @@
             grid-template-columns: repeat(auto-fill, 290px);
         }
     }
-    .category-select{
+    .category-select {
         text-align: center;
     }
-    .date-select{
+    .date-select {
         display: flex;
         flex-direction: column;
     }
-    .project-list{
+    .project-list {
         grid-template-columns: repeat(auto-fill, 290px);
     }
-    .review-container {
-        .review-form {
-            width: 320px;
+    .project-details {
+        .project-info {
+            h4 {
+                .details-text {
+                    display: block;
+                }
+            }
+        }
+        .review-container {
+            .review-list {
+                .review-fullname {
+                    // justify-self: center;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+                .review-card {
+                    .el-avatar {
+                        grid-row: 1/2;
+                    }
+                    .review-date {
+                        font-weight: 100;
+                        grid-column: 2/3;
+                    }
+                }
+            }
+            .review-form {
+                width: 320px;
+            }
+        }
+    }
+    .project-details {
+        padding: 0;
+        .details-img-container {
+            padding-left: 0.6rem;
+            padding-right: 0.6rem;
+            grid-template-rows: 1fr 1fr;
+        }
+        .members {
+            padding: 5px;
         }
     }
 }
+
+// @media  (min-height: ) {
+//     .review-container {
+//         .review-list {
+//             flex-direction: column;
+//         }
+//     }
+// }
