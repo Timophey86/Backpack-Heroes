@@ -238,12 +238,20 @@ export default {
     goToEdit() {
       this.$router.push(`/edit/`);
     },
-    async getRequests() {
-      await this.$store.dispatch({
-        type: "loadOrders",
-        filter: { userId: this.currUser._id },
-      });
-      this.userOrders = this.$store.getters.orders;
+    async getUserOrders() {
+      try {
+        await this.$store.dispatch({
+          type: "loadOrders",
+          filter: { userId: this.currUser._id },
+        });
+        this.userOrders = this.$store.getters.orders;
+      } catch (err) {
+        console.log(
+          "orderStore: Error in getting use orders to the frontend",
+          err
+        );
+        throw err;
+      }
     },
     async getUserProjects() {
       await this.$store.dispatch({
@@ -290,10 +298,11 @@ export default {
   created() {
     this.currUser = this.$store.getters.loggedinUser;
     this.getUserProjects();
-    this.getRequests();
+    this.getUserOrders();
     socketService.setup();
     socketService.on("requestFromUser", (request) => {
-      if (this.cuurUser._id === request.proj.host._id) {
+      console.log("user details");
+      if (this.currUser._id === request.proj.host._id) {
         increaseCount();
       } else {
         return;
@@ -304,6 +313,10 @@ export default {
 
   components: {
     chart,
+  },
+  destroyed() {
+    socketService.off("requestFromUser", this.addMsg);
+    socketService.terminate();
   },
 };
 </script>

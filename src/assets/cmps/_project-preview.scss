@@ -10,6 +10,9 @@
   .el-image {
     height: 200px;
     grid-area: 1 / 1;
+    .el-image__inner {
+      object-fit: cover;
+    }
   }
 
   > * {

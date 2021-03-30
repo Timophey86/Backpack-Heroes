@@ -58,14 +58,13 @@ export default {
       }
     },
     requestCountToZero() {
-      console.log("im hereee");
-      this.requestCount = 0;
-    },
+      this.requestCount =0
+    }
   },
   created() {
-    eventBusService.$on("addCount", () => {
-      this.requestCount = 2;
-    });
+    eventBusService.$on('addCount', () => {
+      this.requestCount += 1
+    })
   },
   components: {
     userMsg,

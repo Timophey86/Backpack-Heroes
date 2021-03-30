@@ -56,8 +56,8 @@
         Be the first to join! Click the join button below.
       </p>
       <p class="spots-left-num">
-        <span>{{ spotsLeft }}</span
-        > / {{ displayedProj.numOfVolunteersNeeded }} spots left
+        <span>{{ spotsLeft }}</span> /
+        {{ displayedProj.numOfVolunteersNeeded }} spots left
       </p>
       <p class="amneties">
         As a member these are some of the bonuses we provide for the members of
@@ -76,10 +76,7 @@
         v-if="!isJoined"
         type="success"
         :class="{ host: isHost }"
-        @click="
-          joinProj();
-          requestSocket();
-        "
+        @click="joinProj"
         ><span>{{ joinProjBtnTxt }}</span></el-button
       >
       <el-button v-else type="info" :class="{ host: isHost }"
@@ -135,7 +132,6 @@ export default {
     },
     img(idx) {
       return this.displayedProj.members[idx].imgUrl;
-      // return require(`@/assets/images/${this.displayedProj.tags[0]}/${this.displayedProj.imgUrls[2]}.jpg`);
     },
     async getCurrProj(_id) {
       await this.$store.dispatch({ type: "getProj", _id });
@@ -165,10 +161,7 @@ export default {
         project: this.displayedProj,
       });
       this.toggleJoinProj();
-      socketService.emit("joinRequest", {
-        user: this.currUser,
-        proj: this.displayedProj,
-      });
+      this.requestSocket();
     },
     toggleJoinProj() {
       this.joinProjStatus = !this.joinProjStatus;

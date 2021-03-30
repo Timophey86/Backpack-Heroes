@@ -117,12 +117,8 @@ export default {
       });
     },
     setRange() {
-      // this.dateFrom = this.fromTodates[0];
       this.dateFrom = Date.parse(this.fromTodates[0]);
-      // console.log("from", this.dateFrom);
-      // this.dateTo = this.fromTodates[1];
       this.dateTo = Date.parse(this.fromTodates[1]);
-      // console.log("to", this.dateTo);
     },
   },
 };

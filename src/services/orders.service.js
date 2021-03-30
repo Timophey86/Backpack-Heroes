@@ -14,7 +14,7 @@ function query(filterBy) {
   if (!filterBy.filter) {
     return httpService.get(`orders`);
   }
-  return httpService.get(`orders/?userId=${filterBy.filter.userId}&type=${filterBy.filter.isForUserApproval}`)
+  return httpService.get(`orders/?userId=${filterBy.filter.userId}`)
 
 }
 

@@ -10,7 +10,7 @@
 </template>
 <script>
 import projectPreview from "@/cmps/project-preview.vue";
-import elSelect from "./select.cmp.vue"
+import elSelect from "./filter.cmp.vue"
 export default {
   name: "projectList",
   props: ["projects"],
@@ -23,6 +23,9 @@ export default {
     setFilter(val) {
       this.$store.dispatch({type: "setFilter", filter:val})
     }
+  },
+  created() {
+    this.setFilter({ category: "",  location: "", from:"", to: "" ,userId: "", pageDiff: 0 })
   },
   components: {
     projectPreview,

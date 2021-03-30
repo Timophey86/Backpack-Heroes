@@ -1,10 +1,10 @@
 <template>
   <section class="home-page">
     <div class="hero">
-      <img :src="require(`@/assets/images/hero/8.jpg`)" alt="" />
+      <img :src="require(`@/assets/images/hero/1.jpg`)" alt="" />
 
       <div class="hero-txt">
-        <h1>Travel differently, connect globally</h1>
+        <h1>Travel with Purpose</h1>
         <p>
           Connecting kind hearted travelers with amazing volunteering
           opportunities around the globe
@@ -91,7 +91,6 @@ export default {
     async loadProjs() {
       await this.$store.dispatch({
         type: "loadProjs",
-        filter: { name: "", type: "all", userId: "", pageDiff: 0 },
       });
     },
     projList() {
@@ -103,8 +102,7 @@ export default {
     this.projs = this.$store.getters.projs;
     socketService.setup();
     socketService.on("requestFromUser", (request) => {
-      console.log(request.proj.host._id);
-      console.log(this.currUser._id);
+      console.log('home')
       if (this.currUser._id === request.proj.host._id) {
         increaseCount()
       } else {

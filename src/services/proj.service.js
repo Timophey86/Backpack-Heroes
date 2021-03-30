@@ -20,7 +20,7 @@ function setFilter(filter) {
   gFilterBy = filter;
 }
 
-function query(filterBy = {}) {
+function query(filterBy={}) {
   if (!filterBy.filter) {
     return httpService.get(`proj?category=${gFilterBy.category}&location=${gFilterBy.location}&from=${gFilterBy.from}&to=${gFilterBy.to}`);
   }
