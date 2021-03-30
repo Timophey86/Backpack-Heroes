@@ -49,26 +49,29 @@
     img{
         width: 100%;
         position: relative;
+        
     }
     .hero-txt{
         color: white;
         position: absolute;
         top: 20vh;
-        right: 4vw;
+        right: 10vw;
         max-width: 510px;
         h1{
             text-align: center;
-            font-size: 3rem;
+            font-size: 4rem;
+            line-height: 4.5rem;
             font-family: montserrat-bold;
             margin: auto;
             text-shadow: 3px 4px 5px #000;
         }
         p{
             font-size: 1.3rem;
+            line-height: 2.4rem;
             max-width: 42ch;
             font-weight: 600;
             text-align: center;
-            margin: auto;
+            margin: 25px auto;
             text-shadow: 3px 4px 5px #000;
         }
         .call-to-action {

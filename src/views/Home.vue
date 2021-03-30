@@ -1,10 +1,10 @@
 <template>
   <section class="home-page">
     <div class="hero">
-      <img :src="require(`@/assets/images/hero/8.jpg`)" alt="" />
+      <img :src="require(`@/assets/images/hero/1.jpg`)" alt="" />
 
       <div class="hero-txt">
-        <h1>Travel differently, connect globally</h1>
+        <h1>Travel with Purpose</h1>
         <p>
           Connecting kind hearted travelers with amazing volunteering
           opportunities around the globe
