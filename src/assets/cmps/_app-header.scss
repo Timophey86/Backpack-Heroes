@@ -1,4 +1,5 @@
 .app-header {
+<<<<<<< HEAD
   background-image: linear-gradient(
     to left,
     #02a092,
@@ -8,6 +9,10 @@
     #64c989
   );
   background-color:white ;
+=======
+  background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
+  // background-color:white ;
+>>>>>>> 0bc32d66cb2bf598fd634b16bf4a296fb7ada5ec
   position: sticky;
   top: 0;
   width: 100%;
@@ -19,6 +24,14 @@
   height: 55px;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  .closeMenu {
+    display: flex;
+    align-items: center;
+    .user-link {
+      margin-right: 20px;
+    }
+  }
   .logo {
     a {
       display: flex;
@@ -29,7 +42,7 @@
       font-size: 2rem;
     }
   }
-  .svg-image{
+  .svg-image {
     height: 40px;
     fill: whitesmoke;
   }
@@ -38,8 +51,13 @@
     a {
       font-family: montserrat;
       font-size: 1rem;
+<<<<<<< HEAD
       color: white;
       font-weight: 600;
+=======
+      font-weight: 600;
+      color: white;
+>>>>>>> 0bc32d66cb2bf598fd634b16bf4a296fb7ada5ec
       margin-inline-end: 50px;
       &:last-child {
         margin-inline-end: 0;
@@ -66,7 +84,6 @@
   right: 50px;
   font-size: x-large;
 }
-
 
 .user-icon {
   position: relative;

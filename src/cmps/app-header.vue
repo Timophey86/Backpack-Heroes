@@ -2,28 +2,39 @@
   <div class="app-header">
     <div class="header main-container">
       <div class="logo">
-        <router-link to="/"><img class="svg-image" src="../assets/images/output-onlinepngtools (2).png" alt=""> Backpack Heroes</router-link>
+        <router-link to="/"
+          ><img
+            class="svg-image"
+            src="../assets/images/output-onlinepngtools (2).png"
+            alt=""
+          />
+          Backpack Heroes</router-link
+        >
       </div>
 
       <div class="menu" @click="toggleMenu"><i class="fas fa-bars"></i></div>
 
       <nav :class="menuClass">
         <router-link to="/project">Explore</router-link>
-        <router-link to="/login-signup">Login/Signup</router-link>
-        <router-link v-if="currUser" class="user-link" to="/user/userId=1">
-          <span @click="requestCountToZero" class="user-icon"
-            ><i class="fas fa-user-circle"></i
-            ><span v-if="requestCount > 0" class="notification-counter">{{
-              requestCount
-            }}</span></span
-          >
-          <span @click="requestCountToZero">{{
-            currUser.fullname
-          }}</span></router-link
+        <router-link v-if="!currUser" to="/login-signup"
+          >Login/Signup</router-link
         >
-        <router-link v-else class="user-link" to="/user/userId=1"
-          ><i class="fas fa-user-circle"></i
-        ></router-link>
+        <router-link v-else class="user-link" to="/user/currUser._id">
+          <p @click="requestCountToZero" class="user-icon"></p>
+
+          <p v-if="requestCount > 0" class="notification-counter"
+            >{{ requestCount }}
+          </p>
+
+          <p @click="requestCountToZero">{{ currUser.fullname }}</p>
+        </router-link>
+        <el-avatar v-if="currUser" :size="35" :src="avatarImg"></el-avatar>
+        <el-avatar v-else :size="35" icon="el-icon-user-solid"></el-avatar>
+
+
+        <!-- <router-link v-else class="user-link" to="/user/userId=1">
+          <i class="fas fa-user-circle"></i>
+        </router-link> -->
       </nav>
       <user-msg />
     </div>
@@ -58,13 +69,13 @@ export default {
       }
     },
     requestCountToZero() {
-      this.requestCount =0
-    }
+      this.requestCount = 0;
+    },
   },
   created() {
-    eventBusService.$on('addCount', () => {
-      this.requestCount += 1
-    })
+    eventBusService.$on("addCount", () => {
+      this.requestCount += 1;
+    });
   },
   components: {
     userMsg,

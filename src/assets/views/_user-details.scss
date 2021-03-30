@@ -1,4 +1,7 @@
 .user-details {
+  .el-button{
+    width: fit-content;
+  }
   display: flex;
   flex-direction: column;
   gap: 40px;

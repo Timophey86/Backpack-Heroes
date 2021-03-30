@@ -144,6 +144,8 @@
         <p v-else>No approved reservations yet</p>
       </el-tab-pane>
     </el-tabs>
+    <el-button @click="doLogout" type="danger" round>Logout</el-button>
+
     <!-- <chart :chartdata="chartdata" /> -->
     <!-- <button @click="fillData">click</button> -->
   </div>
@@ -264,6 +266,10 @@ export default {
     },
     formatDate(timeStamp) {
       return new Date(timeStamp).toDateString();
+    },
+    doLogout() {
+      this.$store.dispatch({ type: "logout" });
+      this.$router.push("/");
     },
     fillData() {
       this.chartdata = {
