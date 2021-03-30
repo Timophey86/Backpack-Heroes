@@ -2,9 +2,66 @@
   <div v-if="currUser" class="user-details main-container">
     <div class="user-profile">
       <img :src="avatarImg" alt="" />
-      <h2>Hello, {{ currUser.fullname }}</h2>
+      <h1>Hello, {{ currUser.fullname }}!</h1>
+      <p>
+        Hello, im Shiran a volunteer project manager from Israel. <br />
+        Currently residing in Thailand. <br />
+        My passion is helping others and my speciality is educational projects,
+        working with special needs children, and community management.<br />
+        I love traveling, basketball, and mountain biking. <br />
+        I'm here to connect with other amazing people who share the same passion
+        for traveling and helping others, just like myself.
+      </p>
+      <br />
     </div>
     <el-tabs tab-position="left">
+      <el-tab-pane>
+        <span slot="label">My Projects ({{ userProjectsLength }})</span>
+        <div class="user-projects">
+          <h4>My Projects:</h4>
+          <div v-if="userProjects" class="back-office-projs">
+            <el-table :data="userProjects" stripe border max-height="250">
+              <el-table-column fixed prop="name" label="Name" width="250">
+              </el-table-column>
+              <el-table-column prop="startsAt" label="StartAt">
+              </el-table-column>
+              <el-table-column prop="endAt" label="EndAt"> </el-table-column>
+              <el-table-column
+                prop="numOfVolunteersNeeded"
+                label="Needed"
+                width="120"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="members.length"
+                label="Enrolled"
+                width="120"
+              >
+              </el-table-column>
+              <el-table-column label="Actions">
+                <template slot-scope="scope">
+                  <el-button
+                    @click.native.prevent="edit(userProjects[scope.$index]._id)"
+                    type="text"
+                    size="small"
+                    >Edit</el-button
+                  >
+                  <el-button
+                    @click.native.prevent="
+                      removeProj(userProjects[scope.$index]._id)
+                    "
+                    type="text"
+                    size="small"
+                    >Remove</el-button
+                  >
+                </template>
+              </el-table-column>
+            </el-table>
+            <button class="btn" @click="goToEdit()">Add a new project!</button>
+          </div>
+          <div v-else>No projects to display</div>
+        </div>
+      </el-tab-pane>
       <el-tab-pane>
         <span slot="label">My Adventures ({{ myRequestsLength }})</span>
         <div class="adventures">
@@ -29,50 +86,7 @@
           <div v-else>Not signed for any project yet</div>
         </div>
       </el-tab-pane>
-      <el-tab-pane>
-        <span slot="label">My Projects ({{ userProjectsLength }})</span>
-        <div class="user-projects">
-          <button class="btn" @click="goToEdit()">Add a new project!</button>
-          <h4>My Projects:</h4>
-          <div v-if="userProjects" class="back-office-projs">
-            <el-table :data="userProjects" stripe border>
-              <el-table-column fixed prop="name" label="Name">
-              </el-table-column>
-              <el-table-column prop="startsAt" label="StartAt" width="120">
-              </el-table-column>
-              <el-table-column prop="endAt" label="EndAt" width="120">
-              </el-table-column>
-              <el-table-column
-                prop="numOfVolunteersNeeded"
-                label="Needed"
-                width="120"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="members.length"
-                label="Enrolled"
-                width="120"
-              >
-              </el-table-column>
-              <el-table-column label="Actions" width="120">
-                <el-button
-                  @click.native.prevent="edit(userProjects._id)"
-                  type="text"
-                  size="small"
-                  >Edit</el-button
-                >
-                <el-button
-                  @click.native.prevent="removeProj(userProjects._id)"
-                  type="text"
-                  size="small"
-                  >Remove</el-button
-                >
-              </el-table-column>
-            </el-table>
-          </div>
-          <div v-else>No projects to display</div>
-        </div>
-      </el-tab-pane>
+
       <el-tab-pane>
         <span slot="label">Admission Requests ({{ pendingOrdersLength }})</span>
         <div class="admission-requests">
@@ -92,9 +106,11 @@
                   >{{ order.proj.name }}</span
                 >
                 <br />
-                <span>Press to approve: </span
-                ><button @click="approve(order)">Approve</button>
-                <button @click="remove(order)">Reject</button>
+                <h4>Press to approve:</h4>
+                <span
+                  ><button @click="approve(order)">Approve</button>
+                  <button @click="remove(order)">Reject</button></span
+                >
               </li>
             </ul>
           </div>
@@ -111,9 +127,11 @@
               v-for="(order, index) in approvedOrders"
               :key="index"
             >
-              <span>Applicants Name: </span>{{ order.member.fullname }} <br />
-              <span>Projects Name: </span
-              ><span
+              <h4>
+                Applicants Name: <span>{{ order.member.fullname }} </span>
+              </h4>
+              <h4>Projects Name:</h4>
+              <span
                 class="goToProj"
                 @click="goToProjectPage(order.proj._id)"
               ></span
@@ -126,6 +144,8 @@
         <p v-else>No approved reservations yet</p>
       </el-tab-pane>
     </el-tabs>
+    <!-- <chart :chartdata="chartdata" /> -->
+    <!-- <button @click="fillData">click</button> -->
   </div>
 
   <div v-else>Please use the login page to log in or sign up.</div>
@@ -135,13 +155,14 @@
 import { socketService } from "../services/socket.service";
 import { showMsg } from "../services/eventBusServices.js";
 import { increaseCount } from "../services/eventBusServices.js";
-
+import chart from "@/cmps/charts";
 export default {
   name: "userDetails",
   data() {
     return {
       currUser: null,
       userOrders: null,
+      chartdata: this.fillData(),
     };
   },
   computed: {
@@ -166,7 +187,6 @@ export default {
     },
     pendingOrders() {
       if (this.userOrders) {
-        var test = [];
         return this.userOrders.host.filter((order) => {
           return order.status === "pending";
         });
@@ -234,11 +254,37 @@ export default {
     goToProjectPage(id) {
       this.$router.push(`/project/${id}`);
     },
-    formatDateFrom(timeStamp) {
+    formatDate(timeStamp) {
       return new Date(timeStamp).toDateString();
     },
-    formatDateTo(timeStamp) {
-      return new Date(timeStamp).toDateString();
+    fillData() {
+      this.chartdata = {
+        labels: [
+          "Approved Orders",
+          "My Requests",
+          "My Projects",
+          "Pending Orders",
+        ],
+        datasets: [
+          {
+            backgroundColor: "#f87979",
+            data: [this.userProjectsLength],
+          },
+          {
+            backgroundColor: "#f87979",
+            data: [this.approvedOrdersLength],
+          },
+          {
+            backgroundColor: "#f87979",
+            data: [this.myRequestsLength],
+          },
+
+          {
+            backgroundColor: "#f87979",
+            data: [this.pendingOrdersLength],
+          },
+        ],
+      };
     },
   },
   created() {
@@ -253,6 +299,11 @@ export default {
         return;
       }
     });
+    this.fillData();
+  },
+
+  components: {
+    chart,
   },
 };
 </script>

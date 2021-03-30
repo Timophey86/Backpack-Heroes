@@ -63,6 +63,10 @@
         margin: 10px;
       }
     }
+    button {
+      min-width: fit-content;
+      max-width: 50%;
+    }
   }
   .members {
     grid-row: 2/3;
@@ -87,7 +91,7 @@
       span {
         color: red;
         font-weight: 600;
-        font-size: larger;
+        font-size: 1.1rem;
       }
     }
     h3 {

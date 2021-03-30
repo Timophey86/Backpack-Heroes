@@ -10,11 +10,16 @@
       <nav :class="menuClass">
         <router-link to="/project">Explore</router-link>
         <router-link to="/login-signup">Login/Signup</router-link>
-        <router-link v-if="currUser" class="user-link" to="/user/userId=1"
-         > 
-          <span  @click="requestCountToZero" class="user-icon"><i class="fas fa-user-circle"></i
-          ><span v-if="requestCount>0" class="notification-counter">{{requestCount}}</span></span>
-          <span @click="requestCountToZero">{{ currUser.fullname }}</span></router-link
+        <router-link v-if="currUser" class="user-link" to="/user/userId=1">
+          <span @click="requestCountToZero" class="user-icon"
+            ><i class="fas fa-user-circle"></i
+            ><span v-if="requestCount > 0" class="notification-counter">{{
+              requestCount
+            }}</span></span
+          >
+          <span @click="requestCountToZero">{{
+            currUser.fullname
+          }}</span></router-link
         >
         <router-link v-else class="user-link" to="/user/userId=1"
           ><i class="fas fa-user-circle"></i
@@ -26,14 +31,14 @@
 </template>
 
 <script>
-import {eventBusService, SHOW_MSG} from '../services/eventBusServices.js'
+import { eventBusService, SHOW_MSG } from "../services/eventBusServices.js";
 import userMsg from "./alert-msg.cmp";
 
 export default {
   data() {
     return {
       menuClass: "closeMenu",
-      requestCount: 0
+      requestCount: 0,
     };
   },
   computed: {
@@ -53,14 +58,14 @@ export default {
       }
     },
     requestCountToZero() {
-      console.log('im hereee');
-      this.requestCount =0
-    }
+      console.log("im hereee");
+      this.requestCount = 0;
+    },
   },
   created() {
-    eventBusService.$on('addCount', () => {
-      this.requestCount +=1
-    })
+    eventBusService.$on("addCount", () => {
+      this.requestCount = 2;
+    });
   },
   components: {
     userMsg,

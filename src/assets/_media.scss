@@ -79,13 +79,17 @@
             margin-left: 35px;
         }
         .members {
+            padding-left: 0;
             .member-list {
                 li {
                     margin: 0;
                 }
             }
             .el-button {
-                margin: 10px auto;
+                // margin: 10px auto;
+                max-width: 100%;
+                margin-left: 10px;
+                margin-right: 10px;
             }
             .spots-left-num {
                 text-align: center;
