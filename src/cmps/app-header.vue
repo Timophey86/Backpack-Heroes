@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="header main-container">
       <div class="logo">
-        <router-link to="/">Backpack Heroes</router-link>
+        <router-link to="/"><img class="svg-image" src="../assets/images/output-onlinepngtools (2).png" alt=""> Backpack Heroes</router-link>
       </div>
 
       <div class="menu" @click="toggleMenu"><i class="fas fa-bars"></i></div>

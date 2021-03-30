@@ -15,22 +15,29 @@
 
 .header {
   display: flex;
-  height: 45px;
+  height: 55px;
   justify-content: space-between;
   align-items: center;
   .logo {
     a {
+      display: flex;
+      align-items: center;
       cursor: pointer;
       font-family: caveat;
       color: white;
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
+  }
+  .svg-image{
+    height: 40px;
+    fill: whitesmoke;
   }
 
   nav {
     a {
       font-family: montserrat;
       font-size: 1rem;
+      font-weight: 600;
       color: white;
       margin-inline-end: 50px;
       &:last-child {
@@ -58,6 +65,7 @@
   right: 50px;
   font-size: x-large;
 }
+
 
 .user-icon {
   position: relative;
