@@ -20,17 +20,16 @@
           >Login/Signup</router-link
         >
         <router-link v-else class="user-link" to="/user/currUser._id">
-          <p @click="requestCountToZero" class="user-icon"></p>
+          <span @click="requestCountToZero" class="user-icon">{{ currUser.fullname }}
+           <span v-if="requestCount > 0" class="notification-counter" >{{
+              requestCount
+            }}</span> 
+          </span>
 
-          <p v-if="requestCount > 0" class="notification-counter"
-            >{{ requestCount }}
-          </p>
-
-          <p @click="requestCountToZero">{{ currUser.fullname }}</p>
+         
         </router-link>
         <el-avatar v-if="currUser" :size="35" :src="avatarImg"></el-avatar>
         <el-avatar v-else :size="35" icon="el-icon-user-solid"></el-avatar>
-
 
         <!-- <router-link v-else class="user-link" to="/user/userId=1">
           <i class="fas fa-user-circle"></i>
