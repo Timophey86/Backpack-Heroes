@@ -1,21 +1,26 @@
 // 960px
 @media (max-width: $normal-breakpoint) {
-    ul{
+    ul {
         padding-inline-start: 0;
     }
-    .select-filter{
+    .select-filter {
         flex-direction: column;
         align-items: center;
-        .el-date-editor--daterange.el-input__inner{
+        .el-date-editor--daterange.el-input__inner {
             width: 220px;
+        }
+    }
+    .project-details {
+        li {
+            margin-left: 35px;
         }
     }
 }
 
 // 760px
 @media (max-width: $narrow-breakpoint) {
-    .app-header{
-        .menu{ 
+    .app-header {
+        .menu {
             display: flex;
         }
         nav {
@@ -26,68 +31,142 @@
             right: 0;
             z-index: 1;
             transform: translateY(-150%);
-            a{
+            a {
                 padding: 10px;
                 display: inline-block;
                 margin: 0;
                 border-bottom: 1px solid white;
-                &:last-child{
-                    border-bottom:none
+                &:last-child {
+                    border-bottom: none;
                 }
             }
-            a:hover{
+            a:hover {
                 background-color: rgba(255, 255, 255, 0.651);
                 transition: 1s;
             }
-        } 
-        .openMenu{
+        }
+        .openMenu {
             transform: translateY(-5%);
             background-color: #02a093f3;
         }
-    
-
     }
-    .hero{
-        .hero-txt{
-            h1{
+    .hero {
+        .hero-txt {
+            h1 {
                 font-size: 2.5rem;
             }
-            p{
+            p {
                 font-size: 1rem;
-        
             }
-            .call-to-action{
+            .call-to-action {
                 font-size: 0.9rem;
                 width: 145px;
             }
         }
     }
+    .project-details {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .project-info {
+            gap: 5px;
+        }
+        .details-img-container {
+            grid-gap: 5px;
+        }
 
-
-  
+        li {
+            margin-left: 35px;
+        }
+        .members {
+            .member-list {
+                li {
+                    margin: 0;
+                }
+            }
+            .el-button {
+                margin: 10px auto;
+            }
+            .spots-left-num {
+                text-align: center;
+                span {
+                    color: red;
+                    font-weight: 600;
+                    font-size: larger;
+                }
+            }
+        }
+    }
+    .review-container {
+        .el-input {
+            margin: 25px auto 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .review-list {
+            justify-content: center;
+            .review-card {
+                i {
+                    font-size: 12px;
+                }
+                .review-date {
+                    grid-column: 2/4;
+                }
+            }
+        }
+    }
 }
 
 // 540px
 @media (max-width: $mobile-breakpoint) {
-    .hero{
+    .hero {
+        background-color: #02a093f3;
+        height: 100vh;
         .hero-txt {
-            background-color: #02a093f3;
             position: unset;
             width: 100%;
             padding: 5px;
-            h1{
+            h1 {
                 padding: 5px;
             }
-            .call-to-action{
-                background-color: #60c78a;
+            p{
+                margin-top: 25px;
             }
-            .call-to-action:hover{
-                background-color: #92DB80;
+            .call-to-action {
+                background-color: #60c78a;
+                margin-top: 25px;
+            }
+            .call-to-action:hover {
+                background-color: #92db80;
                 transition: 1s;
             }
         }
 
-
+        .category-select {
+            text-align: center;
+        }
+        .date-select {
+            display: flex;
+            flex-direction: column;
+        }
+        .project-list {
+            grid-template-columns: repeat(auto-fill, 290px);
+        }
     }
-
+    .category-select{
+        text-align: center;
+    }
+    .date-select{
+        display: flex;
+        flex-direction: column;
+    }
+    .project-list{
+        grid-template-columns: repeat(auto-fill, 290px);
+    }
+    .review-container {
+        .review-form {
+            width: 320px;
+        }
+    }
 }

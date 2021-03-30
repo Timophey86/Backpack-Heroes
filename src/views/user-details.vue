@@ -2,13 +2,14 @@
   <div v-if="currUser" class="user-details main-container">
     <div class="user-profile">
       <img :src="avatarImg" alt="" />
-      <h2>Hello, {{ displayedUser.fullname }}</h2>
+      <h2>Hello, {{ currUser.fullname }}</h2>
     </div>
     <el-tabs tab-position="left">
-      <el-tab-pane label="My Adventures">
+      <el-tab-pane>
+        <span slot="label">My Adventures ({{ myRequestsLength }})</span>
         <div class="adventures">
           <h4>Your future adventures:</h4>
-          <div v-if="myRequests && myRequests.length">
+          <div v-if="myRequests">
             <ul>
               <li
                 class="reservations"
@@ -28,42 +29,52 @@
           <div v-else>Not signed for any project yet</div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="My Projects">
+      <el-tab-pane>
+        <span slot="label">My Projects ({{ userProjectsLength }})</span>
         <div class="user-projects">
+          <button class="btn" @click="goToEdit()">Add a new project!</button>
           <h4>My Projects:</h4>
-          <div
-            v-if="userProjects && userProjects.length"
-            class="back-office-projs"
-          >
-            <table>
-              <th>Name</th>
-              <th>Dates</th>
-              <th>Needed</th>
-              <th>Enrolled</th>
-              <th>Actions</th>
-              <tr v-for="proj in userProjects" :key="proj._id">
-                <td class="goToProj" @click="goToProjectPage(proj._id)">
-                  <span class="myProjs">{{ proj.name }}</span>
-                </td>
-                <td>
-                  {{ formatDateFrom(proj.startsAt) | moment("MM/DD/YY") }}-{{
-                    formatDateTo(proj.endAt) | moment("MM/DD/YY")
-                  }}
-                </td>
-                <td>{{ proj.numOfVolunteersNeeded }}</td>
-                <td>{{ proj.members.length }}</td>
-                <td>
-                  <button @click="removeProj(proj._id)">Remove</button
-                  ><button @click="edit(proj._id)">Edit</button>
-                </td>
-              </tr>
-            </table>
+          <div v-if="userProjects" class="back-office-projs">
+            <el-table :data="userProjects" stripe border>
+              <el-table-column fixed prop="name" label="Name">
+              </el-table-column>
+              <el-table-column prop="startsAt" label="StartAt" width="120">
+              </el-table-column>
+              <el-table-column prop="endAt" label="EndAt" width="120">
+              </el-table-column>
+              <el-table-column
+                prop="numOfVolunteersNeeded"
+                label="Needed"
+                width="120"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="members.length"
+                label="Enrolled"
+                width="120"
+              >
+              </el-table-column>
+              <el-table-column label="Actions" width="120">
+                <el-button
+                  @click.native.prevent="edit(userProjects._id)"
+                  type="text"
+                  size="small"
+                  >Edit</el-button
+                >
+                <el-button
+                  @click.native.prevent="removeProj(userProjects._id)"
+                  type="text"
+                  size="small"
+                  >Remove</el-button
+                >
+              </el-table-column>
+            </el-table>
           </div>
           <div v-else>No projects to display</div>
-          <button class="btn" @click="goToEdit()">Add a new project!</button>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Admission Requests">
+      <el-tab-pane>
+        <span slot="label">Admission Requests ({{ pendingOrdersLength }})</span>
         <div class="admission-requests">
           <h4>Admission requests:</h4>
           <div v-if="pendingOrders">
@@ -90,7 +101,8 @@
           <div v-else>No Pending Reservations</div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Approved Orders">
+      <el-tab-pane>
+        <span slot="label">Approved Orders ({{ approvedOrdersLength }})</span>
         <div class="approved-orders" v-if="approvedOrders">
           <h4>Reservations this month:</h4>
           <ul>
@@ -111,16 +123,15 @@
             </li>
           </ul>
         </div>
-
         <p v-else>No approved reservations yet</p>
       </el-tab-pane>
     </el-tabs>
   </div>
+
   <div v-else>Please use the login page to log in or sign up.</div>
 </template>
 
 <script>
-import elTable from "../cmps/table.vue";
 import { socketService } from "../services/socket.service";
 import { showMsg } from "../services/eventBusServices.js";
 import { increaseCount } from "../services/eventBusServices.js";
@@ -134,49 +145,43 @@ export default {
     };
   },
   computed: {
+    approvedOrdersLength() {
+      return this.approvedOrders?.length || 0;
+    },
+    myRequestsLength() {
+      return this.myRequests?.length || 0;
+    },
+    userProjectsLength() {
+      return this.userProjects?.length || 0;
+    },
+    pendingOrdersLength() {
+      return this.pendingOrders?.length || 0;
+    },
     avatarImg() {
       return require("@/assets/images/avatars/" + this.currUser.imgUrl);
       // return this.currUser.imgUrl;
-    },
-    displayedUser() {
-      return this.$store.getters.loggedinUser;
     },
     userProjects() {
       return this.$store.getters.projs;
     },
     pendingOrders() {
       if (this.userOrders) {
-        const pendingOrders = [];
-        this.userOrders.host.forEach((order) => {
-          if (order.status === "pending") {
-            pendingOrders.push(order);
-          }
+        var test = [];
+        return this.userOrders.host.filter((order) => {
+          return order.status === "pending";
         });
-        if (!pendingOrders[0]) {
-          return null;
-        } else {
-          return pendingOrders;
-        }
-      } else return null;
+      }
     },
     approvedOrders() {
       if (this.userOrders) {
-        const approvedOrders = [];
-        this.userOrders.host.forEach((order) => {
-          if (order.status === "approved") {
-            approvedOrders.push(order);
-          }
+        return this.userOrders.host.filter((order) => {
+          return order.status === "approved";
         });
-        if (!approvedOrders.length) {
-          return null;
-        } else {
-          return approvedOrders;
-        }
-      } else return null;
+      }
     },
     myRequests() {
       if (this.userOrders) {
-        return this.userOrders.reserved;
+        return this.userOrders.reserved || 0;
       }
     },
     maleFemale() {
@@ -213,12 +218,20 @@ export default {
     goToEdit() {
       this.$router.push(`/edit/`);
     },
-    async getRequests() {
-      await this.$store.dispatch({
-        type: "loadOrders",
-        filter: { userId: this.currUser._id },
-      });
-      this.userOrders = this.$store.getters.orders;
+    async getUserOrders() {
+      try {
+        await this.$store.dispatch({
+          type: "loadOrders",
+          filter: { userId: this.currUser._id },
+        });
+        this.userOrders = this.$store.getters.orders;
+      } catch (err) {
+        console.log(
+          "orderStore: Error in getting use orders to the frontend",
+          err
+        );
+        throw err;
+      }
     },
     async getUserProjects() {
       await this.$store.dispatch({
@@ -239,18 +252,20 @@ export default {
   created() {
     this.currUser = this.$store.getters.loggedinUser;
     this.getUserProjects();
-    this.getRequests();
-    // socketService.setup();
-    // socketService.on("requestFromUser", (request) => {
-    //   if (this.displayedUser._id === request.proj.host._id) {
-    //     increaseCount()
-    //   } else {
-    //     return;
-    //   }
-    // });
+    this.getUserOrders();
+    socketService.setup();
+    socketService.on("requestFromUser", (request) => {
+      console.log("user details");
+      if (this.currUser._id === request.proj.host._id) {
+        increaseCount();
+      } else {
+        return;
+      }
+    });
   },
-  components: {
-    elTable,
+  destroyed() {
+    socketService.off("requestFromUser", this.addMsg);
+    socketService.terminate();
   },
 };
 </script>

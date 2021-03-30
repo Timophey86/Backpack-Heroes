@@ -30,7 +30,6 @@ export const projStore = {
       state.projs.splice(idx, 1, proj);
     },
     addProj(state, { proj }) {
-      
       state.projs.push(proj);
     },
     removeProj(state, { projId }) {
@@ -53,12 +52,22 @@ export const projStore = {
   },
   actions: {
     async loadProjs(context, payload) {
-      const projs = await projService.query(payload);
-      context.commit({ type: "setProjs", projs });
+      try {
+        const projs = await projService.query(payload);
+        context.commit({ type: "setProjs", projs });
+      } catch (err) {
+        console.log("orderStore: Error in loading projects", err);
+        throw err;
+      }
     },
     async loadEmptyProj(context, payload) {
-      const proj = await projService.getEmptyProj();
-      context.commit({ type: "setEmptyProj", proj });
+      try {
+        const proj = await projService.getEmptyProj();
+        context.commit({ type: "setEmptyProj", proj });
+      } catch (err) {
+        console.log("orderStore: Error in loading empty proj", err);
+        throw err;
+      }
     },
     async getProj({ commit }, payload) {
       try {
@@ -67,14 +76,24 @@ export const projStore = {
       } catch (err) {}
     },
     async saveProj(context, payload) {
-      const type = payload.project._id ? "updateProj" : "addProj";
-      const savedProj = await projService.save(payload.project);
-      context.commit({ type, proj: savedProj });
-      context.dispatch("getProj", savedProj);
+      try {
+        const type = payload.project._id ? "updateProj" : "addProj";
+        const savedProj = await projService.save(payload.project);
+        context.commit({ type, proj: savedProj });
+        context.dispatch("getProj", savedProj);
+      } catch (err) {
+        console.log("orderStore: Error in saving the order", err);
+        throw err;
+      }
     },
     async removeProj(context, payload) {
-      const removedProj = await projService.remove(payload.projId);
-      context.commit({ type: "removeProj", removedProj });
+      try {
+        const removedProj = await projService.remove(payload.projId);
+        context.commit({ type: "removeProj", removedProj });
+      } catch (err) {
+        console.log("orderStore: Error in saving the order", err);
+        throw err;
+      }
     },
     setFilter(context, payload) {
       context.commit({ type: "setFilter", filter: payload.filter });
@@ -85,10 +104,15 @@ export const projStore = {
       context.dispatch("loadProjs");
     },
     async updateProjReview(context, payload) {
-      const projToUpdate = await projService.getById(payload.id);
-      projToUpdate.reviews.push(payload.review);
-      var obj = { proj: projToUpdate };
-      context.dispatch("saveProj", obj);
+      try {
+        const projToUpdate = await projService.getById(payload.id);
+        projToUpdate.reviews.push(payload.review);
+        var obj = { proj: projToUpdate };
+        context.dispatch("saveProj", obj);
+      } catch (err) {
+        console.log("orderStore: Error in saving the order", err);
+        throw err;
+      }
     },
   },
 };

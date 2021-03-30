@@ -91,7 +91,6 @@ export default {
     async loadProjs() {
       await this.$store.dispatch({
         type: "loadProjs",
-        filter: { name: "", type: "all", userId: "", pageDiff: 0 },
       });
     },
     projList() {
@@ -103,6 +102,7 @@ export default {
     this.projs = this.$store.getters.projs;
     socketService.setup();
     socketService.on("requestFromUser", (request) => {
+      console.log('home')
       if (this.currUser._id === request.proj.host._id) {
         increaseCount()
       } else {

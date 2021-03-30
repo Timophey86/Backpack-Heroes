@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import { userStore } from "./userModule.js";
 import { projStore } from "./projModule.js";
 import { reviewStore } from "./reviewsModule";
-import { orderStore } from "./reservationModule.js";
+import { orderStore } from "./ordersModule";
 import { socketStore } from "./socketModule.js";
 
 Vue.use(Vuex);

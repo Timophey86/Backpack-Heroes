@@ -8,12 +8,25 @@
     gap: 40px;
     margin-top: 40px;
     margin-left: 30px;
-    img{
+    img {
       border-radius: 50%;
+      width: 128px;
+      height: 128px;
     }
-  
+    span {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    h2{
+      text-transform: capitalize;
+    }
   }
   .el-tabs {
+    .user-projects {
+      button {
+        margin-bottom: 20px;
+        margin-left: 0;
+      }
+    }
   }
 }
 
@@ -23,8 +36,8 @@ button {
 .back-office-projs {
   table {
     // border: 1px solid black;
-    border-spacing: 20px;
-    // border-collapse: collapse;
+    // border-spacing: 20px;
+    border-collapse: collapse;
   }
   tr:hover {
     background-color: #f5f5f5;
@@ -35,15 +48,13 @@ button {
     text-align: center;
   }
   td {
+    margin-right: 10px;
     // border: 1px solid black;
     padding: 3px 5px;
     &:not(:first-child) {
       text-align: center;
     }
   }
-}
-span {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .user-summary {
@@ -116,8 +127,8 @@ span.pending {
   font-weight: 500;
 }
 
-.name-and-pic{
-  img{
+.name-and-pic {
+  img {
     width: 128px;
     height: 128px;
   }
