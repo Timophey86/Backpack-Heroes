@@ -20,7 +20,7 @@
 // 760px
 @media (max-width: $narrow-breakpoint) {
     .app-header {
-        .header{
+        .header {
             padding: 10px;
         }
         .main-container {
@@ -177,6 +177,13 @@
         grid-template-columns: repeat(auto-fill, 290px);
     }
     .project-details {
+        .project-info {
+            h4 {
+                .details-text {
+                    display: block;
+                }
+            }
+        }
         .review-container {
             .review-list {
                 .review-fullname {

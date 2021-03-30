@@ -6,7 +6,7 @@
     grid-column: 1/-1;
     grid-row: 1/2;
     display: grid;
-    grid-template-rows: 200px 200px;
+    grid-template-rows: 350px 350px;
     grid-template-columns: 1fr 1fr;
     border-radius: 20px;
     overflow: hidden;
@@ -68,6 +68,7 @@
       min-width: fit-content;
       max-width: 50%;
     }
+
   }
   .members {
     grid-row: 2/3;
