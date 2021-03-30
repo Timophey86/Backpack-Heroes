@@ -189,7 +189,7 @@ export default {
     },
     pendingOrders() {
       if (this.userOrders) {
-        if (!this.userOrders.host) return;
+        if (!this.userOrders.host) return 
         return this.userOrders.host.filter((order) => {
           return order.status === "pending";
         });
@@ -198,7 +198,7 @@ export default {
     },
     approvedOrders() {
       if (this.userOrders) {
-        if (!this.userOrders.host) return;
+         if (!this.userOrders.host) return 
         return this.userOrders.host.filter((order) => {
           return order.status === "approved";
         });
@@ -231,11 +231,11 @@ export default {
       var newOrder = JSON.parse(JSON.stringify(order));
       newOrder.status = "approved";
       await this.$store.dispatch({ type: "approveOrder", order: newOrder });
-      this.getRequests();
+      this.getUserOrders();
     },
     async remove(order) {
       await this.$store.dispatch({ type: "removeOrder", order });
-      this.getRequests();
+      this.getUserOrders();
     },
     async removeProj(projId) {
       await this.$store.dispatch({ type: "removeProj", projId });
