@@ -25,7 +25,8 @@
             bottom: 16px;
             right: 5px;
             color: #fff;
-            background-color: #989e9ce6;
+            background-color: #cccecdd1;
+            border-radius: 20px;
             padding: 2px 7px;
             background-position: 50%;
             background-size: contain;
@@ -49,7 +50,7 @@
     img{
         width: 100%;
         position: relative;
-        
+        filter: brightness(0.8);
     }
     .hero-txt{
         color: white;
@@ -72,7 +73,7 @@
             font-weight: 600;
             text-align: center;
             margin: 25px auto;
-            text-shadow: 3px 4px 5px #000;
+            
         }
         .call-to-action {
             cursor: pointer;
