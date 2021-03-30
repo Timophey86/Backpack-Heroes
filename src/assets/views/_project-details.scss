@@ -6,10 +6,11 @@
     grid-column: 1/-1;
     grid-row: 1/2;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 200px 200px;
     grid-template-columns: 1fr 1fr;
-
-    grid-gap: 15px;
+    border-radius: 20px;
+    overflow: hidden;
+    grid-gap: 8px;
     list-style-type: none;
     padding: 0;
     .img-1 {

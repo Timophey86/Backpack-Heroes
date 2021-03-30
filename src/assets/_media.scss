@@ -20,6 +20,9 @@
 // 760px
 @media (max-width: $narrow-breakpoint) {
     .app-header {
+        .header{
+            padding: 10px;
+        }
         .main-container {
             width: 100%;
             .menu {
@@ -201,6 +204,7 @@
         .details-img-container {
             padding-left: 0.6rem;
             padding-right: 0.6rem;
+            grid-template-rows: 1fr 1fr;
         }
         .members {
             padding: 5px;
