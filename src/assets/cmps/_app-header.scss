@@ -87,16 +87,16 @@
 
 .user-icon {
   position: relative;
-  // .notification-counter {
-  //   position: absolute;
-  //   top: -5px;
-  //   right: -2px;
-  //   background-color: rgba(212, 19, 13, 1);
-  //   color: #fff;
-  //   border-radius: 3px;
-  //   padding: 1px 3px;
-  //   font: 8px Verdana;
-  // }
+  .notification-counter {
+    position: absolute;
+    top: -7px;
+    right: -2px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 8px Verdana;
+  }
 }
 
 .alert {
