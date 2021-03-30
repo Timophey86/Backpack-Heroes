@@ -2,9 +2,7 @@
   <div v-if="currUser" class="user-details main-container">
     <div class="user-profile">
       <!-- <img :src="avatarImg" alt="" /> -->
-      <el-image
-      :src="avatarImg"
-      fit="cover"></el-image>
+      <el-image :src="avatarImg" fit="cover"></el-image>
       <h1>Hello, {{ currUser.fullname }}!</h1>
       <p>
         Hello, im Shiran a volunteer project manager from Israel. <br />
@@ -146,7 +144,9 @@
         <p v-else>No approved reservations yet</p>
       </el-tab-pane>
     </el-tabs>
-    <el-button class="logout-btn" @click="doLogout" type="danger" round>Logout</el-button>
+    <el-button class="logout-btn" @click="doLogout" type="danger" round
+      >Logout</el-button
+    >
     <!-- <chart :chartdata="chartdata" /> -->
     <!-- <button @click="fillData">click</button> -->
   </div>
@@ -189,17 +189,21 @@ export default {
     },
     pendingOrders() {
       if (this.userOrders) {
+        if (!this.userOrders.host) return;
         return this.userOrders.host.filter((order) => {
           return order.status === "pending";
         });
       }
+      return null;
     },
     approvedOrders() {
       if (this.userOrders) {
+        if (!this.userOrders.host) return;
         return this.userOrders.host.filter((order) => {
           return order.status === "approved";
         });
       }
+      return null;
     },
     myRequests() {
       if (this.userOrders) {
