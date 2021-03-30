@@ -1,12 +1,5 @@
 .app-header {
-  background-image: linear-gradient(
-    to left,
-    #02a092,
-    #21ab92,
-    #38b590,
-    #4ebf8d,
-    #64c989
-  );
+  background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
   position: sticky;
   top: 0;
   width: 100%;
@@ -18,6 +11,14 @@
   height: 55px;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
+  .closeMenu {
+    display: flex;
+    align-items: center;
+    .user-link{
+      margin-right: 20px;
+    }
+  }
   .logo {
     a {
       display: flex;
@@ -28,7 +29,7 @@
       font-size: 2rem;
     }
   }
-  .svg-image{
+  .svg-image {
     height: 40px;
     fill: whitesmoke;
   }
@@ -65,7 +66,6 @@
   right: 50px;
   font-size: x-large;
 }
-
 
 .user-icon {
   position: relative;
