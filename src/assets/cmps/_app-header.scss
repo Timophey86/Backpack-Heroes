@@ -1,18 +1,6 @@
 .app-header {
-<<<<<<< HEAD
-  background-image: linear-gradient(
-    to left,
-    #02a092,
-    #21ab92,
-    #38b590,
-    #4ebf8d,
-    #64c989
-  );
-  background-color:white ;
-=======
   background-image: linear-gradient(to left, #02a092, #21ab92, #38b590, #4ebf8d, #64c989);
   // background-color:white ;
->>>>>>> 0bc32d66cb2bf598fd634b16bf4a296fb7ada5ec
   position: sticky;
   top: 0;
   width: 100%;
@@ -51,13 +39,8 @@
     a {
       font-family: montserrat;
       font-size: 1rem;
-<<<<<<< HEAD
-      color: white;
-      font-weight: 600;
-=======
       font-weight: 600;
       color: white;
->>>>>>> 0bc32d66cb2bf598fd634b16bf4a296fb7ada5ec
       margin-inline-end: 50px;
       &:last-child {
         margin-inline-end: 0;
