@@ -21,6 +21,16 @@
   align-items: center;
   padding: 0;
   .closeMenu {
+    .notification-counter {
+      position: absolute;
+      top: -5px;
+      right: -2px;
+      background-color: rgba(212, 19, 13, 1);
+      color: #fff;
+      border-radius: 3px;
+      padding: 1px 3px;
+      font: 8px Verdana;
+    }
     display: flex;
     align-items: center;
     .user-link {
