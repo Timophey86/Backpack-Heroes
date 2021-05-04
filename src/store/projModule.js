@@ -6,6 +6,7 @@ export const projStore = {
     proj: null,
     filterBy: { name: "", tags: "all", type: "all", userId: "", pageDiff: 0 },
     sortBy: { sortType: "location" },
+    isLoading: false
   },
   getters: {
     projs(state) {
@@ -17,6 +18,9 @@ export const projStore = {
     filterBy(state) {
       return state.filterBy;
     },
+    loaderStatus(state){
+      return state.isLoading
+    }
   },
   mutations: {
     setEmptyProj(state, payload) {
@@ -41,6 +45,9 @@ export const projStore = {
     getproj(state, { projFromStorage }) {
       state.proj = projFromStorage;
     },
+    setLoader(state, payload) {
+      state.isLoading = payload.loader
+    },
     setFilter(state, payload) {
       state.filterBy = payload.filter;
       projService.setFilter(state.filterBy);
@@ -53,8 +60,10 @@ export const projStore = {
   actions: {
     async loadProjs(context, payload) {
       try {
+        context.commit({ type: "setLoader", loader: true });
         const projs = await projService.query(payload);
         context.commit({ type: "setProjs", projs });
+        context.commit({ type: "setLoader", loader: false });
       } catch (err) {
         console.log("orderStore: Error in loading projects", err);
         throw err;

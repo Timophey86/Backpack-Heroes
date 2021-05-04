@@ -12,3 +12,8 @@ export function showMsg(txt, type='success') {
 export function increaseCount() {
     eventBusService.$emit('addCount');
 }
+
+export function filterBtCategory(category) {
+    console.log('from the event bus', category);
+    eventBusService.$emit('filterByCategory', category )
+}

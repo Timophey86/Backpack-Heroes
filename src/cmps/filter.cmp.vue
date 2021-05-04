@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  props: ["homePageCategory", "homePageLocation"],
   data() {
     return {
       categoryOptions: [
@@ -69,6 +70,14 @@ export default {
           value: "Children",
           label: "Children",
         },
+        {
+          value: "Medical Care",
+          label: "Medical Care",
+        },
+        {
+          value: "Women's Empowerment",
+          label: "Women's Empowerment",
+        },
       ],
       locationOptions: [
         {
@@ -99,6 +108,14 @@ export default {
           value: "Thailand",
           label: "Thailand",
         },
+        {
+          value: "South Africa",
+          label: "South Africa",
+        },
+        {
+          value: "Tanzania",
+          label: "Tanzania",
+        },
       ],
       fromTodates: [],
       category: "",
@@ -108,18 +125,36 @@ export default {
     };
   },
   methods: {
-    async goSearch() {
-      await this.$emit("setFilter", {
+    goSearch() {
+      this.$emit("setListFilter", {
         category: this.category,
         location: this.location,
         from: this.dateFrom,
         to: this.dateTo,
       });
+      this.$emit("displayShowAllBtn");
     },
     setRange() {
       this.dateFrom = Date.parse(this.fromTodates[0]);
       this.dateTo = Date.parse(this.fromTodates[1]);
     },
+    resetFilterVals() {
+      (this.fromTodates = []),
+        (this.category = ""),
+        (this.location = ""),
+        (this.dateFrom = ""),
+        (this.dateTo = "");
+    },
+  },
+  created() {
+    if (this.homePageCategory) {
+      this.category = this.homePageCategory;
+      this.goSearch();
+    }
+    if (this.homePageLocation) {
+      this.location = this.homePageLocation;
+      this.goSearch();
+    }
   },
 };
 </script>

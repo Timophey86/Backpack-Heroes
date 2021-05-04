@@ -16,24 +16,31 @@
 
       <nav :class="menuClass">
         <router-link to="/project">Explore</router-link>
+        <a v-if="currUser" @click="doLogout">Logout</a>
         <router-link v-if="!currUser" to="/login-signup"
           >Login/Signup</router-link
         >
         <router-link v-else class="user-link" to="/user/currUser._id">
-          <span @click="requestCountToZero" class="user-icon">{{ currUser.fullname }}
-           <span v-if="requestCount > 0" class="notification-counter" >{{
-              requestCount
-            }}</span> 
+          <span @click="nullifyNotifications" class="user-icon"
+            >{{ currUser.fullname }}
+            <span
+              v-if="currUser.notifications > 0 && !requestCount"
+              class="notification-counter"
+              >{{ currUser.notifications }}</span
+            >
+            <span
+              v-if="!currUser.notifications && requestCount > 0"
+              class="notification-counter"
+              >{{ requestCount }}</span
+            >
           </span>
-
-         
         </router-link>
-        <el-avatar v-if="currUser" :size="35" :src="avatarImg"></el-avatar>
-        <el-avatar v-else :size="35" icon="el-icon-user-solid"></el-avatar>
-
-        <!-- <router-link v-else class="user-link" to="/user/userId=1">
-          <i class="fas fa-user-circle"></i>
-        </router-link> -->
+        <el-avatar
+          v-if="currUser && currUser.imgUrl"
+          :size="35"
+          :src="avatarImg"
+        ></el-avatar>
+        <el-avatar v-else :src="defaultAvatar" :size="35"></el-avatar>
       </nav>
       <user-msg />
     </div>
@@ -42,6 +49,7 @@
 
 <script>
 import { eventBusService, SHOW_MSG } from "../services/eventBusServices.js";
+import { socketService } from "../services/socket.service";
 import userMsg from "./alert-msg.cmp";
 
 export default {
@@ -53,7 +61,13 @@ export default {
   },
   computed: {
     avatarImg() {
-      return require("@/assets/images/avatars/" + this.currUser.imgUrl);
+      if (!this.currUser.imgUrl.includes("http://res.cloudinary.com/")) {
+        return require("@/assets/images/avatars/" + this.currUser.imgUrl);
+      }
+      return this.currUser.imgUrl;
+    },
+    defaultAvatar() {
+      return require("@/assets/images/avatars/Default.svg");
     },
     currUser() {
       return this.$store.getters.loggedinUser;
@@ -70,11 +84,45 @@ export default {
     requestCountToZero() {
       this.requestCount = 0;
     },
+    nullifyNotifications() {
+      this.currUser.notifications = 0;
+      this.$store.dispatch({
+        type: "updateUser",
+        user: this.currUser,
+      });
+      this.requestCountToZero();
+    },
+    doLogout() {
+      this.$store.dispatch({ type: "logout" });
+      this.$router.push("/");
+    },
+    increaseCount() {
+      this.requestCount += 1;
+    },
+    async addNotficationsToHost(id) {
+      this.$store.dispatch({
+        type: "updateNotifications",
+        hostId: id,
+      });
+    },
   },
   created() {
-    eventBusService.$on("addCount", () => {
-      this.requestCount += 1;
+    socketService.setup();
+    socketService.on("requestFromUser", (request) => {
+      if (!this.currUser) {
+        this.addNotficationsToHost(request.proj.host._id);
+        return;
+      }
+      if (this.currUser._id === request.proj.host._id) {
+        this.increaseCount();
+      } else {
+        this.addNotficationsToHost(request.proj.host._id)
+      }
     });
+  },
+  destroyed() {
+    socketService.off("requestFromUser");
+    socketService.terminate();
   },
   components: {
     userMsg,

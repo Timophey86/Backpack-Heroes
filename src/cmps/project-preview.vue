@@ -18,16 +18,6 @@
       <p>
         ⭐ {{ averageRate }} <span>( {{ proj.reviews.length }} )</span>
       </p>
-      <!-- <el-rate
-        v-if="proj.reviews.length"
-        v-model="averageRate"
-        disabled
-        show-score
-        text-color="#ff9900"
-        score-template="{value} "
-      /> -->
-      <!-- <span v-else>No Ranking Yet</span> -->
-      <!-- <span>( {{ proj.reviews.length }} )</span> -->
     </div>
     <p class="spots-left-num">
       <span>{{ spotsLeft }}</span

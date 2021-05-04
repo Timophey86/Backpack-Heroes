@@ -4,6 +4,7 @@ export const userStore = {
   state: {
     loggedInUser: userService.getLoggedInUser(),
     users: [],
+    viewedUser: null,
   },
   getters: {
     users({ users }) {
@@ -11,6 +12,9 @@ export const userStore = {
     },
     loggedinUser({ loggedInUser }) {
       return loggedInUser;
+    },
+    viewedUser({ viewedUser }) {
+      return viewedUser;
     },
   },
   mutations: {
@@ -23,6 +27,12 @@ export const userStore = {
     removeUser(state, { userId }) {
       state.users = state.users.filter((user) => user._id !== userId);
     },
+    setViewedUser(state, { user }) {
+      state.viewedUser = user;
+    },
+    removeViewedUser(state, payload) {
+      state.viewedUser = null;
+    }
   },
   actions: {
     async login({ commit }, { userCred }) {
@@ -65,6 +75,15 @@ export const userStore = {
         throw err;
       }
     },
+    async getUser({ commit }, { userId }) {
+      try {
+        const user = await userService.getUser(userId);
+        commit({ type: "setViewedUser", user: user });
+      } catch (err) {
+        console.log("userStore: Error in getting user tio view", err);
+        throw err;
+      }
+    },
     async removeUser({ commit }, { userId }) {
       try {
         await userService.remove(userId);
@@ -77,11 +96,20 @@ export const userStore = {
     async updateUser({ commit }, { user }) {
       try {
         user = await userService.update(user);
-        commit({ type: "setUser", user });
       } catch (err) {
         console.log("userStore: Error in updateUser", err);
         throw err;
       }
     },
+   async updateNotifications ({ commit }, { hostId }) {
+     try {
+      const user = await userService.getUser(hostId); 
+      user.notifications += 1
+      await userService.update(user, true)
+     } catch (err) {
+      console.log("userStore: Error in updating notifications", err);
+      throw err;
+     }
+    }
   },
 };

@@ -33,7 +33,11 @@
         />
       </el-form-item>
       <el-form-item label="Number of volunteers needed:">
-        <el-input-number v-model="projectToEdit.numOfVolunteersNeeded" :min="1" :max="100"></el-input-number>
+        <el-input-number
+          v-model="projectToEdit.numOfVolunteersNeeded"
+          :min="1"
+          :max="100"
+        ></el-input-number>
       </el-form-item>
 
       <el-form-item label="Tags:">
@@ -98,11 +102,24 @@
       </el-form-item>
       <el-form-item class="img-upload" label="Upload Images">
         <label for="imgUploader">
-          <img v-if="!isLoading"  src="http://simpleicon.com/wp-content/uploads/cloud-upload-2.png" alt="" />
-        <img v-else class="loading" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
+          <img
+            v-if="!isLoading"
+            src="http://simpleicon.com/wp-content/uploads/cloud-upload-2.png"
+            alt=""
+          />
+          <img
+            v-else
+            class="loading"
+            src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+            alt=""
+          />
         </label>
         <div class="imgList">
-        <img v-for="(imgUrl, index) in projectToEdit.imgUrls" :src="imgUrl" :key="index">
+          <img
+            v-for="(imgUrl, index) in projectToEdit.imgUrls"
+            :src="imgUrl"
+            :key="index"
+          />
         </div>
         <input type="file" id="imgUploader" @change="onUploadImg" />
       </el-form-item>
@@ -122,7 +139,7 @@ export default {
   data() {
     return {
       projectToEdit: null,
-      isLoading: false
+      isLoading: false,
     };
   },
   computed: {
@@ -141,16 +158,36 @@ export default {
       this.projectToEdit = this.$store.getters.projForDetails;
     },
     async submitProj() {
+      if (this.projectToEdit.imgUrls.length < 3) {
+        this.$swal({
+          icon: "info",
+          title: "Please choose at least 3 Imaged",
+        });
+        return;
+      }
+      if (typeof this.projectToEdit.startsAt === "string" || "object") {
+        this.projectToEdit.startsAt = Date.parse(this.projectToEdit.startsAt);
+      }
+      if (typeof this.projectToEdit.endAt === "string" || "object") {
+        this.projectToEdit.endAt = Date.parse(this.projectToEdit.endAt);
+      }
       const projectCopy = JSON.parse(JSON.stringify(this.projectToEdit));
       await this.$store.dispatch({ type: "saveProj", project: projectCopy });
       this.$router.push("/project");
     },
     async onUploadImg(ev) {
-      this.isLoading=true
+      if (this.projectToEdit.imgUrls.length >= 3) {
+        this.$swal({
+          icon: "info",
+          title: "Choose 3 Imaged only",
+        });
+        return;
+      }
+      this.isLoading = true;
       const res = await uploadImg(ev);
-      this.projectToEdit.imgUrls.push(res.url)
-      console.log(this.projectToEdit)
-      this.isLoading=false
+      this.projectToEdit.imgUrls.push(res.url);
+      console.log(this.projectToEdit);
+      this.isLoading = false;
     },
   },
   created() {

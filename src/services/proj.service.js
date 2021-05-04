@@ -14,7 +14,7 @@ export const projService = {
   getEmptyProj,
 };
 
-var gFilterBy = { category: "",  location: "", from:"", to: "" ,userId: "", pageDiff: 0 };
+var gFilterBy = { category: "",  location: "", from:"", to: "" , pageDiff: 0 };
 
 function setFilter(filter) {
   gFilterBy = filter;
@@ -36,7 +36,6 @@ function remove(id) {
 }
 
 function save(proj) {
-  console.log('from front end ',proj)
   if (proj._id) {
     return httpService.put(`proj/${proj._id}`, proj);
   } else {

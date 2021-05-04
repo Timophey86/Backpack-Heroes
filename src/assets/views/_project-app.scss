@@ -8,6 +8,19 @@
   .app-container{
     flex: 1;
   }
+  .loader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: rgb(117, 117, 117);
+    }
+  }
 }
 
 

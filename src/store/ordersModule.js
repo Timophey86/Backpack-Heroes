@@ -59,7 +59,7 @@ export const orderStore = {
           },
           status: "pending",
         };
-        orderService.save(order);
+      const sentOrder = await orderService.save(order);
       } catch (err) {
         console.log("orderStore: Error in sending the order", err);
         throw err;
@@ -91,7 +91,7 @@ export const orderStore = {
         var order = await orderService.save(payload.order);
         var project = await projService.getById(order.proj._id);
         project.members.push(order.member);
-        await projService.save(project);
+        const savedProj = await projService.save(project);
       } catch (err) {
         console.log("orderStore: Error in approving the order", err);
         throw err;
@@ -105,7 +105,6 @@ export const orderStore = {
         var idx = proj.members.findIndex((members) => {
           return members._id === order.member._id;
         });
-        console.log("before ", proj);
         if (idx > -1) {
           proj.members.splice(idx, 1);
           await projService.save(proj);

@@ -7,7 +7,7 @@
     #4ebf8d,
     #64c989
   );
-  background-color:white ;
+  background-color: white;
   position: sticky;
   top: 0;
   width: 100%;
@@ -48,9 +48,15 @@
       font-size: 1rem;
       color: white;
       font-weight: 600;
-      margin-inline-end: 50px;
+      margin-inline-end: 40px;
+      height: 100%;
+      transition: 0.3s;
       &:last-child {
         margin-inline-end: 0;
+      }
+      &:hover {
+        text-shadow: -1px 0px 12px black;
+        cursor: pointer;
       }
     }
   }
@@ -85,7 +91,7 @@
     color: #fff;
     border-radius: 3px;
     padding: 1px 3px;
-    font: 8px Verdana;
+    font: 9px Verdana;
   }
 }
 

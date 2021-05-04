@@ -72,6 +72,7 @@ export default {
   props: ["proj"],
   data() {
     return {
+      currUser: this.$store.getters.loggedinUser,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
       isShowForm: false,
       reviewToEdit: {
@@ -79,7 +80,7 @@ export default {
         rate: 5,
         by: {
           fullname: "",
-          imgUrl: "",
+          imgUrl: this.$store.getters.loggedinUser,
         },
       },
     };
@@ -93,26 +94,7 @@ export default {
         rates.reduce((acc, rate) => acc + rate, 0) / this.proj.reviews.length
       ).toFixed(1);
     },
-    // randAvatar() {
-    //   //  retrun `https://randomuser.me/api/portraits/${this.maleFemale}/${this.getRandomNum}.jpg`;
-    //   // https://randomuser.me/api/portraits/thumb/women/78.jpg
-    //   return require(`https://randomuser.me/api/portraits/thumb/women/78.jpg`);
-    //   // return require(`https://randomuser.me/api/portraits/${this.maleFemale}/${this.getRandomNum}.jpg`);
-    // },
-    maleFemale() {
-      if (Math.random() > 0.5) {
-        return "women";
-      } else {
-        return "men";
-      }
-    },
-    getRandomNum() {
-      var min = Math.ceil(1);
-      var max = Math.floor(99);
-      return Math.floor(Math.random() * (max - min + 1) + min);
-    },
   },
-
   methods: {
     reviewAvatar(idx) {
       return require("@/assets/images/avatars/" +
@@ -135,6 +117,13 @@ export default {
       this.isShowForm = true;
     },
     async addReview() {
+      if (!this.currUser) {
+        this.$swal({
+          icon: "warning",
+          title: "Please Log In to leave a review",
+        });
+        return;
+      }
       const reviewCopy = JSON.parse(JSON.stringify(this.reviewToEdit));
       this.proj.reviews.unshift(reviewCopy);
       this.hideForm();

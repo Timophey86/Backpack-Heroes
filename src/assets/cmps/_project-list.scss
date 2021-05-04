@@ -10,6 +10,35 @@
     }
 }
 
+.show-all{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    span{
+        color: #6c6f72;
+        font-weight: 800;
+        cursor: pointer;
+        border-bottom: 2px solid #6c6f72;
+        transition: 0.2s;
+        &:hover {
+            border-bottom: none;
+            color: #02a092;
+        }
+    }
+}
+
+.no-projects-found{
+    height: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img{
+        width: 150px;
+    }
+}
+
 .select-filter {
     display: flex;
     justify-content: center;
